@@ -3,18 +3,21 @@
 <head>
   <meta charset="utf-8">
   
-  <title>关于我 | 安阳</title>
+  <title>Ajax跨域问题 | 安阳</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="安阳的个人博客，通信工程，JAVA，读书，旅行，分享。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="关于我">
-<meta property="og:url" content="http://JohnneyAnn.github.io/about/index.html">
+  <meta name="description" content="由于JS同源策略的影响，因此js只能访问同域名下的文档，当我们用ajax请求某个别人提供的接口时，可能存在跨域问题，导致接口无法访问，这里有一些解决方案。">
+<meta name="keywords" content="Java,jQuery,Ajax,编程问题">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Ajax跨域问题">
+<meta property="og:url" content="http://JohnneyAnn.github.io/2017/08/01/ajax/index.html">
 <meta property="og:site_name" content="安阳">
-<meta property="og:description" content="安阳的个人博客，通信工程，JAVA，读书，旅行，分享。">
-<meta property="og:updated_time" content="2017-08-01T15:42:56.606Z">
+<meta property="og:description" content="由于JS同源策略的影响，因此js只能访问同域名下的文档，当我们用ajax请求某个别人提供的接口时，可能存在跨域问题，导致接口无法访问，这里有一些解决方案。">
+<meta property="og:image" content="http://johnneyann.github.io/img/wechatV.jpg">
+<meta property="og:updated_time" content="2017-08-01T15:42:47.810Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="关于我">
-<meta name="twitter:description" content="安阳的个人博客，通信工程，JAVA，读书，旅行，分享。">
+<meta name="twitter:title" content="Ajax跨域问题">
+<meta name="twitter:description" content="由于JS同源策略的影响，因此js只能访问同域名下的文档，当我们用ajax请求某个别人提供的接口时，可能存在跨域问题，导致接口无法访问，这里有一些解决方案。">
+<meta name="twitter:image" content="http://johnneyann.github.io/img/wechatV.jpg">
   
   
     <link rel="icon" href="/img/favicon.png">
@@ -38,7 +41,7 @@
           fancybox: true,
           animate: true,
           isHome: false,
-          isPost: false,
+          isPost: true,
           isArchive: false,
           isTag: false,
           isCategory: false,
@@ -226,11 +229,11 @@
         </header>                
     </div>
 </nav>
-      <div class="body-wrap"><article id="page-" class="article article-type-page" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-ajax" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/about/index.html" class="article-date">
-      <time datetime="2017-07-26T13:54:36.000Z" itemprop="datePublished">2017-07-26</time>
+      <a href="/2017/08/01/ajax/" class="article-date">
+      <time datetime="2017-08-01T15:55:18.596Z" itemprop="datePublished">2017-08-01</time>
 </a>
     </div>
   
@@ -243,7 +246,7 @@
         
   
     <h1 class="article-title" itemprop="name">
-      关于我
+      Ajax跨域问题
     </h1>
   
 
@@ -251,8 +254,16 @@
       
       <div class="article-info article-info-post">
         
+    <div class="article-category tagcloud">
+    <a class="article-category-link" href="/categories/编程/">编程</a>
+    </div>
+
 
         
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Ajax/">Ajax</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/jQuery/">jQuery</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/编程问题/">编程问题</a></li></ul>
+    </div>
+
         <div class="clearfix"></div>
       </div>
       
@@ -260,42 +271,31 @@
     <div class="article-entry" itemprop="articleBody">
       
           
-              <style>
-    .article-meta {
-        display: none;
-    }
-    #container .article .article-title {
-        padding-right: 0;
-    }
-    .article-header {
-        padding: 0;
-        padding-top: 26px;
-        border-left: none;
-        text-align: center;
-    }
-    .article-header:hover {
-        border-left: none;
-    }
-    .article-title {
-        font-size: 1.6em
-    }
-    .article-meta {
-        display: none;
-    }
-    .article-entry hr {
-        margin: 0;
-    }
-    #container .article-info-post.article-info {
-      display: none;
-      }
-    #container .article .article-title {
-    padding: 0;
-    }
-</style>
+        <p>由于JS同源策略的影响，因此js只能访问同域名下的文档，当我们用ajax请求某个别人提供的接口时，可能存在跨域问题，导致接口无法访问，这里有一些解决方案。</p>
+<a id="more"></a>
+<h2 id="同源策略"><a href="#同源策略" class="headerlink" title="同源策略"></a>同源策略</h2><p>百度的解释：</p>
+<blockquote>
+<p>同源策略，它是由Netscape提出的一个著名的安全策略。现在所有支持JavaScript 的浏览器都会使用这个策略。所谓同源是指，域名，协议，端口相同。当一个浏览器的两个tab页中分别打开来 百度和谷歌的页面当一个百度浏览器执行一个脚本的时候会检查这个脚本是属于哪个页面的，即检查是否同源，只有和百度同源的脚本才会被执行。</p>
+</blockquote>
+<h2 id="跨域报错信息"><a href="#跨域报错信息" class="headerlink" title="跨域报错信息"></a>跨域报错信息</h2><pre><code>Origin null is not allowed by Access-Control-Allow-Origin
+</code></pre><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="在服务端填上响应头"><a href="#在服务端填上响应头" class="headerlink" title="在服务端填上响应头"></a>在服务端填上响应头</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">response.setHeader(&quot;Access-Control-Allow-Origin&quot;,&quot;*&quot;); </div><div class="line">response.setHeader(&quot;Access-Control-Allow-Methods:GET,POST&quot;);</div></pre></td></tr></table></figure>
+<p>*号表示所有的域都接受，HTML5中提供的XMLHTTPREQUEST Level2（即XHR2）已经实现了跨域访问，添加上这些即可。</p>
+<p>目前遇到的一个跨域问题使用这个方法解决了，只添加了第一条。</p>
+<h2 id="另一种解决方案"><a href="#另一种解决方案" class="headerlink" title="另一种解决方案"></a>另一种解决方案</h2><h3 id="JSONP-JSON-with-Padding"><a href="#JSONP-JSON-with-Padding" class="headerlink" title="JSONP(JSON with Padding)"></a>JSONP(JSON with Padding)</h3><p>JSONP还需要去理解，这里先记个笔记，可无视。。。不保证记录的正确性。</p>
+<p>百度百科</p>
+<blockquote>
+<p>JSONP(JSON with Padding)是JSON的一种“使用模式”，可用于解决主流浏览器的跨域数据访问的问题。用 JSONP 抓到的资料并不是 JSON，而是任意的JavaScript，用 JavaScript 直译器执行而不是用 JSON 解析器解析。</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$.ajax(&#123;  </div><div class="line">   url: &quot;http://异域IP:port/getSomeData.do&quot;,  </div><div class="line">   dataType: &quot;jsonp&quot;,  </div><div class="line">   jsonpCallback: &quot;callbank&quot;,  //设置一个回调函数，请求的JSON将会被包裹在callback()内</div><div class="line">   success: function(data) &#123;</div><div class="line">//...</div><div class="line">&#125;  </div><div class="line">&#125;);  </div><div class="line">function callbank(data) &#123;  </div><div class="line">    console.log(data);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>JSONP对于GET适用，对于POST并没有完美支持，也需在服务端添上相应头，下面两行代码都需要。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">response.setHeader(&quot;Access-Control-Allow-Origin&quot;,&quot;*&quot;); </div><div class="line">response.setHeader(&quot;Access-Control-Allow-Methods:GET,POST&quot;);</div></pre></td></tr></table></figure></p>
+<p><hr></p>
+<h2 id="关注"><a href="#关注" class="headerlink" title="关注"></a>关注</h2><h3 id="微信公众号"><a href="#微信公众号" class="headerlink" title="微信公众号"></a><center>微信公众号</center></h3><center><img src="/img/wechatV.jpg" alt="微信公众号"></center><br><center>每篇博客将在微信公众帐号同步推送，如果觉得不错敬请关注。</center><br><center>有任何意见或建议可邮件交流：<a href="&#109;&#97;&#105;&#108;&#116;&#111;&#x3a;&#x69;&#116;&#115;&#97;&#110;&#x79;&#97;&#x6e;&#103;&#64;&#x31;&#x36;&#51;&#46;&#x63;&#x6f;&#109;">&#x69;&#116;&#115;&#97;&#110;&#x79;&#97;&#x6e;&#103;&#64;&#x31;&#x36;&#51;&#46;&#x63;&#x6f;&#109;</a> </center>
 
 
-          
-        
+
+
+
+
       
       
         <div class="page-reward">
@@ -349,10 +349,67 @@
   </div>
   
     
+    <div class="copyright">
+        <p><span>本文标题:</span><a href="/2017/08/01/ajax/">Ajax跨域问题</a></p>
+        <p><span>文章作者:</span><a href="/" title="访问 安 阳 的个人博客">安 阳</a></p>
+        <p><span>发布时间:</span>2017年08月01日 - 23时55分</p>
+        <p><span>最后更新:</span>2017年08月01日 - 23时42分</p>
+        <p>
+            <span>原始链接:</span><a class="post-url" href="/2017/08/01/ajax/" title="Ajax跨域问题">http://JohnneyAnn.github.io/2017/08/01/ajax/</a>
+            <span class="copy-path" data-clipboard-text="原文: http://JohnneyAnn.github.io/2017/08/01/ajax/　　作者: 安 阳" title="点击复制文章链接"><i class="fa fa-clipboard"></i></span>
+            <script src="/js/clipboard.min.js"></script>
+            <script> var clipboard = new Clipboard('.copy-path'); </script>
+        </p>
+        <p>
+            <span>许可协议:</span><i class="fa fa-creative-commons"></i> <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/cn/" title="中国大陆 (CC BY-NC-SA 3.0 CN)" target = "_blank">"署名-非商用-相同方式共享 3.0"</a> 若非特别强调，转载请保留原文链接及作者。
+        </p>
+    </div>
 
+
+
+<nav id="article-nav">
+  
+  
+    <a href="/2017/08/01/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Hello World</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
 
   
 </article>
+
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#同源策略"><span class="toc-number">1.</span> <span class="toc-text">同源策略</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#跨域报错信息"><span class="toc-number">2.</span> <span class="toc-text">跨域报错信息</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决方案"><span class="toc-number">3.</span> <span class="toc-text">解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#在服务端填上响应头"><span class="toc-number">3.1.</span> <span class="toc-text">在服务端填上响应头</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#另一种解决方案"><span class="toc-number">4.</span> <span class="toc-text">另一种解决方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#JSONP-JSON-with-Padding"><span class="toc-number">4.1.</span> <span class="toc-text">JSONP(JSON with Padding)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#关注"><span class="toc-number">5.</span> <span class="toc-text">关注</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#微信公众号"><span class="toc-number">5.1.</span> <span class="toc-text">微信公众号</span></a></li></ol></li></ol>
+</div>
+<input type="button" id="tocButton" value="隐藏目录"  title="点击按钮隐藏或者显示文章目录">
+
+<script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+<script>
+    var valueHide = "隐藏目录";
+    var valueShow = "显示目录";
+
+    if ($(".left-col").is(":hidden")) {
+        $("#tocButton").attr("value", valueShow);
+    }
+    $("#tocButton").click(function() {
+        if ($("#toc").is(":hidden")) {
+            $("#tocButton").attr("value", valueHide);
+            $("#toc").slideDown(320);
+        }
+        else {
+            $("#tocButton").attr("value", valueShow);
+            $("#toc").slideUp(350);
+        }
+    })
+    if ($(".toc").length < 1) {
+        $("#toc, #tocButton").hide();
+    }
+</script>
+
+
 
 
 
@@ -370,6 +427,37 @@
 
 
 
+
+    <div class="scroll" id="post-nav-button">
+        
+            <a href="/" title="回到主页"><i class="fa fa-home"></i></a>
+        
+        <a title="文章列表"><i class="fa fa-bars"></i><i class="fa fa-times"></i></a>
+        
+            <a href="/2017/08/01/hello-world/" title="下一篇: Hello World">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        
+    </div>
+    <ul class="post-list"><li class="post-list-item"><a class="post-list-link" href="/2017/08/01/ajax/">Ajax跨域问题</a></li><li class="post-list-item"><a class="post-list-link" href="/2017/08/01/hello-world/">Hello World</a></li></ul>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+    <script>
+        $(".post-list").addClass("toc-article");
+        $(".post-list-item a").attr("target","_blank");
+        $("#post-nav-button > a:nth-child(2)").click(function() {
+            $(".fa-bars, .fa-times").toggle();
+            $(".post-list").toggle(300);
+            if ($(".toc").length > 0) {
+                $("#toc, #tocButton").toggle(200, function() {
+                    if ($(".switch-area").is(":visible")) {
+                        $("#tocButton").attr("value", valueHide);
+                        }
+                    })
+            }
+            else {
+            }
+        })
+    </script>
 
 
 
