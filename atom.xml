@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://JohnneyAnn.github.io/"/>
-  <updated>2017-09-08T16:18:29.662Z</updated>
+  <updated>2017-09-13T04:31:53.070Z</updated>
   <id>http://JohnneyAnn.github.io/</id>
   
   <author>
@@ -15,6 +15,28 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>测试加密访问</title>
+    <link href="http://JohnneyAnn.github.io/2017/09/13/testPassword/"/>
+    <id>http://JohnneyAnn.github.io/2017/09/13/testPassword/</id>
+    <published>2017-09-13T04:31:53.206Z</published>
+    <updated>2017-09-13T04:31:53.070Z</updated>
+    
+    <content type="html"><![CDATA[<p>这是用来测试文章加密访问的。</p><a id="more"></a><p>这是用来测试文章加密访问的。<br>这是用来测试文章加密访问的。<br>这是用来测试文章加密访问的。<br>这是用来测试文章加密访问的。<br>这是用来测试文章加密访问的。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;这是用来测试文章加密访问的。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="http://JohnneyAnn.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="Test" scheme="http://JohnneyAnn.github.io/tags/Test/"/>
+    
+  </entry>
   
   <entry>
     <title>机器学习实战系列</title>
@@ -470,31 +492,6 @@
     <summary type="html">
     
       &lt;p&gt;2017.8.20 22:52&lt;/p&gt;&lt;br&gt;&lt;p&gt;今天是星期天。从昨晚开始，心里不太好受，我觉得是感受到了孤独。&lt;/p&gt;&lt;br&gt;&lt;p&gt;我确实也是一个待不住的人，总爱折腾。&lt;/p&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="生活" scheme="http://JohnneyAnn.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="随笔" scheme="http://JohnneyAnn.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>念想</title>
-    <link href="http://JohnneyAnn.github.io/2017/08/13/%E5%BF%B5%E6%83%B3/"/>
-    <id>http://JohnneyAnn.github.io/2017/08/13/念想/</id>
-    <published>2017-08-13T14:17:53.766Z</published>
-    <updated>2017-08-13T14:17:53.754Z</updated>
-    
-    <content type="html"><![CDATA[<p>2017.8.13 21:09</p><p>我几乎对所有事都有进行悲观检测，唯独没有对你。</p><p>乐极生悲。</p><a id="more"></a><p>我不得不承认，我们倆在一起时件特别美好的事，当然是在分手之前。三年半，可能是美好的太久了，我迷失了，我沉浸了，忘记了乐极生悲这回事。也该相信，美好的事物应该是短暂的，在某种程度上说短暂才造就了她的美好。</p><p>好像知道的太晚了，当悲降临时，才发现来势凶猛，猝不及防，我感受到的只有无助，因为这次悲传达的信息就是告诉我，做什么也于事无补。</p><p>因为你，我丢失了我所有的底气。</p><p>朋友说我现在对很多事都没有信心，也不太敢向以前一样去做一些事。这个我清楚的知道，在这几年，我们在一起太安逸，大学太安逸，所做的一切事都与你有关，你在，我就不需要做与你无关的事，我那时认为的信心可能只是能够帮你完成一些事之后的快乐。而现在，我不仅丢了你，没了与你的快乐，也丢了底气。</p><p>我想写下我的大学四年，或者说想写我们，从初遇见开始。没有写作的功底，没有丰满的词藻，不知道自己能不能写下去，也不知道写着写着还能记得多少，更不确定再未来的某一天还想不想继续写下去。</p><p>想做就去做吧，也可能每写下一篇，就能够放下一点，我不想再承受了。</p><p>我时感受到世界的不公，如果有上帝的话，可能真如泰戈尔所说，上帝治愈你所以才要伤害你。再如果，我后天得到的是上帝给我的恩赐，那么我宁愿不要，我希望我哥能回来，你也能回来，我很想。</p><p>没有如果。</p><p>哥，希望你去的是你想要的天堂，希望那里的生活没有现实生活的压迫，你在这个世界所留下的念想，你想照顾的人，你想做的事，我来完成。</p><p>你，祝你幸福。</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;2017.8.13 21:09&lt;/p&gt;
-&lt;p&gt;我几乎对所有事都有进行悲观检测，唯独没有对你。&lt;/p&gt;
-
-&lt;p&gt;乐极生悲。&lt;/p&gt;
     
     </summary>
     
