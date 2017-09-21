@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://JohnneyAnn.github.io/"/>
-  <updated>2017-09-20T15:10:36.452Z</updated>
+  <updated>2017-09-21T16:26:40.100Z</updated>
   <id>http://JohnneyAnn.github.io/</id>
   
   <author>
@@ -15,6 +15,30 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>RHEL配置本地YUM源(使用镜像)</title>
+    <link href="http://JohnneyAnn.github.io/2017/09/22/RHEL%E9%85%8D%E7%BD%AE%E6%9C%AC%E5%9C%B0YUM%E6%BA%90/"/>
+    <id>http://JohnneyAnn.github.io/2017/09/22/RHEL配置本地YUM源/</id>
+    <published>2017-09-21T16:26:40.108Z</published>
+    <updated>2017-09-21T16:26:40.100Z</updated>
+    
+    <content type="html"><![CDATA[<p>RHEL6使用镜像文件配置本地yum源。</p><a id="more"></a><h1 id="挂载本地光盘到系统"><a href="#挂载本地光盘到系统" class="headerlink" title="挂载本地光盘到系统"></a>挂载本地光盘到系统</h1><p>这里使用的是虚拟机，点击右下角光盘图标，选择setting可选择需要挂在的镜像，在点击光盘的connecting即可挂载。</p><h1 id="配置本地YUM源"><a href="#配置本地YUM源" class="headerlink" title="配置本地YUM源"></a>配置本地YUM源</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /etc/yum.repos.d/</div><div class="line">touch rhel-media.repo</div><div class="line">vim rhel-media.repo</div></pre></td></tr></table></figure><h2 id="填写以下内容"><a href="#填写以下内容" class="headerlink" title="填写以下内容"></a>填写以下内容</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[media]</div><div class="line">name=Red Hat Enterprise Linux 6.6                                </div><div class="line">baseurl=file:///media/RHEL...                                         </div><div class="line">enabled=1                                                         </div><div class="line">gpgcheck=1                                                        </div><div class="line">gpgkey=</div></pre></td></tr></table></figure><p>其中file://后面跟的是你的挂在位置，根据具体情况填入，一般在/media下的一个包，进入输入pwd把包路径获取下来，复制贴到这里。写完退出保存。</p><h2 id="清空原有缓存"><a href="#清空原有缓存" class="headerlink" title="清空原有缓存"></a>清空原有缓存</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum clean all</div></pre></td></tr></table></figure><p>结果如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Loaded plugins: product-id, security, subscription-manager</div><div class="line">This system is not registered to Red Hat Subscription Management. You can use subscription-manager to register.</div><div class="line">Cleaning repos: media</div><div class="line">Cleaning up Everything</div></pre></td></tr></table></figure><h2 id="验证yum配置是否成功"><a href="#验证yum配置是否成功" class="headerlink" title="验证yum配置是否成功"></a>验证yum配置是否成功</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum makecache</div></pre></td></tr></table></figure><p>结果如下：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Loaded plugins: product-id, refresh-packagekit, security, subscription-manager</div><div class="line">This system is not registered to Red Hat Subscription Management. You can use subscription-manager to register.</div><div class="line">media                                                   | 4.1 kB     00:00 ... </div><div class="line">media/group_gz                                          | 211 kB     00:00 ... </div><div class="line">media/filelists_db                                      | 3.3 MB     00:00 ... </div><div class="line">media/primary_db                                        | 3.1 MB     00:00 ... </div><div class="line">media/other_db                                          | 1.4 MB     00:00 ... </div><div class="line">Metadata Cache Created</div></pre></td></tr></table></figure><p>P.S. file://后面的路径一定要对！</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;RHEL6使用镜像文件配置本地yum源。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="http://JohnneyAnn.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="linux" scheme="http://JohnneyAnn.github.io/tags/linux/"/>
+    
+      <category term="yum" scheme="http://JohnneyAnn.github.io/tags/yum/"/>
+    
+  </entry>
   
   <entry>
     <title>转正风波</title>
@@ -477,28 +501,6 @@
       <category term="Ajax" scheme="http://JohnneyAnn.github.io/tags/Ajax/"/>
     
       <category term="编程问题" scheme="http://JohnneyAnn.github.io/tags/%E7%BC%96%E7%A8%8B%E9%97%AE%E9%A2%98/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>来自南京眼</title>
-    <link href="http://JohnneyAnn.github.io/2017/09/02/%E6%9D%A5%E8%87%AA%E5%8D%97%E4%BA%AC%E7%9C%BC/"/>
-    <id>http://JohnneyAnn.github.io/2017/09/02/来自南京眼/</id>
-    <published>2017-09-01T16:47:33.639Z</published>
-    <updated>2017-09-01T16:47:33.631Z</updated>
-    
-    <content type="html"><![CDATA[<p>2017.9.1 23:24</p><br><p>耽误了两周，但说要去还是要去的啊。当时觉得先去近一点的地方，选择了南京眼，是在网上看的照片，自己也喜欢水，那在桥上走着肯定很舒服。周五晚上去是很合适的。</p><br><a id="more"></a><br><p>当然，以上的想法或者说是计划是对于我一个人的。事实上并不是，好友来访，可能是猜到我昨天发了工资（狗贼！），索性就带他一起去吧，不，还有他女朋友（我是拒绝的！）。就这样开始了两个人和一条狗的短途。</p><br><p>我们是先做地铁到江心洲，随后叫的滴滴。下车的地方是一个小道，很长的小道，能够从远处看到南京眼的小道。顺着小道，朝桥的方向走去，小道是有路灯的，人不太多，可能都在桥上。这个时候已经有微风袭来，我喜欢走在前面，打开网易云音乐放了首Eason的《心的距离》，快步的走着。</p><br><p>到了桥上，灯光很好看，能够看到远处的大厦，这是我想到的城市该有的样子，所以我想我也是喜欢这个地方的。不拍照肯定不合适，我拍着景色，他们在自拍，或许也拍了这美景。可能是知道我晚上吃的不太饱，体贴的他们一把一把的狗粮往我嘴里塞，我享受着美食。（不要脸！）这不是重点，终于到了最尴尬的时候，我需要完成作为单手狗的使命，给他们拍照。我蹲在地下，满足他们的各种要求，像是“别拍腿”，“拍我亲他”，周围的人在我旁边走过，我仍蹲在地下等别人走再拍。喂！单身狗支架不要尊严啊！</p><br><p>上面都是玩笑话，能够看着朋友们开开心心，心里也算欣慰。他俩呢也是我之前说的有问题的情侣中的一对，有问题是我本着学习社会心理学应该学以致用的想法来分析他们之间的矛盾所得出来的结论。希望能够帮助他们去理解矛盾，遇到问题也能够想着尽力去解决，倒不希望他们走我走过的路。我喜欢去分析，可分析到最后得到结论与我自己的预见是不一致的。每个人都有自己的烦恼，两个人在一起自然会有矛盾，就你现在看到的他们的样子，你凭什么说他们有问题？作为局外人，我们自认能够看到他们组成的系统中所存在的问题，然而当这个系统出现紊乱（矛盾）时，系统的自我调节正是在加强这个系统的稳定性，自我调节的来源于哪？来自于系统成员自己的感悟、自己的行动。可以去分析当前的矛盾的原因，但主体不是你这个局外人。所以啊，明白了这个之后，想想自己瞎操个什么心啊（摊手）。</p><br><p>这里，比作一个系统的话，那自然从中体会到的是道家的思想，个人愚见，各学说中道家是最具科学依据的。旁观者，即是将我们抽离系统之外，或者对于某个系统来说我们极其渺小。那系统的稳定与否应当是顺其自然的，用外力去影响这个系统是有悖于道的。作为局外者，对于由别人组成的系统，或者对于自然这个大系统，它们有自己存在的方式，有自己调节的方式，我们干涉不了，能够自我调节的系统是适于万物的规律的，否则这个系统自然是不适合的，那么，瓦解也未尝不可。让他们自己发展，我们并不是圣人，能够处理好自己的事已实属不易。</p><br><p>既然是短途，到了时间也该结束了，但这次的出行自认为还是有意义的。不敢说什么能够以小见大能够看透什么，但希望能够做一个格物致知的人。到这，也能够去理解，人们为什么爱好去旅行，旅行不是到一个地点拍张照片告诉别人自己来过这个地方，而是我们需要遇见更多的人，去看更大的世界，能够去找到反省自己找到真我，让自己的认知得到提升，这才是旅行的意义。</p><br><p>通过认识别人来认识自己。我的想法是以当前为一个原点，小范围的一步步向外扩撒，以时间为刻度扩大自己周围的空间，在以后的日子多去一些地方，去实现自己的想法，共勉。</p><br><p>哎呀，这本来是想写下单身狗被虐的过程的，感觉。。。跑题了啊（尴尬脸）！罢了罢了，不重要，就是个噱头，谁说我像条狗的？我是个有梦想的程序猿好吧！我想我写的是我认为重要的。</p><br><p>睡了睡了，明天去加班，晚上还得去找虐！我得好好休息。</p><br><p>2017.9.2 00:41</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;2017.9.1 23:24&lt;/p&gt;&lt;br&gt;&lt;p&gt;耽误了两周，但说要去还是要去的啊。当时觉得先去近一点的地方，选择了南京眼，是在网上看的照片，自己也喜欢水，那在桥上走着肯定很舒服。周五晚上去是很合适的。&lt;/p&gt;&lt;br&gt;
-    
-    </summary>
-    
-      <category term="生活" scheme="http://JohnneyAnn.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="随笔" scheme="http://JohnneyAnn.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
