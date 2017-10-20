@@ -1,0 +1,1027 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Javascript,Cytoscape,记录," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="安阳" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Cytoscape.js是一个很好的实现关系图的js组件。最近用的比较多，这里记录下如何用CytoscapeJS实现类ER图。 这是官方文档： Cytoscape.js    这是GitHub地址：GitHub-Cytoscape.js">
+<meta name="keywords" content="Javascript,Cytoscape,记录">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CytoscapeJS实现ER图">
+<meta property="og:url" content="http://JohnneyAnn.github.io/2017/10/20/CytoscapeJS实现ER图/index.html">
+<meta property="og:site_name" content="安阳">
+<meta property="og:description" content="Cytoscape.js是一个很好的实现关系图的js组件。最近用的比较多，这里记录下如何用CytoscapeJS实现类ER图。 这是官方文档： Cytoscape.js    这是GitHub地址：GitHub-Cytoscape.js">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-20T06:36:18.698Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CytoscapeJS实现ER图">
+<meta name="twitter:description" content="Cytoscape.js是一个很好的实现关系图的js组件。最近用的比较多，这里记录下如何用CytoscapeJS实现类ER图。 这是官方文档： Cytoscape.js    这是GitHub地址：GitHub-Cytoscape.js">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '作者'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://JohnneyAnn.github.io/2017/10/20/CytoscapeJS实现ER图/"/>
+
+
+
+
+
+  <title>CytoscapeJS实现ER图 | 安阳</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+<a href="https://github.com/JohnneyAnn"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>    
+<header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">安阳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">若真的喜欢，就别抗拒遗憾</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://JohnneyAnn.github.io/2017/10/20/CytoscapeJS实现ER图/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="安 阳">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安阳">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">CytoscapeJS实现ER图</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-20T14:36:18+08:00">
+                2017-10-20
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-10-20T14:36:18+08:00">
+                2017-10-20
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,043 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Cytoscape.js是一个很好的实现关系图的js组件。最近用的比较多，这里记录下如何用CytoscapeJS实现类ER图。</p>
+<p>这是官方文档： <a href="http://js.cytoscape.org/" target="_blank" rel="external">Cytoscape.js</a>   </p>
+<p>这是GitHub地址：<a href="https://github.com/cytoscape/cytoscape.js" target="_blank" rel="external">GitHub-Cytoscape.js</a><br><a id="more"></a></p>
+<p></p><p>一开始用的是力导向图，后来发现这样很难表现出表内字段关系，于是就想着用来实现ER图。</p><p></p>
+<p></p><p>下面是写的一个小Demo，数据是自己造的，写在了文件里，具体数据还需做写修改，这里只提供一个思路。</p><p></p>
+<h1 id="主要包含三个文件"><a href="#主要包含三个文件" class="headerlink" title="主要包含三个文件"></a>主要包含三个文件</h1><h2 id="index-html"><a href="#index-html" class="headerlink" title="index.html"></a>index.html</h2><p>此文件里给一个div作为Cytoscape的容器,并引入需要的文件<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="meta">&lt;!DOCTYPE html&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"css/style.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> /&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">utf-8</span> /&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"cy"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/cytoscape.min.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"js/code.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></div></pre></td></tr></table></figure></p>
+<h2 id="style-css"><a href="#style-css" class="headerlink" title="style.css"></a>style.css</h2><p>此文件给作为Cytoscape容器的div定一些样式，该容器需要指定宽和高<br><figure class="highlight css"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="selector-tag">body</span> &#123; </div><div class="line">  <span class="attribute">font</span>: <span class="number">14px</span> helvetica neue, helvetica, arial, sans-serif;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="selector-id">#cy</span> &#123;</div><div class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</div><div class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</div><div class="line">  <span class="attribute">position</span>: absolute;</div><div class="line">  <span class="attribute">left</span>: <span class="number">0</span>;</div><div class="line">  <span class="attribute">top</span>: <span class="number">0</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h2 id="code-js"><a href="#code-js" class="headerlink" title="code.js"></a>code.js</h2><p>此文件造了些数据，并对数据进行处理（计算位置），最终画入到cytoscape中，具体请到翻到博客底部下载源码<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div></pre></td><td class="code"><pre><div class="line">(<span class="function"><span class="keyword">function</span> (<span class="params">tableNum,fRow,fCol</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> _ = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">      getRandomNum : <span class="function"><span class="keyword">function</span>(<span class="params">n,m</span>)</span>&#123;</div><div class="line">        <span class="keyword">return</span> <span class="built_in">Math</span>.floor(<span class="built_in">Math</span>.random()*(m-n+<span class="number">1</span>)+n);</div><div class="line">      &#125;,</div><div class="line">      createNodesData : <span class="function"><span class="keyword">function</span>(<span class="params">tNum</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> model = &#123;</div><div class="line">          tableNodes:[],</div><div class="line">          fieldNodes:&#123;&#125;</div><div class="line">        &#125;;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; tNum; i++)&#123;</div><div class="line">          <span class="keyword">var</span> node = &#123; <span class="attr">id</span>:<span class="string">'t'</span>+i, <span class="attr">name</span>:<span class="string">'表'</span>+i &#125;;</div><div class="line">          <span class="keyword">var</span> param = &#123; <span class="attr">data</span>: node &#125;;</div><div class="line">          model.tableNodes.push(param);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; tNum; i++)&#123;</div><div class="line">          model.fieldNodes[<span class="string">'t'</span>+i]=[];</div><div class="line">          <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j &lt; _.getRandomNum(<span class="number">1</span>,<span class="number">80</span>); j++)&#123;</div><div class="line">            <span class="keyword">var</span> node = &#123; <span class="attr">id</span>:<span class="string">'t'</span>+i+<span class="string">'-f'</span>+j, <span class="attr">name</span>:<span class="string">'t'</span>+i+<span class="string">'字段'</span>+j &#125;;</div><div class="line">            <span class="keyword">var</span> param = &#123; <span class="attr">data</span>: node &#125;;</div><div class="line">            model.fieldNodes[<span class="string">'t'</span>+i].push(param);</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> model;</div><div class="line">      &#125;,</div><div class="line">      createEdgesData : <span class="function"><span class="keyword">function</span>(<span class="params">model</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> edgesER = [];</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; model.tableNodes.length; i++)&#123;</div><div class="line">          <span class="keyword">var</span> edge = &#123; <span class="attr">source</span>:model.fieldNodes[model.tableNodes[i].data.id][model.fieldNodes[model.tableNodes[i].data.id].length<span class="number">-1</span>].data.id,</div><div class="line">                       target:model.fieldNodes[model.tableNodes[<span class="number">0</span>].data.id][<span class="number">0</span>].data.id &#125;</div><div class="line">          <span class="keyword">var</span> param = &#123; <span class="attr">data</span>:edge, <span class="attr">classes</span>:<span class="string">'fieldRelation'</span> &#125;;</div><div class="line">          edgesER.push(param);</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> edgesER;</div><div class="line">      &#125;,</div><div class="line">      figureNodesPosition : <span class="function"><span class="keyword">function</span>(<span class="params">model,fRow,fCol</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> nodesER = [];</div><div class="line">        nodesER.push(&#123;<span class="attr">data</span>: &#123; <span class="attr">id</span>: <span class="string">'main'</span>, <span class="attr">name</span>: <span class="string">'ER图'</span> &#125;&#125;);</div><div class="line">        <span class="keyword">var</span> fieldXOffset = <span class="number">0</span>,fieldYOffset = <span class="number">40</span>,fieldRow = fRow,fieldCol = fCol;</div><div class="line">        <span class="keyword">var</span> maxX = <span class="number">0</span>,maxY = <span class="number">0</span>,entityXOffset=<span class="number">200</span>;</div><div class="line">        <span class="keyword">var</span> outLoopNum = <span class="number">0</span>,cols=<span class="number">0</span>;</div><div class="line">        <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; model.tableNodes.length; i++)&#123;</div><div class="line">          cols += <span class="built_in">parseInt</span>(model.fieldNodes[model.tableNodes[i].data.id].length/fieldRow)+<span class="number">1</span>;</div><div class="line">          model.tableNodes[i].data.parent = <span class="string">'main'</span>;</div><div class="line">          nodesER.push(model.tableNodes[i]);</div><div class="line">          <span class="keyword">var</span> tempJ = <span class="number">0</span> ;</div><div class="line">          <span class="keyword">var</span> innerLoopNum = <span class="number">0</span>;</div><div class="line">          <span class="keyword">for</span>(<span class="keyword">var</span> j = <span class="number">0</span>; j&lt;model.fieldNodes[model.tableNodes[i].data.id].length; j++)&#123;</div><div class="line">            <span class="keyword">if</span>(<span class="built_in">parseInt</span>((j/fieldRow)-innerLoopNum)==<span class="number">1</span>)&#123;<span class="comment">//字段切换到下一列</span></div><div class="line">                fieldXOffset = <span class="number">180</span>*(++innerLoopNum);</div><div class="line">                tempJ = <span class="number">0</span>;</div><div class="line">            &#125;</div><div class="line">            model.fieldNodes[model.tableNodes[i].data.id][j].data.parent = model.tableNodes[i].data.id;</div><div class="line">            model.fieldNodes[model.tableNodes[i].data.id][j].classes = <span class="string">'cyField'</span>;</div><div class="line">            model.fieldNodes[model.tableNodes[i].data.id][j].position = &#123; <span class="attr">x</span>: maxX+fieldXOffset, <span class="attr">y</span>: maxY+fieldYOffset*tempJ &#125;;</div><div class="line">            tempJ++;</div><div class="line">            nodesER.push(model.fieldNodes[model.tableNodes[i].data.id][j]);</div><div class="line">          &#125;</div><div class="line">          fieldXOffset=<span class="number">0</span>;<span class="comment">//每个实体字段渲染完成后fieldXOffset清零</span></div><div class="line">          <span class="keyword">if</span>(innerLoopNum==<span class="number">0</span>)&#123;<span class="comment">//若只够画一列，仍需偏移</span></div><div class="line">              maxX=maxX+entityXOffset;</div><div class="line">          &#125;<span class="keyword">else</span>&#123;<span class="comment">//否则记录上一个实体最后一个字段的X</span></div><div class="line">              maxX = model.fieldNodes[model.tableNodes[i].data.id][model.fieldNodes[model.tableNodes[i].data.id].length<span class="number">-1</span>].position.x+entityXOffset;<span class="comment">//偏移量200</span></div><div class="line">          &#125;</div><div class="line">          <span class="keyword">if</span>(cols&gt;fieldCol)&#123;<span class="comment">//实体切换到下一行</span></div><div class="line">              fieldXOffset = <span class="number">0</span>;</div><div class="line">              maxX = <span class="number">0</span>;</div><div class="line">              maxY=fieldYOffset*fieldRow*(++outLoopNum)+<span class="number">120</span>*outLoopNum;</div><div class="line">              cols = <span class="number">0</span>;</div><div class="line">          &#125;</div><div class="line">        &#125;</div><div class="line">        <span class="keyword">return</span> &#123; <span class="attr">nodes</span>: nodesER, <span class="attr">edges</span>: _.createEdgesData(model)&#125;;</div><div class="line">      &#125;,</div><div class="line">      paintCytoER : <span class="function"><span class="keyword">function</span>(<span class="params">datas</span>)</span>&#123;</div><div class="line">        <span class="keyword">var</span> cy = cytoscape(&#123;</div><div class="line">          container: <span class="built_in">document</span>.getElementById(<span class="string">'cy'</span>),</div><div class="line">          minZoom : <span class="number">0.5</span>,</div><div class="line">          maxZoom : <span class="number">1.5</span>,</div><div class="line">          userZoomingEnabled: <span class="literal">true</span>,</div><div class="line">          userPanningEnabled:<span class="literal">true</span>,</div><div class="line">          wheelSensitivity : <span class="number">0.1</span>,</div><div class="line">          style: cytoscape.stylesheet()</div><div class="line">            .selector(<span class="string">'node'</span>)</div><div class="line">              .css(&#123;</div><div class="line">                <span class="string">'shape'</span>: <span class="string">'roundrectangle'</span>,</div><div class="line">                <span class="string">'content'</span>: <span class="string">'data(name)'</span>,</div><div class="line">                <span class="string">'text-valign'</span>: <span class="string">'center'</span>,</div><div class="line">                <span class="string">'color'</span>: <span class="string">'white'</span>,</div><div class="line">                <span class="string">'text-outline-width'</span>: <span class="number">3</span>,</div><div class="line">                <span class="string">'text-outline-color'</span>: <span class="string">'#888'</span>,</div><div class="line">                <span class="string">'font-size'</span> : <span class="string">'8px'</span>,</div><div class="line">                <span class="string">'width'</span>: <span class="number">100</span>,</div><div class="line">                <span class="string">'height'</span>: <span class="number">30</span>,</div><div class="line">                <span class="string">'background-color'</span>: <span class="string">'#93CDDD'</span>,</div><div class="line">                <span class="string">'text-outline-color'</span>: <span class="string">'#93CDDD'</span>,</div><div class="line">              &#125;)</div><div class="line">            .selector(<span class="string">'.fieldRelation'</span>)<span class="comment">//关系线</span></div><div class="line">              .css(&#123;</div><div class="line">                  <span class="string">'content'</span>: <span class="string">'data(name)'</span>,</div><div class="line">                  <span class="string">'width'</span>: <span class="number">1</span>,</div><div class="line">                  <span class="string">"color"</span> : <span class="string">"#FFFF00"</span>,</div><div class="line">                  <span class="string">'font-family'</span>: <span class="string">"Microsoft YaHei"</span>,</div><div class="line">                  <span class="string">'font-size'</span> : <span class="string">'10px'</span>,</div><div class="line">                  <span class="string">'line-color'</span>: <span class="string">'red'</span>,</div><div class="line">                  <span class="string">'target-arrow-color'</span>: <span class="string">'red'</span>,</div><div class="line">                  <span class="string">'source-arrow-color'</span>: <span class="string">'red'</span>,</div><div class="line">                  <span class="string">'curve-style'</span> : <span class="string">'bezier'</span>,<span class="comment">//路线</span></div><div class="line">                  <span class="string">'line-style'</span> : <span class="string">'dashed'</span>,<span class="comment">//线的样式</span></div><div class="line">                  <span class="string">'target-arrow-shape'</span>: <span class="string">'triangle-backcurve'</span>,</div><div class="line">                  <span class="string">'target-arrow-fill'</span> : <span class="string">'filled'</span>,</div><div class="line">                  <span class="string">'text-background-opacity'</span> : <span class="number">0</span>,</div><div class="line">              &#125;)</div><div class="line">            .selector(<span class="string">'$node &gt; node'</span>)<span class="comment">//小节点外面的框</span></div><div class="line">              .css(&#123;</div><div class="line">                <span class="string">'shape'</span>: <span class="string">'roundrectangle'</span>,</div><div class="line">                <span class="string">'text-valign'</span>: <span class="string">'top'</span>,</div><div class="line">                <span class="comment">// 'height': 'auto',</span></div><div class="line">                <span class="comment">// 'width': 'auto',</span></div><div class="line">                <span class="string">'background-color'</span>: <span class="string">'#ccc'</span>,</div><div class="line">                <span class="string">'background-opacity'</span>: <span class="number">0.333</span>,</div><div class="line">                <span class="string">'color'</span>: <span class="string">'#888'</span>,</div><div class="line">                <span class="string">'text-outline-width'</span>:<span class="number">0</span>,</div><div class="line">                <span class="string">'font-size'</span>: <span class="number">15</span></div><div class="line">              &#125;)</div><div class="line">            .selector(<span class="string">':selected'</span>)<span class="comment">//选中</span></div><div class="line">              .css(&#123;</div><div class="line">                <span class="string">'background-color'</span>: <span class="string">'#00BFFF'</span>,</div><div class="line">                <span class="string">'line-color'</span>: <span class="string">'#00BFFF'</span>,</div><div class="line">                <span class="string">'target-arrow-color'</span>: <span class="string">'#00BFFF'</span>,</div><div class="line">                <span class="string">'source-arrow-color'</span>: <span class="string">'#00BFFF'</span>,</div><div class="line">                <span class="string">'text-outline-color'</span>: <span class="string">'#00BFFF'</span></div><div class="line">              &#125;)</div><div class="line">            .selector(<span class="string">'#main'</span>)</div><div class="line">              .css(&#123;</div><div class="line">                <span class="string">'background-opacity'</span>: <span class="number">0</span>,</div><div class="line">                <span class="string">'border-width'</span>: <span class="number">1</span>,</div><div class="line">                <span class="string">'border-color'</span>: <span class="string">'#aaa'</span>,</div><div class="line">                <span class="string">'border-opacity'</span>: <span class="number">0.5</span>,</div><div class="line">                <span class="string">'font-size'</span>: <span class="number">30</span>,</div><div class="line">                <span class="string">'padding-top'</span>: <span class="number">40</span>,</div><div class="line">                <span class="string">'padding-left'</span>: <span class="number">40</span>,</div><div class="line">                <span class="string">'padding-bottom'</span>: <span class="number">40</span>,</div><div class="line">                <span class="string">'padding-right'</span>: <span class="number">40</span>,</div><div class="line">              &#125;),</div><div class="line">          elements: &#123;</div><div class="line">            nodes: datas.nodes,</div><div class="line">            edges: []</div><div class="line">          &#125;,</div><div class="line">          layout: &#123;</div><div class="line">            name: <span class="string">'preset'</span></div><div class="line">          &#125;</div><div class="line">        &#125;).off(<span class="string">'click'</span>).on(<span class="string">'click'</span>,<span class="string">'.cyField'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;<span class="comment">//左键展开</span></div><div class="line">                <span class="comment">//关闭存在的关系  目前只有表0的字段0有关系</span></div><div class="line">                <span class="keyword">if</span>(e.target.id()==<span class="string">'t0-f0'</span>)&#123;</div><div class="line">                  cy.remove(<span class="string">'.fieldRelation'</span>);</div><div class="line">                  cy.add(datas.edges);</div><div class="line">                &#125;</div><div class="line">                </div><div class="line">            &#125;).off(<span class="string">'cxttap'</span>).on(<span class="string">'cxttap'</span>,<span class="string">'node'</span>,<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;<span class="comment">//右键关闭</span></div><div class="line">                <span class="keyword">if</span>(e.target.id()==<span class="string">'t0-f0'</span>)&#123;</div><div class="line">                  cy.remove(<span class="string">'.fieldRelation'</span>);</div><div class="line">                &#125;</div><div class="line">            &#125;);</div><div class="line">        <span class="keyword">return</span> cy;</div><div class="line">      &#125;</div><div class="line">    &#125;;</div><div class="line">  &#125;();</div><div class="line">  _.paintCytoER(</div><div class="line">    _.figureNodesPosition(</div><div class="line">      _.createNodesData(tableNum),fRow,fCol</div><div class="line">    )</div><div class="line">  );</div><div class="line">&#125;)(<span class="number">10</span>,<span class="number">10</span>,<span class="number">8</span>);<span class="comment">//表数，每个实体的字段行数，每行的字段列数</span></div></pre></td></tr></table></figure></p>
+<h1 id="源码下载"><a href="#源码下载" class="headerlink" title="源码下载"></a>源码下载</h1><p>提供两种压缩包下载：</p>
+<p>tar.gz下载：<a href="download/cytoscapeER.tar.gz">cytoscapeER.tar.gz</a></p>
+<p>zip下载：<a href="http://iamanyang.com/download/cytoscapeER.zip" target="_blank" rel="external">cytoscapeER.zip</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechatV.jpg" alt="安 阳 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信公众号，欢迎关注</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>创作需要动力</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="安 阳 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="安 阳 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    安 阳
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://JohnneyAnn.github.io/2017/10/20/CytoscapeJS实现ER图/" title="CytoscapeJS实现ER图">http://JohnneyAnn.github.io/2017/10/20/CytoscapeJS实现ER图/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Javascript/" rel="tag"><i class="fa fa-tag"></i> Javascript</a>
+          
+            <a href="/tags/Cytoscape/" rel="tag"><i class="fa fa-tag"></i> Cytoscape</a>
+          
+            <a href="/tags/记录/" rel="tag"><i class="fa fa-tag"></i> 记录</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/16/镇江游记/" rel="next" title="镇江游记">
+                <i class="fa fa-chevron-left"></i> 镇江游记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/images/avatar.jpg"
+              alt="安 阳" />
+          
+            <p class="site-author-name" itemprop="name">安 阳</p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">30</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/an-an-an-an-an-an-70/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>知乎</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/3554797744" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>微博</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JohnneyAnn" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>Github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.linkedin.com/in/%E9%98%B3-%E5%AE%89-84441b103/" target="_blank" title="Linkedin">
+                  
+                    <i class="fa fa-fw fa-globe"></i>Linkedin</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/150539663/" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>豆瓣</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:itsanyang@163.com" target="_blank" title="邮箱">
+                  
+                    <i class="fa fa-fw fa-globe"></i>邮箱</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.imooc.com/" title="慕课网" target="_blank">慕课网</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/" title="PythonPackages" target="_blank">PythonPackages</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#主要包含三个文件"><span class="nav-number">1.</span> <span class="nav-text">主要包含三个文件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#index-html"><span class="nav-number">1.1.</span> <span class="nav-text">index.html</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#style-css"><span class="nav-number">1.2.</span> <span class="nav-text">style.css</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#code-js"><span class="nav-number">1.3.</span> <span class="nav-text">code.js</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#源码下载"><span class="nav-number">2.</span> <span class="nav-text">源码下载</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">安 阳</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">
+      29.8k
+    </span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
