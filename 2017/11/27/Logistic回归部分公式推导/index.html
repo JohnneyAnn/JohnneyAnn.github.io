@@ -95,7 +95,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="随笔," />
+  <meta name="keywords" content="机器学习," />
 
 
 
@@ -113,18 +113,20 @@
 
 
 
-<meta name="description" content="2017.8.13 21:09 我几乎对所有事都有进行悲观检测，唯独没有对你。  乐极生悲。">
-<meta name="keywords" content="随笔">
+<meta name="description" content="代码的转换跳跃太大，还得自己去推到一边才知道下句代码为什么这样写。数学：你还是不是栽在我手里！">
+<meta name="keywords" content="机器学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="念想">
-<meta property="og:url" content="http://JohnneyAnn.github.io/2017/08/13/念想/index.html">
+<meta property="og:title" content="Logistic回归部分公式推导">
+<meta property="og:url" content="http://JohnneyAnn.github.io/2017/11/27/Logistic回归部分公式推导/index.html">
 <meta property="og:site_name" content="安阳">
-<meta property="og:description" content="2017.8.13 21:09 我几乎对所有事都有进行悲观检测，唯独没有对你。  乐极生悲。">
+<meta property="og:description" content="代码的转换跳跃太大，还得自己去推到一边才知道下句代码为什么这样写。数学：你还是不是栽在我手里！">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-08-13T14:17:53.754Z">
+<meta property="og:image" content="http://johnneyann.github.io/img/logistic/logistic.jpg">
+<meta property="og:updated_time" content="2017-11-27T13:56:01.420Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="念想">
-<meta name="twitter:description" content="2017.8.13 21:09 我几乎对所有事都有进行悲观检测，唯独没有对你。  乐极生悲。">
+<meta name="twitter:title" content="Logistic回归部分公式推导">
+<meta name="twitter:description" content="代码的转换跳跃太大，还得自己去推到一边才知道下句代码为什么这样写。数学：你还是不是栽在我手里！">
+<meta name="twitter:image" content="http://johnneyann.github.io/img/logistic/logistic.jpg">
 
 
 
@@ -154,13 +156,13 @@
 
 
 
-  <link rel="canonical" href="http://JohnneyAnn.github.io/2017/08/13/念想/"/>
+  <link rel="canonical" href="http://JohnneyAnn.github.io/2017/11/27/Logistic回归部分公式推导/"/>
 
 
 
 
 
-  <title>念想 | 安阳</title>
+  <title>Logistic回归部分公式推导 | 安阳</title>
   
 
 
@@ -307,7 +309,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://JohnneyAnn.github.io/2017/08/13/念想/">
+    <link itemprop="mainEntityOfPage" href="http://JohnneyAnn.github.io/2017/11/27/Logistic回归部分公式推导/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="安 阳">
@@ -324,7 +326,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">念想</h2>
+          <h2 class="post-title" itemprop="name headline">Logistic回归部分公式推导</h2>
         
 
         <div class="post-meta">
@@ -336,8 +338,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-08-13T22:17:53+08:00">
-                2017-08-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-27T21:56:01+08:00">
+                2017-11-27
               </time>
             
 
@@ -352,8 +354,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-08-13T22:17:53+08:00">
-                2017-08-13
+              <time title="更新于" itemprop="dateModified" datetime="2017-11-27T21:56:01+08:00">
+                2017-11-27
               </time>
             
           </span>
@@ -371,8 +373,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/生活/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
                   </a>
                 </span>
 
@@ -407,7 +409,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  568 字
+                  48 字
                 </span>
               
 
@@ -423,7 +425,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  1 分钟
                 </span>
               
             </div>
@@ -444,31 +446,8 @@
       
 
       
-        <p>2017.8.13 21:09</p>
-<p>我几乎对所有事都有进行悲观检测，唯独没有对你。</p>
-
-<p>乐极生悲。</p>
-
-<a id="more"></a>
-<p>我不得不承认，我们倆在一起时件特别美好的事，当然是在分手之前。三年半，可能是美好的太久了，我迷失了，我沉浸了，忘记了乐极生悲这回事。也该相信，美好的事物应该是短暂的，在某种程度上说短暂才造就了她的美好。</p>
-
-<p>好像知道的太晚了，当悲降临时，才发现来势凶猛，猝不及防，我感受到的只有无助，因为这次悲传达的信息就是告诉我，做什么也于事无补。</p>
-
-<p>因为你，我丢失了我所有的底气。</p>
-
-<p>朋友说我现在对很多事都没有信心，也不太敢向以前一样去做一些事。这个我清楚的知道，在这几年，我们在一起太安逸，大学太安逸，所做的一切事都与你有关，你在，我就不需要做与你无关的事，我那时认为的信心可能只是能够帮你完成一些事之后的快乐。而现在，我不仅丢了你，没了与你的快乐，也丢了底气。</p>
-
-<p>我想写下我的大学四年，或者说想写我们，从初遇见开始。没有写作的功底，没有丰满的词藻，不知道自己能不能写下去，也不知道写着写着还能记得多少，更不确定再未来的某一天还想不想继续写下去。</p>
-
-<p>想做就去做吧，也可能每写下一篇，就能够放下一点，我不想再承受了。</p>
-
-<p>我时感受到世界的不公，如果有上帝的话，可能真如泰戈尔所说，上帝治愈你所以才要伤害你。再如果，我后天得到的是上帝给我的恩赐，那么我宁愿不要，我希望我哥能回来，你也能回来，我很想。</p>
-
-<p>没有如果。</p>
-
-<p>哥，希望你去的是你想要的天堂，希望那里的生活没有现实生活的压迫，你在这个世界所留下的念想，你想照顾的人，你想做的事，我来完成。</p>
-
-<p>你，祝你幸福。</p>
+        <p>代码的转换跳跃太大，还得自己去推到一边才知道下句代码为什么这样写。<br>数学：你还是不是栽在我手里！<br><a id="more"></a></p>
+<h1 id="直接上图片"><a href="#直接上图片" class="headerlink" title="直接上图片"></a>直接上图片</h1><p><img src="/img/logistic/logistic.jpg" alt="回归公式推倒"></p>
 
       
     </div>
@@ -526,7 +505,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://JohnneyAnn.github.io/2017/08/13/念想/" title="念想">http://JohnneyAnn.github.io/2017/08/13/念想/</a>
+    <a href="http://JohnneyAnn.github.io/2017/11/27/Logistic回归部分公式推导/" title="Logistic回归部分公式推导">http://JohnneyAnn.github.io/2017/11/27/Logistic回归部分公式推导/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -541,7 +520,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/随笔/" rel="tag"><i class="fa fa-tag"></i> 随笔</a>
+            <a href="/tags/机器学习/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
           
         </div>
       
@@ -554,15 +533,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2017/11/27/醒来/" rel="next" title="醒来">
+                <i class="fa fa-chevron-left"></i> 醒来
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/08/20/我从未感受过的孤独/" rel="prev" title="我从未感受过的孤独">
-                我从未感受过的孤独 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -654,8 +633,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           
             <img class="site-author-image" itemprop="image"
@@ -783,6 +771,22 @@
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#直接上图片"><span class="nav-number">1.</span> <span class="nav-text">直接上图片</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
