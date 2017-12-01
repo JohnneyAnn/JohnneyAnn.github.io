@@ -1,0 +1,1078 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+                history.back();
+            }
+        }
+    })();
+</script>
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="机器学习,Python," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="安阳" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.2" />
+
+
+
+
+
+
+<meta name="description" content="Logistic回归是一种简单的分类算法，提到“回归”，很多人可能觉得与分类没什么关系，Logistic回归通过对数据分类边界的拟合来实现分类。而“回归”也就意味着最佳拟合。要进行最佳拟合，则需要寻找到最佳的拟合参数，一些最优化方法就可以用于最佳回归系数的确定。">
+<meta name="keywords" content="机器学习,Python">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习实战（五）Logistic回归">
+<meta property="og:url" content="http://JohnneyAnn.github.io/2017/12/01/机器学习实战（五）Logistic回归/index.html">
+<meta property="og:site_name" content="安阳">
+<meta property="og:description" content="Logistic回归是一种简单的分类算法，提到“回归”，很多人可能觉得与分类没什么关系，Logistic回归通过对数据分类边界的拟合来实现分类。而“回归”也就意味着最佳拟合。要进行最佳拟合，则需要寻找到最佳的拟合参数，一些最优化方法就可以用于最佳回归系数的确定。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://johnneyann.github.io/img/logistic/1.png">
+<meta property="og:image" content="http://johnneyann.github.io/img/logistic/2.png">
+<meta property="og:image" content="http://johnneyann.github.io/img/logistic/3.png">
+<meta property="og:updated_time" content="2017-12-01T13:50:26.704Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习实战（五）Logistic回归">
+<meta name="twitter:description" content="Logistic回归是一种简单的分类算法，提到“回归”，很多人可能觉得与分类没什么关系，Logistic回归通过对数据分类边界的拟合来实现分类。而“回归”也就意味着最佳拟合。要进行最佳拟合，则需要寻找到最佳的拟合参数，一些最优化方法就可以用于最佳回归系数的确定。">
+<meta name="twitter:image" content="http://johnneyann.github.io/img/logistic/1.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.2',
+    sidebar: {"position":"left","display":"post","offset":12,"offset_float":12,"b2t":false,"scrollpercent":true,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '作者'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://JohnneyAnn.github.io/2017/12/01/机器学习实战（五）Logistic回归/"/>
+
+
+
+
+
+  <title>机器学习实战（五）Logistic回归 | 安阳</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+<a href="https://github.com/JohnneyAnn"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://camo.githubusercontent.com/38ef81f8aca64bb9a64448d0d70f1308ef5341ab/68747470733a2f2f73332e616d617a6f6e6177732e636f6d2f6769746875622f726962626f6e732f666f726b6d655f72696768745f6461726b626c75655f3132313632312e706e67" alt="Fork me on GitHub" data-canonical-src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png"></a>    
+<header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">安阳</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">若真的喜欢，就别抗拒遗憾</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-commonweal">
+          <a href="/404.html" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-heartbeat"></i> <br />
+            
+            公益404
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://JohnneyAnn.github.io/2017/12/01/机器学习实战（五）Logistic回归/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="安 阳">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="安阳">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">机器学习实战（五）Logistic回归</h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T21:50:26+08:00">
+                2017-12-01
+              </time>
+            
+
+            
+              <span class="post-meta-divider">|</span>
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-check-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">更新于&#58;</span>
+              
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-01T21:50:26+08:00">
+                2017-12-01
+              </time>
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,007 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  9 分钟
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Logistic回归是一种简单的分类算法，提到“回归”，很多人可能觉得与分类没什么关系，Logistic回归通过对数据分类边界的拟合来实现分类。而“回归”也就意味着最佳拟合。要进行最佳拟合，则需要寻找到最佳的拟合参数，一些最优化方法就可以用于最佳回归系数的确定。<br><a id="more"></a></p>
+<h1 id="Logistic回归"><a href="#Logistic回归" class="headerlink" title="Logistic回归"></a>Logistic回归</h1><p><strong>对书中代码做的修改：</strong></p>
+<ul>
+<li>1.修改plotBestFit（wei）参数名称plotBestFit（weights）</li>
+<li>2.移除plotBestFit（）中weights=wei.getA()</li>
+<li>3.分析数据画决策边界调用plotBestFit（weights）时传入weights.getA()，其中weight是gredAscent(dataArr,labelMat)方法的返回值</li>
+</ul>
+<h2 id="LogistiC-回归梯度上升优化算法"><a href="#LogistiC-回归梯度上升优化算法" class="headerlink" title="LogistiC 回归梯度上升优化算法"></a>LogistiC 回归梯度上升优化算法</h2><h3 id="加载数据"><a href="#加载数据" class="headerlink" title="加载数据"></a>加载数据</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadDataSet</span><span class="params">()</span>:</span></div><div class="line">    dataMat = []</div><div class="line">    labelMat = []</div><div class="line">    fr = open(<span class="string">'F:\\study\\testSet.txt'</span>)</div><div class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> fr.readlines():</div><div class="line">        <span class="comment">#去除空格并拆分</span></div><div class="line">        lineArr = line.strip().split()</div><div class="line">        dataMat.append([<span class="number">1.0</span>, float(lineArr[<span class="number">0</span>]), float(lineArr[<span class="number">1</span>])])</div><div class="line">        labelMat.append(int(lineArr[<span class="number">2</span>]))</div><div class="line">    <span class="keyword">return</span> dataMat,labelMat</div></pre></td></tr></table></figure>
+<h3 id="Sigmoid函数"><a href="#Sigmoid函数" class="headerlink" title="Sigmoid函数"></a>Sigmoid函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">sigmoid函数</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">sigmoid</span><span class="params">(inX)</span>:</span></div><div class="line">    <span class="keyword">return</span> (<span class="number">1.0</span>/(<span class="number">1</span>+exp(-inX)))</div></pre></td></tr></table></figure>
+<h3 id="LogistiC-梯度上升算法"><a href="#LogistiC-梯度上升算法" class="headerlink" title="LogistiC 梯度上升算法"></a>LogistiC 梯度上升算法</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">gredAscent</span><span class="params">(dataMatIn, classLabels)</span>:</span></div><div class="line">    <span class="comment">#[[x,x,x],...]</span></div><div class="line">    dataMatrix = mat(dataMatIn)</div><div class="line">    <span class="comment">#将列表转换为矩阵再倒置</span></div><div class="line">    labelMat = mat(classLabels).transpose()</div><div class="line">    <span class="comment">#获取行列</span></div><div class="line">    m,n = shape(dataMatrix)</div><div class="line">    <span class="comment">#向目标移动的步长</span></div><div class="line">    alpha = <span class="number">0.001</span></div><div class="line">    <span class="comment">#迭代次数</span></div><div class="line">    maxCycles = <span class="number">500</span></div><div class="line">    <span class="comment">#回归系数 n=3行1列的单位数组</span></div><div class="line">    weights = ones((n,<span class="number">1</span>))</div><div class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(maxCycles):</div><div class="line">        <span class="comment">#h&gt;0.5 在右边 dataMatrix*weights矩阵相乘100行一列</span></div><div class="line">        <span class="comment">#每次计算所有样本点</span></div><div class="line">        h = sigmoid(dataMatrix*weights)</div><div class="line">        error = (labelMat-h);</div><div class="line">        <span class="comment">#w = w + α▽w f(w)</span></div><div class="line">        <span class="comment">#dataMatrix.transpose() 3行100列  error 100行1列  相乘后3，1</span></div><div class="line">        weights = weights + alpha * dataMatrix.transpose()*error</div><div class="line">    <span class="keyword">return</span> weights</div></pre></td></tr></table></figure>
+<ul>
+<li>1.解析文本，文本中有100个样本点，前两列代表点的数值型特征X1,X2，最后一列为分类标签</li>
+<li>2.设置回归系数初始值为1（为单位矩阵，每个样本点对应一个回归系数，设置回归系数行数等于样本点的列数，实现倒置），步长为0.001，训练次数500</li>
+<li>3.计算z=wTx,带入sigmod获取结果，将结果与分类标签计算误差值</li>
+<li>4.根据误差值方向调整回归系数（梯度迭代公式，梯度简化为数据样本与错误量相乘[见上篇博客公式推导]）</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">查看效果</span></div><div class="line"><span class="string">"""</span></div><div class="line">dataArr,labelMat = loadDataSet()</div><div class="line">weights = gredAscent(dataArr,labelMat)</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">分析数据：画出决策边界</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plotBestFit</span><span class="params">(weights)</span>:</span></div><div class="line">    dataMat,labelMat = loadDataSet()</div><div class="line">    dataArr = array(dataMat)</div><div class="line">    <span class="comment"># n = 100</span></div><div class="line">    n = shape(dataArr)[<span class="number">0</span>]</div><div class="line">    xcord1 = []; ycord1 = []</div><div class="line">    xcord2 = []; ycord2 = []</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(n):</div><div class="line">        <span class="keyword">if</span> int(labelMat[i]) == <span class="number">1</span>:</div><div class="line">            xcord1.append(dataArr[i, <span class="number">1</span>]); ycord1.append(dataArr[i,<span class="number">2</span>])</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            xcord2.append(dataArr[i, <span class="number">1</span>]); ycord2.append(dataArr[i,<span class="number">2</span>])</div><div class="line">    <span class="comment"># 创建画布</span></div><div class="line">    fig = plt.figure()</div><div class="line">    ax = fig.add_subplot(<span class="number">111</span>)</div><div class="line">    <span class="comment"># 画标签为1的点</span></div><div class="line">    ax.scatter(xcord1, ycord1, s=<span class="number">30</span>, c=<span class="string">'red'</span>, marker=<span class="string">'p'</span>)</div><div class="line">    <span class="comment"># 画标签为0的点</span></div><div class="line">    ax.scatter(xcord2, ycord2, s=<span class="number">30</span>, c=<span class="string">'green'</span>)</div><div class="line">    <span class="comment">#创建决策边界线</span></div><div class="line">    x = arange(<span class="number">-3.0</span>, <span class="number">3.0</span>, <span class="number">0.1</span>)</div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">    设置sigmod函数值为0,0是两个分类的分界处，可解出x，y的关系式</span></div><div class="line"><span class="string">    """</span></div><div class="line">    <span class="comment"># 0 = w0*x0 + w1*x + w2*y  =&gt;  y = -(w0 + w1*x)/w2</span></div><div class="line">    y = (-weights[<span class="number">0</span>]-weights[<span class="number">1</span>]*x)/weights[<span class="number">2</span>] <span class="comment">#最佳拟合线</span></div><div class="line">    ax.plot(x,y)</div><div class="line">    plt.xlabel(<span class="string">'X1'</span>);plt.ylabel(<span class="string">'X2'</span>);</div><div class="line">    plt.show()</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">查看效果</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</div><div class="line"><span class="comment"># 传入返回的回归系数(书中有误，因此修改了plotBestFit的传参，也为了后面随机梯度可共用</span></div><div class="line"><span class="comment">#另外需要定义weights将gredAscent的值赋给weights)</span></div><div class="line">%matplotlib inline</div><div class="line"><span class="comment"># getA()将自身矩阵转化为ndarray类型的变量，等价于asarray(self)</span></div><div class="line">plotBestFit(weights.getA())</div></pre></td></tr></table></figure>
+<p><img src="/img/logistic/1.png" alt="分析数据"></p>
+<h2 id="随机梯度上升算法"><a href="#随机梯度上升算法" class="headerlink" title="随机梯度上升算法"></a>随机梯度上升算法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">一次仅用一个样本点来更新回归系数</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">stocGradAscent0</span><span class="params">(dataMatrix, classLabels)</span>:</span></div><div class="line">    m,n=shape(dataMatrix)</div><div class="line">    alpha = <span class="number">0.01</span></div><div class="line">    weights = ones(n)</div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(m):</div><div class="line">        <span class="comment">#每次计算一个样本点</span></div><div class="line">        h = sigmoid(sum(dataMatrix[i]*weights))</div><div class="line">        error = classLabels[i] - h</div><div class="line">        weights = weights + alpha*error*dataMatrix[i]</div><div class="line">    <span class="keyword">return</span> weights</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">查看效果</span></div><div class="line"><span class="string">"""</span></div><div class="line">dataArr,labelMat = loadDataSet()</div><div class="line">weights = stocGradAscent0(array(dataArr),labelMat)</div><div class="line">plotBestFit(weights)</div></pre></td></tr></table></figure>
+<p><img src="/img/logistic/2.png" alt="分析数据"></p>
+<h2 id="改进的随机梯度上升算法"><a href="#改进的随机梯度上升算法" class="headerlink" title="改进的随机梯度上升算法"></a>改进的随机梯度上升算法</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">改进的随机梯度上升算法</span></div><div class="line"><span class="string">alpha在每次迭代的时候都会调整，随着迭代次数不断减小，但永远不会到0</span></div><div class="line"><span class="string">每次从样本中随机取出一个样本更新回归系数，之后将改值从列表中删除，进行下次迭代</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">stocGradAscent1</span><span class="params">(dataMatrix, classLabels, numIter=<span class="number">150</span>)</span>:</span></div><div class="line">    m,n = shape(dataMatrix)</div><div class="line">    weights = ones(n)</div><div class="line">    <span class="keyword">for</span> j <span class="keyword">in</span> range(numIter):</div><div class="line">        <span class="comment"># 每个样本的编号[0,..,99]</span></div><div class="line">        dataIndex = range(m)</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(m):</div><div class="line">            <span class="string">"""</span></div><div class="line"><span class="string">            步长alpha每次迭代时需要调整，每次减少1/(i+j)</span></div><div class="line"><span class="string">            档j&lt;&lt;max(i),alpha就不是严格下降的。</span></div><div class="line"><span class="string">            避免参数严格下降也常见于模拟退火算法（SAA)等其他优化算法中</span></div><div class="line"><span class="string">            """</span></div><div class="line">            alpha = <span class="number">4</span>/(<span class="number">1.0</span>+j+i)+<span class="number">0.01</span></div><div class="line">            <span class="comment"># numpy.random.uniform(low,high,size)在给定区间[0,100)内随机取样，注意是左闭右开</span></div><div class="line">            <span class="comment"># size输出样本数目，int或元组，缺省时输出一个值</span></div><div class="line">            randIndex = int(random.uniform(<span class="number">0</span>,len(dataIndex)))</div><div class="line">            <span class="comment"># 求和 即计算z = w0x0+w1*x1+w2*x2  随机选取样本计算h</span></div><div class="line">            h = sigmoid(sum(dataMatrix[randIndex]*weights))</div><div class="line">            error = classLabels[randIndex] - h</div><div class="line">            weights = weights + alpha * error * dataMatrix[randIndex]</div><div class="line">            <span class="comment"># 样本被使用后去除 在此次迭代内dataIndex长度每次减1</span></div><div class="line">            <span class="keyword">del</span>(dataIndex[randIndex])</div><div class="line">    <span class="keyword">return</span> weights</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">查看效果</span></div><div class="line"><span class="string">"""</span></div><div class="line">dataArr,labelMat = loadDataSet()</div><div class="line">weights = stocGradAscent1(array(dataArr),labelMat)</div><div class="line">plotBestFit(weights)</div></pre></td></tr></table></figure>
+<p><img src="/img/logistic/3.png" alt="分析数据"></p>
+<h2 id="从疝气病症预测病马的死亡率"><a href="#从疝气病症预测病马的死亡率" class="headerlink" title="从疝气病症预测病马的死亡率"></a>从疝气病症预测病马的死亡率</h2><h3 id="处理数据中的缺失值"><a href="#处理数据中的缺失值" class="headerlink" title="处理数据中的缺失值"></a>处理数据中的缺失值</h3><p><strong>可选的做法</strong></p>
+<blockquote>
+<p>使用可用特征的均值来填补缺失值；<br>使用特殊值来填补缺失值，如-1;<br>忽略有缺失值的样本；<br>使用相似样本的均值添补缺失值；<br>使用另外的机器学习算法预测缺失值。</p>
+</blockquote>
+<p>numpy不允许包含缺失值，选择实数0来替换所有缺失值，恰好能适用于Logistic回归<br>我们需要的是一个在更新是不会影响系数的值，根据回归系数的更新公式<br>w = w + a <em> e </em> dataMatrix[randIndex],若dataMatrix的某特征对应值为0,则系数不做更新w=w，另外sigmoid(0)=0.5，对结果的预测不具有任何的倾向性</p>
+<h3 id="Logistic回归分类函数"><a href="#Logistic回归分类函数" class="headerlink" title="Logistic回归分类函数"></a>Logistic回归分类函数</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">classifyVector</span><span class="params">(inX, weights)</span>:</span></div><div class="line">    prob = sigmoid(sum(inX*weights))</div><div class="line">    <span class="keyword">if</span> prob &gt; <span class="number">0.5</span>: <span class="keyword">return</span> <span class="number">1.0</span></div><div class="line">    <span class="keyword">else</span>: <span class="keyword">return</span> <span class="number">0.0</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">colicTest</span><span class="params">()</span>:</span></div><div class="line">    frTrain = open(<span class="string">'F:\study\horseColicTraining.txt'</span>)</div><div class="line">    frTest = open(<span class="string">'F:\study\horseColicTest.txt'</span>)</div><div class="line">    trainingSet = []; trainingLabels = []</div><div class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> frTrain.readlines():</div><div class="line">        currLine = line.strip().split(<span class="string">'\t'</span>)</div><div class="line">        lineArr = []</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">21</span>):</div><div class="line">            lineArr.append(float(currLine[i]))</div><div class="line">        trainingSet.append(lineArr)</div><div class="line">        trainingLabels.append(float(currLine[<span class="number">21</span>]))</div><div class="line">    trainWeights = stocGradAscent1(array(trainingSet), trainingLabels, <span class="number">500</span>)</div><div class="line">    errorCount = <span class="number">0</span>; numTestVec = <span class="number">0.0</span></div><div class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> frTest.readlines():</div><div class="line">        numTestVec += <span class="number">1.0</span></div><div class="line">        currLine = line.strip().split(<span class="string">'\t'</span>)</div><div class="line">        lineArr = []</div><div class="line">        <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">21</span>):</div><div class="line">            lineArr.append(float(currLine[i]))</div><div class="line">        <span class="keyword">if</span> int(classifyVector(array(lineArr), trainWeights)) != int(currLine[<span class="number">21</span>]):</div><div class="line">            errorCount += <span class="number">1</span></div><div class="line">    errorRate = (float(errorCount)/numTestVec)</div><div class="line">    <span class="keyword">print</span> <span class="string">"the error rate of this test is: %f"</span> % errorRate</div><div class="line">    <span class="keyword">return</span> errorRate</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">multiTest</span><span class="params">()</span>:</span></div><div class="line">    numTests = <span class="number">10</span>; errorSum=<span class="number">0.0</span></div><div class="line">    <span class="keyword">for</span> k <span class="keyword">in</span> range(numTests):</div><div class="line">        errorSum += colicTest()</div><div class="line">    <span class="keyword">print</span> <span class="string">"after %d iterations the average error rate is: %f"</span> % (numTests, errorSum/float(numTests))</div></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">运行时报D:\Anaconda2\lib\site-packages\ipykernel\__main__.py:5: </span></div><div class="line"><span class="string">RuntimeWarning: overflow encountered in exp警告</span></div><div class="line"><span class="string">说明计算的数据结果溢出了，忽略也无妨，查过说可以调整sigmoid函数，</span></div><div class="line"><span class="string">使用longfloat()来解决溢出，但没有解决，还在寻找解决办法。。</span></div><div class="line"><span class="string">"""</span></div><div class="line">multiTest()</div></pre></td></tr></table></figure>
+<pre><code>D:\Anaconda2\lib\site-packages\ipykernel\__main__.py:5: RuntimeWarning: overflow encountered in exp
+
+
+the error rate of this test is: 0.298507
+the error rate of this test is: 0.402985
+the error rate of this test is: 0.268657
+the error rate of this test is: 0.298507
+the error rate of this test is: 0.283582
+the error rate of this test is: 0.402985
+the error rate of this test is: 0.388060
+the error rate of this test is: 0.328358
+the error rate of this test is: 0.388060
+the error rate of this test is: 0.417910
+after 10 iterations the average error rate is: 0.347761
+</code></pre><h2 id="总结（来自书中）"><a href="#总结（来自书中）" class="headerlink" title="总结（来自书中）"></a>总结（来自书中）</h2><blockquote>
+<p>Logistic回归的目的是寻找一个非线性函数sigmoid的最佳拟合参数，求解过程可以由最优化<br>算法来完成。在最优化算法中，最常用的就是梯度上升算法，而梯度上升算法又可以简化为随机<br>梯度上升算法。<br>随机梯度上升算法与梯度上升算法的效果相当，但占用更少的计算资源。此外，随机梯度上<br>升是一个在线算法，它可以在新数据到来时就完成参数更新，而不需要重新读取整个数据集来进<br>行批处理运算。<br>机器学习的一个重要问题就是如何处理缺失数据。这个问题没有标准答案，取决于实际应用<br>中的需求。现有一些解决方案，每种方案都各有优缺点。</p>
+</blockquote>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/wechatV.jpg" alt="安 阳 wechat" style="width: 200px; max-width: 100%;"/>
+    <div>微信公众号，欢迎关注</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>创作需要动力</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.jpg" alt="安 阳 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.jpg" alt="安 阳 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    安 阳
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://JohnneyAnn.github.io/2017/12/01/机器学习实战（五）Logistic回归/" title="机器学习实战（五）Logistic回归">http://JohnneyAnn.github.io/2017/12/01/机器学习实战（五）Logistic回归/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"><i class="fa fa-tag"></i> 机器学习</a>
+          
+            <a href="/tags/Python/" rel="tag"><i class="fa fa-tag"></i> Python</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/11/27/Logistic回归部分公式推导/" rel="next" title="Logistic回归部分公式推导">
+                <i class="fa fa-chevron-left"></i> Logistic回归部分公式推导
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        
+  <div class="bdsharebuttonbox">
+    <a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a>
+    <a href="#" class="bds_douban" data-cmd="douban" title="分享到豆瓣网"></a>
+    <a href="#" class="bds_sqq" data-cmd="sqq" title="分享到QQ好友"></a>
+    <a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a>
+    <a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a>
+    <a href="#" class="bds_tieba" data-cmd="tieba" title="分享到百度贴吧"></a>
+    <a href="#" class="bds_twi" data-cmd="twi" title="分享到Twitter"></a>
+    <a href="#" class="bds_fbook" data-cmd="fbook" title="分享到Facebook"></a>
+    <a href="#" class="bds_more" data-cmd="more"></a>
+    <a class="bds_count" data-cmd="count"></a>
+  </div>
+  <script>
+    window._bd_share_config = {
+      "common": {
+        "bdText": "",
+        "bdMini": "2",
+        "bdMiniList": false,
+        "bdPic": ""
+      },
+      "share": {
+        "bdSize": "16",
+        "bdStyle": "0"
+      },
+      "image": {
+        "viewList": ["tsina", "douban", "sqq", "qzone", "weixin", "twi", "fbook"],
+        "viewText": "分享到：",
+        "viewSize": "16"
+      }
+    }
+  </script>
+
+<script>
+  with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='//bdimg.share.baidu.com/static/api/js/share.js?cdnversion='+~(-new Date()/36e5)];
+</script>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div id="uyan_frame"></div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          
+            <img class="site-author-image" itemprop="image"
+              src="/images/avatar.jpg"
+              alt="安 阳" />
+          
+            <p class="site-author-name" itemprop="name">安 阳</p>
+            <p class="site-description motion-element" itemprop="description"></p>
+        </div>
+
+        <nav class="site-state motion-element">
+
+          
+            <div class="site-state-item site-state-posts">
+            
+              <a href="/archives/">
+            
+                <span class="site-state-item-count">35</span>
+                <span class="site-state-item-name">日志</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-categories">
+              <a href="/categories/index.html">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            
+            
+            <div class="site-state-item site-state-tags">
+              <a href="/tags/index.html">
+                <span class="site-state-item-count">23</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://www.zhihu.com/people/an-an-an-an-an-an-70/activities" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-globe"></i>知乎</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/u/3554797744" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-globe"></i>微博</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/JohnneyAnn" target="_blank" title="Github">
+                  
+                    <i class="fa fa-fw fa-globe"></i>Github</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.linkedin.com/in/%E9%98%B3-%E5%AE%89-84441b103/" target="_blank" title="Linkedin">
+                  
+                    <i class="fa fa-fw fa-globe"></i>Linkedin</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://www.douban.com/people/150539663/" target="_blank" title="豆瓣">
+                  
+                    <i class="fa fa-fw fa-globe"></i>豆瓣</a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="mailto:itsanyang@163.com" target="_blank" title="邮箱">
+                  
+                    <i class="fa fa-fw fa-globe"></i>邮箱</a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+          <div class="links-of-blogroll motion-element links-of-blogroll-inline">
+            <div class="links-of-blogroll-title">
+              <i class="fa  fa-fw fa-globe"></i>
+              Links
+            </div>
+            <ul class="links-of-blogroll-list">
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.imooc.com/" title="慕课网" target="_blank">慕课网</a>
+                </li>
+              
+                <li class="links-of-blogroll-item">
+                  <a href="http://www.lfd.uci.edu/~gohlke/pythonlibs/" title="PythonPackages" target="_blank">PythonPackages</a>
+                </li>
+              
+            </ul>
+          </div>
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Logistic回归"><span class="nav-number">1.</span> <span class="nav-text">Logistic回归</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LogistiC-回归梯度上升优化算法"><span class="nav-number">1.1.</span> <span class="nav-text">LogistiC 回归梯度上升优化算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#加载数据"><span class="nav-number">1.1.1.</span> <span class="nav-text">加载数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Sigmoid函数"><span class="nav-number">1.1.2.</span> <span class="nav-text">Sigmoid函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LogistiC-梯度上升算法"><span class="nav-number">1.1.3.</span> <span class="nav-text">LogistiC 梯度上升算法</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机梯度上升算法"><span class="nav-number">1.2.</span> <span class="nav-text">随机梯度上升算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#改进的随机梯度上升算法"><span class="nav-number">1.3.</span> <span class="nav-text">改进的随机梯度上升算法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#从疝气病症预测病马的死亡率"><span class="nav-number">1.4.</span> <span class="nav-text">从疝气病症预测病马的死亡率</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#处理数据中的缺失值"><span class="nav-number">1.4.1.</span> <span class="nav-text">处理数据中的缺失值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Logistic回归分类函数"><span class="nav-number">1.4.2.</span> <span class="nav-text">Logistic回归分类函数</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结（来自书中）"><span class="nav-number">1.5.</span> <span class="nav-text">总结（来自书中）</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">安 阳</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+      <span class="post-meta-item-text">Site words total count&#58;</span>
+    
+    <span title="Site words total count">
+      34.8k
+    </span>
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+  <span class="post-meta-divider">|</span>
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.2</div>
+
+
+        
+<div class="busuanzi-count">
+  <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fa fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fa fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.2"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.2"></script>
+
+
+
+  
+  
+
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.2"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.2"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+    
+
+    
+      <!-- UY BEGIN -->
+      <script type="text/javascript" src="http://v2.uyan.cc/code/uyan.js?uid=2150516"></script>
+      <!-- UY END -->
+    
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
