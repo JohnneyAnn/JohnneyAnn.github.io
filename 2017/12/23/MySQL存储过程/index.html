@@ -95,7 +95,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="随笔,愚见," />
+  <meta name="keywords" content="mysql,存储过程," />
 
 
 
@@ -113,18 +113,18 @@
 
 
 
-<meta name="description" content="任何事都是两面的，人们对一件事有着正面的解释，自然别人会给它另一种解释。各自都有道理。 对于该不该畅想未来这件事，我想别人也有两种看法，我的看法在转变。">
-<meta name="keywords" content="随笔,愚见">
+<meta name="description" content="有这样一个需求，从A表中查询出结果，之后循环插入B表中，B表中的某个字段将使用到A表查询结果的值。从网上看了些解决方案，这里写了一个存储过程的DEMO。">
+<meta name="keywords" content="mysql,存储过程">
 <meta property="og:type" content="article">
-<meta property="og:title" content="我现在已不敢往后想">
-<meta property="og:url" content="http://JohnneyAnn.github.io/2017/09/08/I can't think back now/index.html">
+<meta property="og:title" content="MySQL存储过程">
+<meta property="og:url" content="http://JohnneyAnn.github.io/2017/12/23/MySQL存储过程/index.html">
 <meta property="og:site_name" content="安阳">
-<meta property="og:description" content="任何事都是两面的，人们对一件事有着正面的解释，自然别人会给它另一种解释。各自都有道理。 对于该不该畅想未来这件事，我想别人也有两种看法，我的看法在转变。">
+<meta property="og:description" content="有这样一个需求，从A表中查询出结果，之后循环插入B表中，B表中的某个字段将使用到A表查询结果的值。从网上看了些解决方案，这里写了一个存储过程的DEMO。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-08T13:03:30.986Z">
+<meta property="og:updated_time" content="2017-12-22T16:16:05.112Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="我现在已不敢往后想">
-<meta name="twitter:description" content="任何事都是两面的，人们对一件事有着正面的解释，自然别人会给它另一种解释。各自都有道理。 对于该不该畅想未来这件事，我想别人也有两种看法，我的看法在转变。">
+<meta name="twitter:title" content="MySQL存储过程">
+<meta name="twitter:description" content="有这样一个需求，从A表中查询出结果，之后循环插入B表中，B表中的某个字段将使用到A表查询结果的值。从网上看了些解决方案，这里写了一个存储过程的DEMO。">
 
 
 
@@ -154,13 +154,13 @@
 
 
 
-  <link rel="canonical" href="http://JohnneyAnn.github.io/2017/09/08/I can't think back now/"/>
+  <link rel="canonical" href="http://JohnneyAnn.github.io/2017/12/23/MySQL存储过程/"/>
 
 
 
 
 
-  <title>我现在已不敢往后想 | 安阳</title>
+  <title>MySQL存储过程 | 安阳</title>
   
 
 
@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://JohnneyAnn.github.io/2017/09/08/I can't think back now/">
+    <link itemprop="mainEntityOfPage" href="http://JohnneyAnn.github.io/2017/12/23/MySQL存储过程/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="安 阳">
@@ -324,7 +324,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">我现在已不敢往后想</h2>
+          <h2 class="post-title" itemprop="name headline">MySQL存储过程</h2>
         
 
         <div class="post-meta">
@@ -336,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-08T21:03:30+08:00">
-                2017-09-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-23T00:16:05+08:00">
+                2017-12-23
               </time>
             
 
@@ -352,8 +352,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-09-08T21:03:30+08:00">
-                2017-09-08
+              <time title="更新于" itemprop="dateModified" datetime="2017-12-23T00:16:05+08:00">
+                2017-12-23
               </time>
             
           </span>
@@ -371,8 +371,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/生活/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
                   </a>
                 </span>
 
@@ -407,7 +407,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  898 字
+                  427 字
                 </span>
               
 
@@ -423,7 +423,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -444,19 +444,14 @@
       
 
       
-        <p>任何事都是两面的，人们对一件事有着正面的解释，自然别人会给它另一种解释。各自都有道理。</p>
-<p>对于该不该畅想未来这件事，我想别人也有两种看法，我的看法在转变。</p>
-<a id="more"></a>
-<p>人应该思考未来，好让自己知道想要的未来是什么样的，自己也有了目标，一切好似有了奔头，如果你真的在做准备，渴望去达到你所设定的目标，那么你肯定会尝到甜头。觉得这一切做的都是值得的，这是希望。</p>
-<p>人不需要思考未来，应当过好当前的生活，未来就会来。谁也不能保证未来会是什么样子，未来到来之时，它是什么样子取决于你在那时内心的映射，未来“好”的标准来源于你自己而不是别人。既然这样，何必那么多期望，应该让现在的自己开心。期望抬的越大，摔的越惨，这是绝望。</p>
-<p>如何得到幸福感？拥有更多的钱？有个大房子？是否物质上的满足真的能让人感到幸福?</p>
-<p>没错，能。</p>
-<p>但这种幸福感是短暂，当你渴望去得到某样的东西的时候，享受的是其中的过程，真的得到了这个过程就过了。那一直去追求不就好了？尴尬的就在这，人们得去做有把握的事，得不到又会很失望。、</p>
-<p>是否可以这样，物质上的追求转变为生活上的追求，让自己的生活变得有趣。人总不能不追求，精神追求是能够提高自己的社会认知的，碎片化时代我们需要不断的学习，去多了解一些事物。38平的房子照样可以装出自己想要的样子，住的舒坦不就行了，空闲的时间多看看书，多出去走走去了解其他地方的文化，充实自己。必须承认社会是现实的，但我们学到的不是变的现实，而去接受现实，理解现实。如何去支撑这些想法呢，你还是要努力工作啊，工作也是生活的一部分，不用去追求别人追求的，选择你想要的生活，如果工作也是自己喜欢的，甚是完美。</p>
-<p>我一直在思考未来，而现在我已经不敢往后想。你在思考的时候，是你正在为自己选择路线，是在社会影响下选择的路线，别人都说这条路不错，于是你也准备走走，因为在这种时候，人们用于对自己的真实想法进行误判。路很长，可恨的是，一开始我们真的不偏不移的走着，掉以轻心，以至于没有预计到当前面的路出现一点点的误差时自己该如何应对。有的可能是致命的，让自己在自己的幻想中死去。</p>
-<p>罢了，别想了。何必这么折腾，我在改变我的想法，我想过好现在的生活，我想去体验生活。</p>
-<p>那么，未来该怎么办？套用软件行业的一个思想：拥抱变化，积极应对。</p>
-<p>一直觉得，我们应当在大环境下“顺其自然”，因为顺其自然才是可持续发展，在小环境下努力向上，做好每一件事。顺道而不失道，无为而有所谓，再等等，慢一点，总会来。</p>
+        <p>有这样一个需求，从A表中查询出结果，之后循环插入B表中，B表中的某个字段将使用到A表查询结果的值。从网上看了些解决方案，这里写了一个存储过程的DEMO。<br><a id="more"></a><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DROP</span> <span class="keyword">PROCEDURE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> SELECT_4_INSERT;<span class="comment">-- 若存在此存储过程先删除</span></div><div class="line"></div><div class="line">DELIMITER $$ <span class="comment">-- 定义结束符 避免与存储过程中“;”冲突 语句到"$$"才算结束</span></div><div class="line"></div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> SELECT_4_INSERT() <span class="comment">-- 创建存储过程</span></div><div class="line"><span class="keyword">BEGIN</span></div><div class="line"><span class="comment">-- 定义结束标识 用于判断是否结束循环 也可以用FALSE，MYSQL认为非0为TRUE</span></div><div class="line"><span class="keyword">DECLARE</span> DONE <span class="built_in">INT</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>;  </div><div class="line"><span class="comment">-- 用于存储结果集的记录 这里的记录只有一列 多列需要定义多个 VARCHAR需指定长度</span></div><div class="line"><span class="keyword">DECLARE</span> STYPE <span class="built_in">VARCHAR</span>(<span class="number">128</span>);  </div><div class="line"><span class="comment">-- 定义游标 使用游标进行遍历</span></div><div class="line"><span class="keyword">DECLARE</span> STYPE_CURSOR <span class="keyword">CURSOR</span> <span class="keyword">FOR</span> <span class="keyword">SELECT</span> DATA_TYPE <span class="keyword">FROM</span> BASE_STYPE_INFO <span class="keyword">WHERE</span> <span class="keyword">ID</span> &gt; <span class="number">1000000</span>;</div><div class="line"><span class="comment">-- 定义 结束标识DONE何时改变</span></div><div class="line"><span class="keyword">DECLARE</span> CONTINUE <span class="keyword">HANDLER</span> <span class="keyword">FOR</span> <span class="keyword">NOT</span> <span class="keyword">FOUND</span> <span class="keyword">SET</span> DONE = <span class="number">1</span>; </div><div class="line"></div><div class="line"><span class="comment">-- 打开游标</span></div><div class="line">OPEN STYPE_CURSOR;</div><div class="line"></div><div class="line"><span class="comment">-- 循环开始</span></div><div class="line">REPEAT</div><div class="line"><span class="comment">-- 可FETCH多列 需对应上</span></div><div class="line">FETCH STYPE_CURSOR INTO STYPE;</div><div class="line"><span class="comment">-- 结果集没读完则继续</span></div><div class="line">IF NOT DONE THEN</div><div class="line">	<span class="comment">-- 假设这里需要做一下类型转换 使用CAST将字符转成数值</span></div><div class="line">	<span class="keyword">INSERT</span> <span class="keyword">INTO</span> BASE_OTHER <span class="keyword">TABLE</span>(<span class="keyword">ID</span>, TYPE_NAME, CREATE_TIME) <span class="keyword">VALUES</span>(<span class="keyword">CAST</span>(STYPE <span class="keyword">AS</span> SIGNED), <span class="string">'TEST'</span>, <span class="number">1563445355</span>);</div><div class="line"><span class="keyword">END</span> <span class="keyword">IF</span>;</div><div class="line">UNTIL DONE <span class="keyword">END</span> <span class="keyword">REPEAT</span>;</div><div class="line"></div><div class="line"><span class="comment">-- 关闭游标</span></div><div class="line">CLOSE STYPE_CURSOR;</div><div class="line"><span class="comment">-- 循环结束</span></div><div class="line"><span class="keyword">END</span> $$</div><div class="line"></div><div class="line">DELIMITER;<span class="comment">-- 结束符恢复</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">-- 调用存储过程</span></div><div class="line"><span class="keyword">CALL</span> SELECT_4_INSERT();</div><div class="line"></div><div class="line"><span class="comment">-- 若为临时存储过程 调用完删除</span></div><div class="line"><span class="keyword">DROP</span> <span class="keyword">PROCEDURE</span> SELECT_4_INSERT;</div></pre></td></tr></table></figure></p>
+<p>还有一种情况，将A表中的查询结果全部塞到B表中，只做一些字段匹配调整，可直接使用INSERT…SELECT…</p>
+<p>A表中字段：ID FIRST_NAME LAST_NAME GENDER<br>B表中字段：ID NAME FLAG HOBBIES</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> BASE_B_INFO(<span class="keyword">ID</span>, NAM, FLAG, HOBBIES)</div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">ID</span>+<span class="number">1000000</span> <span class="keyword">ID</span>, <span class="keyword">CONCAT</span>(FIRST_NAME, LAST_NAME) <span class="keyword">NAME</span> , <span class="number">0</span> FLAG ,<span class="string">'无'</span> HOBBIES </div><div class="line"><span class="keyword">FROM</span> BASE_A_INFO</div></pre></td></tr></table></figure>
+<p><hr></p>
+<p>2017.12.23 00:13</p>
+
+
 
       
     </div>
@@ -514,7 +509,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://JohnneyAnn.github.io/2017/09/08/I can't think back now/" title="我现在已不敢往后想">http://JohnneyAnn.github.io/2017/09/08/I can't think back now/</a>
+    <a href="http://JohnneyAnn.github.io/2017/12/23/MySQL存储过程/" title="MySQL存储过程">http://JohnneyAnn.github.io/2017/12/23/MySQL存储过程/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -529,9 +524,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/随笔/" rel="tag"><i class="fa fa-tag"></i> 随笔</a>
+            <a href="/tags/mysql/" rel="tag"><i class="fa fa-tag"></i> mysql</a>
           
-            <a href="/tags/愚见/" rel="tag"><i class="fa fa-tag"></i> 愚见</a>
+            <a href="/tags/存储过程/" rel="tag"><i class="fa fa-tag"></i> 存储过程</a>
           
         </div>
       
@@ -544,8 +539,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/08/DockerInitialExperience/" rel="next" title="Docker初体验">
-                <i class="fa fa-chevron-left"></i> Docker初体验
+              <a href="/2017/12/17/后焦虑思考/" rel="next" title="后焦虑思考">
+                <i class="fa fa-chevron-left"></i> 后焦虑思考
               </a>
             
           </div>
@@ -553,10 +548,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/08/Impression management the world is a big stage/" rel="prev" title="印象管理">
-                印象管理 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
