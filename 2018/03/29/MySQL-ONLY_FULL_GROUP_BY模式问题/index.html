@@ -13,8 +13,8 @@
 <meta name="theme-color" content="#222">
 <script>
     (function(){
-        if('fhzm'){
-            if (prompt('请输入文章密码') !== 'fhzm'){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
                 alert('密码错误！');
                 history.back();
             }
@@ -95,7 +95,7 @@
 <link href="/css/main.css?v=5.1.2" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="随笔," />
+  <meta name="keywords" content="mysql," />
 
 
 
@@ -113,18 +113,18 @@
 
 
 
-<meta name="description" content="2017.9.17 00:22起之前的某一天，有人在mplus上发关于联谊的通知。考虑到周末的去处以及内心的好奇，我报了名。好在，这次的联谊还算有意思，或许应该多参与这些活动。">
-<meta name="keywords" content="随笔">
+<meta name="description" content="数据库刷在mysql5.5版本上没有问题，但刷在5.7上之后出了这个问题，导致页面请求出错。">
+<meta name="keywords" content="mysql">
 <meta property="og:type" content="article">
-<meta property="og:title" content="这次联谊">
-<meta property="og:url" content="http://JohnneyAnn.github.io/2017/09/18/这次联谊/index.html">
+<meta property="og:title" content="MySQL-ONLY_FULL_GROUP_BY模式问题">
+<meta property="og:url" content="http://JohnneyAnn.github.io/2018/03/29/MySQL-ONLY_FULL_GROUP_BY模式问题/index.html">
 <meta property="og:site_name" content="安阳">
-<meta property="og:description" content="2017.9.17 00:22起之前的某一天，有人在mplus上发关于联谊的通知。考虑到周末的去处以及内心的好奇，我报了名。好在，这次的联谊还算有意思，或许应该多参与这些活动。">
+<meta property="og:description" content="数据库刷在mysql5.5版本上没有问题，但刷在5.7上之后出了这个问题，导致页面请求出错。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-09-18T14:45:59.494Z">
+<meta property="og:updated_time" content="2018-03-29T05:44:54.638Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="这次联谊">
-<meta name="twitter:description" content="2017.9.17 00:22起之前的某一天，有人在mplus上发关于联谊的通知。考虑到周末的去处以及内心的好奇，我报了名。好在，这次的联谊还算有意思，或许应该多参与这些活动。">
+<meta name="twitter:title" content="MySQL-ONLY_FULL_GROUP_BY模式问题">
+<meta name="twitter:description" content="数据库刷在mysql5.5版本上没有问题，但刷在5.7上之后出了这个问题，导致页面请求出错。">
 
 
 
@@ -154,13 +154,13 @@
 
 
 
-  <link rel="canonical" href="http://JohnneyAnn.github.io/2017/09/18/这次联谊/"/>
+  <link rel="canonical" href="http://JohnneyAnn.github.io/2018/03/29/MySQL-ONLY_FULL_GROUP_BY模式问题/"/>
 
 
 
 
 
-  <title>这次联谊 | 安阳</title>
+  <title>MySQL-ONLY_FULL_GROUP_BY模式问题 | 安阳</title>
   
 
 
@@ -307,7 +307,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://JohnneyAnn.github.io/2017/09/18/这次联谊/">
+    <link itemprop="mainEntityOfPage" href="http://JohnneyAnn.github.io/2018/03/29/MySQL-ONLY_FULL_GROUP_BY模式问题/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="安 阳">
@@ -324,7 +324,7 @@
 
         
         
-          <h2 class="post-title" itemprop="name headline">这次联谊</h2>
+          <h2 class="post-title" itemprop="name headline">MySQL-ONLY_FULL_GROUP_BY模式问题</h2>
         
 
         <div class="post-meta">
@@ -336,8 +336,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-09-18T22:45:59+08:00">
-                2017-09-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-29T13:55:33+08:00">
+                2018-03-29
               </time>
             
 
@@ -352,8 +352,8 @@
               
                 <span class="post-meta-item-text">更新于&#58;</span>
               
-              <time title="更新于" itemprop="dateModified" datetime="2017-09-18T22:45:59+08:00">
-                2017-09-18
+              <time title="更新于" itemprop="dateModified" datetime="2018-03-29T13:44:54+08:00">
+                2018-03-29
               </time>
             
           </span>
@@ -371,8 +371,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/生活/" itemprop="url" rel="index">
-                    <span itemprop="name">生活</span>
+                  <a href="/categories/编程/" itemprop="url" rel="index">
+                    <span itemprop="name">编程</span>
                   </a>
                 </span>
 
@@ -407,7 +407,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,101 字
+                  299 字
                 </span>
               
 
@@ -423,7 +423,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  4 分钟
+                  1 分钟
                 </span>
               
             </div>
@@ -444,8 +444,19 @@
       
 
       
-        <p>2017.9.17 00:22起</p><br><p>之前的某一天，有人在mplus上发关于联谊的通知。考虑到周末的去处以及内心的好奇，我报了名。好在，这次的联谊还算有意思，或许应该多参与这些活动。</p><br><a id="more"></a><br><p>起初，并不知道是联谊相亲。报完名负责人询问关于身高、年龄、爱好等信息，我有点方，有考虑过临阵脱逃。程序员啊，想到我们这狭窄的圈子，还是去吧，我想认识更多的人。于是，到了今天，还特地做了些准备。</p><br><p>早上起来，与往常一样，洗漱、做早饭。不一样的是，潜意识下臭美照镜子，我不知道今天会遇到什么样的人，不知道自己的穿着是否得体，也没有将头发梳成大人模样。算是参与的一件事，不管怎样都应该重视。</p><br><p>9:28分到达指定地点，是要抽个号码牌，抽到了76号，找到座位坐下，看到了几张熟悉的面孔顿时显示的不那么尴尬。周围没有多少人。被告知，后面可能人数不够需要重新抽签不然略显尴尬，我听从安排，因为我喜欢这种随机性，也对不可预见的结果保持着好奇，我拿到了26号。</p><br><p>座位的安排是男女各一边，持有相同的号码。大致看了下，男女比例接近1:1，烽火主男性，华泰主女性。总人数分成四组，接下来的时间是游戏阶段，每组做不同的游戏，我们是第二组。看着第一组的做游戏的过程，我在思考如果是我在下面比划，是否也能放得开？不确定。难道脸皮变薄了？我这么认为（说这句的话时候，我可能把脸借给了吴彦祖）。我们组的游戏是“女生值1块，男生值5毛（相信我，当时肯定不是叫这个名字）”，主持人随机叫出金额，我们需要抱团，未抱团的则被淘汰。最终留下了两个男生和一个女生，我是其中一个男生，这是队友照顾的结果。这就算胜出了，于是被叫到了台上。</p><br><p>在台上当然就是自我介绍，说起自己的爱好想起了曾经放下的BBox，就不说处于什么原因放弃了，反正现在也跟初衷不一样。即兴来了一段，好在音还算准，鼓点还凑合，也打了我喜欢的bass。当然是有点紧张的，草草结束。也算“重操旧业”，好像也很久没在台上打过，我喜欢这感觉。</p><br><p>接下来是吃饭时间，我没有吃太多东西，不是放不开膀子吃，是真的吃不下太多。很多人在一起吃，很奇妙，多么热闹啊。吃饭的时候是离开桌子可以认识周围以外人的时间，我竟然没有做到，太不像我了，可能确实现在跟以前确实不同，我安静的玩着手机。</p><br><p>最后的阶段是比较有意思的，因为我记得我笑了好多次，互相“表白”阶段。当男女双方都写下了对方的号码，就能够都得到一盒月饼。个人认为，这是小概率事件，发生的可能性几乎无，但也饶有兴趣的听着主持人唱票，有些有趣的事情。先说说我右边的男生，他为了月饼去找女生配对，真的这么做了！导致后来主持人读到双方填写相同的号码时，我心里都想着：这是为了月饼！还有些事，像两个男生写的同一个女生，有人跟摄影师表白了，都觉得很有意思。在我在的时间里，被这些逗笑了好几次。后面肯定还有很多有趣的事，可是我不在，我是不愿意走的，但公司需要我，人民需要我，我要回去加班。略带遗憾，工作重要。</p><br><p>就这样结束了这次联谊，剩下的时间在公司度过。接下来的一天在公司待到23:03，周围漆黑一片，看着窗户的倒影稍有一点恐惧。</p><br><p>多充实！！&lt;/&gt;<br></p><p>2017.9.18 22:42</p>
+        <p>数据库刷在mysql5.5版本上没有问题，但刷在5.7上之后出了这个问题，导致页面请求出错。</p>
+<a id="more"></a>
+<p>错误信息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Expression #1 of SELECT list is not in GROUP BY clause and contains </div><div class="line">nonaggregated column &apos;dept.label&apos; which is not functionally </div><div class="line">dependent on columns in GROUP BY clause; this is incompatible with </div><div class="line">sql_mode=only_full_group_by</div></pre></td></tr></table></figure>
+<p>问题原因：</p>
+<p>MySQL 5.7.5及以上功能依赖检测功能。默认情况下启用ONLY_FULL_GROUP_BY SQL模式，MySQL将拒绝选择列表，HAVING条件或ORDER BY列表的查询引用在GROUP BY子句中既未命名的非集合列，也不在功能上依赖于它们。（5.7.5之前，MySQL没有检测到功能依赖关系，默认情况下不启用ONLY_FULL_GROUP_BY）。</p>
+<p>解决方案：<br>（关闭ONLY_FULL_GROUP_BY模式）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> @@global.sql_mode </div><div class="line">=<span class="string">'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'</span>;</div><div class="line"><span class="keyword">FLUSH</span> <span class="keyword">PRIVILEGES</span>;</div><div class="line">（以前是ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION，可用<span class="keyword">select</span> @@global.sql_mode查出来）</div></pre></td></tr></table></figure>
+<p>我在执行过程中报了错，说没有NO_AUTO_CREATE_USER，于是把这个也给去了，之后页面就正常显示了。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> @@global.sql_mode</div><div class="line">=<span class="string">'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'</span>;</div></pre></td></tr></table></figure></p>
+<p>这里作为个人笔记，其他解决办法及介绍可移步：<br><a href="https://blog.csdn.net/MissWwg/article/details/77719085" target="_blank" rel="external">Error Code: 1055. Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated</a></p>
+<hr>
 
+<p>2018.03.29 13:44</p>
 
 
 
@@ -505,7 +516,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://JohnneyAnn.github.io/2017/09/18/这次联谊/" title="这次联谊">http://JohnneyAnn.github.io/2017/09/18/这次联谊/</a>
+    <a href="http://JohnneyAnn.github.io/2018/03/29/MySQL-ONLY_FULL_GROUP_BY模式问题/" title="MySQL-ONLY_FULL_GROUP_BY模式问题">http://JohnneyAnn.github.io/2018/03/29/MySQL-ONLY_FULL_GROUP_BY模式问题/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -520,7 +531,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/随笔/" rel="tag"><i class="fa fa-tag"></i> 随笔</a>
+            <a href="/tags/mysql/" rel="tag"><i class="fa fa-tag"></i> mysql</a>
           
         </div>
       
@@ -533,8 +544,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/09/13/testPassword/" rel="next" title="测试加密访问">
-                <i class="fa fa-chevron-left"></i> 测试加密访问
+              <a href="/2018/03/25/这里有一座孤岛/" rel="next" title="这里有一座孤岛">
+                <i class="fa fa-chevron-left"></i> 这里有一座孤岛
               </a>
             
           </div>
@@ -542,10 +553,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/09/20/转正风波/" rel="prev" title="转正风波">
-                转正风波 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
