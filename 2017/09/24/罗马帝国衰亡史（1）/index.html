@@ -282,7 +282,19 @@
     
     
     <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
-
+    <!--valine comment-->
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+    <script>
+    new Valine({
+    	el: '#comment' ,
+    	appId: 'vRAyxzxr73dg5eErS2BinqU0-gzGzoHsz',
+    	appKey: 'GtyJrh1h66aRFHDhsKXGD5pT',
+   	placeholder: 'just go go',
+    	path:window.location.pathname, 
+    	avatar:'mm' 
+    });
+    </script>
     <!-- Analytics -->
     
 
@@ -502,11 +514,13 @@
 
     
 </div>
+<div id="comment"></div>
 
 
                 
 
                 <!-- Post Comments -->
+		<div id="comment"></div>
                 
                     
                 
