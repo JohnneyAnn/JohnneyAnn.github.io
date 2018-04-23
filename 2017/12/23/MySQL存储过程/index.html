@@ -485,15 +485,73 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>有这样一个需求，从A表中查询出结果，作为B表插入的查询条件，之后循环查询并插入。从网上看了些解决方案，这里写了一个存储过程的DEMO。<br><a id="more"></a><br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">DROP</span> <span class="keyword">PROCEDURE</span> <span class="keyword">IF</span> <span class="keyword">EXISTS</span> SELECT_4_INSERT;<span class="comment">-- 若存在此存储过程先删除</span></div><div class="line"></div><div class="line">DELIMITER $$ <span class="comment">-- 定义结束符 避免与存储过程中“;”冲突 语句到"$$"才算结束</span></div><div class="line"></div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> SELECT_4_INSERT() <span class="comment">-- 创建存储过程</span></div><div class="line"><span class="keyword">BEGIN</span></div><div class="line"><span class="comment">-- 定义结束标识 用于判断是否结束循环 也可以用FALSE，MYSQL认为非0为TRUE</span></div><div class="line"><span class="keyword">DECLARE</span> DONE <span class="built_in">INT</span> <span class="keyword">DEFAULT</span> <span class="number">0</span>;  </div><div class="line"><span class="comment">-- 用于存储结果集的记录 这里的记录只有一列 多列需要定义多个 VARCHAR需指定长度</span></div><div class="line"><span class="keyword">DECLARE</span> STYPE <span class="built_in">VARCHAR</span>(<span class="number">128</span>);  </div><div class="line"><span class="comment">-- 定义游标 使用游标进行遍历</span></div><div class="line"><span class="keyword">DECLARE</span> STYPE_CURSOR <span class="keyword">CURSOR</span> <span class="keyword">FOR</span> <span class="keyword">SELECT</span> DATA_TYPE <span class="keyword">FROM</span> BASE_STYPE_INFO <span class="keyword">WHERE</span> <span class="keyword">ID</span> &gt; <span class="number">1000000</span>;</div><div class="line"><span class="comment">-- 定义 结束标识DONE何时改变</span></div><div class="line"><span class="keyword">DECLARE</span> CONTINUE <span class="keyword">HANDLER</span> <span class="keyword">FOR</span> <span class="keyword">NOT</span> <span class="keyword">FOUND</span> <span class="keyword">SET</span> DONE = <span class="number">1</span>; </div><div class="line"></div><div class="line"><span class="comment">-- 打开游标</span></div><div class="line">OPEN STYPE_CURSOR;</div><div class="line"></div><div class="line"><span class="comment">-- 循环开始</span></div><div class="line">REPEAT</div><div class="line"><span class="comment">-- 可FETCH多列 需对应上</span></div><div class="line">FETCH STYPE_CURSOR INTO STYPE;</div><div class="line"><span class="comment">-- 结果集没读完则继续</span></div><div class="line">IF NOT DONE THEN</div><div class="line">	<span class="comment">-- 假设这里需要做一下类型转换 使用CAST将字符转成数值</span></div><div class="line">	<span class="keyword">INSERT</span> <span class="keyword">INTO</span> BASE_OTHER_TABLE(<span class="keyword">ID</span>, TYPE_NAME, CREATE_TIME) </div><div class="line">		<span class="keyword">SELECT</span> <span class="keyword">ID</span>+<span class="number">1000000</span> <span class="keyword">ID</span>, <span class="string">'TEST'</span> TYPE_NAME, <span class="number">1563445355</span> CREATE_TIME <span class="keyword">FROM</span> BASE_ANOTHER_TABLE</div><div class="line">			<span class="keyword">WHERE</span> <span class="keyword">TYPE</span> = <span class="keyword">CAST</span>(STYPE <span class="keyword">AS</span> SIGNED);</div><div class="line"><span class="keyword">END</span> <span class="keyword">IF</span>;</div><div class="line">UNTIL DONE <span class="keyword">END</span> <span class="keyword">REPEAT</span>;</div><div class="line"></div><div class="line"><span class="comment">-- 关闭游标</span></div><div class="line">CLOSE STYPE_CURSOR;</div><div class="line"><span class="comment">-- 循环结束</span></div><div class="line"><span class="keyword">END</span> $$</div><div class="line"></div><div class="line">DELIMITER;<span class="comment">-- 结束符恢复</span></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">-- 调用存储过程</span></div><div class="line"><span class="keyword">CALL</span> SELECT_4_INSERT();</div><div class="line"></div><div class="line"><span class="comment">-- 若为临时存储过程 调用完删除</span></div><div class="line"><span class="keyword">DROP</span> <span class="keyword">PROCEDURE</span> SELECT_4_INSERT;</div></pre></td></tr></table></figure></p>
+        <p>有这样一个需求，从A表中查询出结果，作为B表插入的查询条件，之后循环查询并插入。从网上看了些解决方案，这里写了一个存储过程的DEMO。<br><a id="more"></a></p>
+<pre><code class="sql">DROP PROCEDURE IF EXISTS SELECT_4_INSERT;-- 若存在此存储过程先删除
+
+DELIMITER $$ -- 定义结束符 避免与存储过程中“;”冲突 语句到&quot;$$&quot;才算结束
+
+CREATE PROCEDURE SELECT_4_INSERT() -- 创建存储过程
+BEGIN
+-- 定义结束标识 用于判断是否结束循环 也可以用FALSE，MYSQL认为非0为TRUE
+DECLARE DONE INT DEFAULT 0;  
+-- 用于存储结果集的记录 这里的记录只有一列 多列需要定义多个 VARCHAR需指定长度
+DECLARE STYPE VARCHAR(128);  
+-- 定义游标 使用游标进行遍历
+DECLARE STYPE_CURSOR CURSOR FOR SELECT DATA_TYPE FROM BASE_STYPE_INFO WHERE ID &gt; 1000000;
+-- 定义 结束标识DONE何时改变
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET DONE = 1; 
+
+-- 打开游标
+OPEN STYPE_CURSOR;
+
+-- 循环开始
+REPEAT
+-- 可FETCH多列 需对应上
+FETCH STYPE_CURSOR INTO STYPE;
+-- 结果集没读完则继续
+IF NOT DONE THEN
+    -- 假设这里需要做一下类型转换 使用CAST将字符转成数值
+    INSERT INTO BASE_OTHER_TABLE(ID, TYPE_NAME, CREATE_TIME) 
+        SELECT ID+1000000 ID, &#39;TEST&#39; TYPE_NAME, 1563445355 CREATE_TIME FROM BASE_ANOTHER_TABLE
+            WHERE TYPE = CAST(STYPE AS SIGNED);
+END IF;
+UNTIL DONE END REPEAT;
+
+-- 关闭游标
+CLOSE STYPE_CURSOR;
+-- 循环结束
+END $$
+
+DELIMITER;-- 结束符恢复
+
+
+-- 调用存储过程
+CALL SELECT_4_INSERT();
+
+-- 若为临时存储过程 调用完删除
+DROP PROCEDURE SELECT_4_INSERT;
+</code></pre>
 <p>还有一种情况，将A表中的查询结果全部塞到B表中，只做一些字段匹配调整，可直接使用INSERT…SELECT…</p>
 <p>A表中字段：ID FIRST_NAME LAST_NAME GENDER<br>B表中字段：ID NAME FLAG HOBBIES</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">INSERT</span> <span class="keyword">INTO</span> BASE_B_INFO(<span class="keyword">ID</span>, NAM, FLAG, HOBBIES)</div><div class="line"><span class="keyword">SELECT</span> <span class="keyword">ID</span>+<span class="number">1000000</span> <span class="keyword">ID</span>, <span class="keyword">CONCAT</span>(FIRST_NAME, LAST_NAME) <span class="keyword">NAME</span> , <span class="number">0</span> FLAG ,<span class="string">'无'</span> HOBBIES </div><div class="line"><span class="keyword">FROM</span> BASE_A_INFO</div></pre></td></tr></table></figure>
+<pre><code class="sql">INSERT INTO BASE_B_INFO(ID, NAM, FLAG, HOBBIES)
+SELECT ID+1000000 ID, CONCAT(FIRST_NAME, LAST_NAME) NAME , 0 FLAG ,&#39;无&#39; HOBBIES 
+FROM BASE_A_INFO
+</code></pre>
 <p><hr></p>
 <p>2017.12.23 00:13</p>
 
 
 
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                         
+                            Licensed under <a target="_blank" href="//creativecommons.org/licenses/by-nc-sa/4.0/legalcode">CC BY-NC-SA 4.0</a>
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="http://JohnneyAnn.github.io/2017/12/23/MySQL存储过程/">http://JohnneyAnn.github.io/2017/12/23/MySQL存储过程/</a>
+                    </p>
+                </blockquote>
         
     
 

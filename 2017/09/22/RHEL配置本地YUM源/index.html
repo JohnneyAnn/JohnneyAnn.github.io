@@ -499,21 +499,54 @@
 <a id="more"></a>
 <h1 id="挂载本地光盘到系统"><a href="#挂载本地光盘到系统" class="headerlink" title="挂载本地光盘到系统"></a>挂载本地光盘到系统</h1><p>这里使用的是虚拟机，点击右下角光盘图标，选择setting可选择需要挂在的镜像，在点击光盘的connecting即可挂载。</p>
 
-<h1 id="配置本地YUM源"><a href="#配置本地YUM源" class="headerlink" title="配置本地YUM源"></a>配置本地YUM源</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /etc/yum.repos.d/</div><div class="line">touch rhel-media.repo</div><div class="line">vim rhel-media.repo</div></pre></td></tr></table></figure>
-<h2 id="填写以下内容"><a href="#填写以下内容" class="headerlink" title="填写以下内容"></a>填写以下内容</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">[media]</div><div class="line">name=Red Hat Enterprise Linux 6.6                                </div><div class="line">baseurl=file:///media/RHEL...                                         </div><div class="line">enabled=1                                                         </div><div class="line">gpgcheck=1                                                        </div><div class="line">gpgkey=</div></pre></td></tr></table></figure>
+<h1 id="配置本地YUM源"><a href="#配置本地YUM源" class="headerlink" title="配置本地YUM源"></a>配置本地YUM源</h1><pre><code class="bash">cd /etc/yum.repos.d/
+touch rhel-media.repo
+vim rhel-media.repo
+</code></pre>
+<h2 id="填写以下内容"><a href="#填写以下内容" class="headerlink" title="填写以下内容"></a>填写以下内容</h2><pre><code class="bash">[media]
+name=Red Hat Enterprise Linux 6.6                                
+baseurl=file:///media/RHEL...                                         
+enabled=1                                                         
+gpgcheck=1                                                        
+gpgkey=
+</code></pre>
 <p>其中file://后面跟的是你的挂在位置，根据具体情况填入，一般在/media下的一个包，进入输入pwd把包路径获取下来，复制贴到这里。写完退出保存。</p>
 
-<h2 id="清空原有缓存"><a href="#清空原有缓存" class="headerlink" title="清空原有缓存"></a>清空原有缓存</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum clean all</div></pre></td></tr></table></figure>
+<h2 id="清空原有缓存"><a href="#清空原有缓存" class="headerlink" title="清空原有缓存"></a>清空原有缓存</h2><pre><code class="bash">yum clean all
+</code></pre>
 <p>结果如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Loaded plugins: product-id, security, subscription-manager</div><div class="line">This system is not registered to Red Hat Subscription Management. You can use subscription-manager to register.</div><div class="line">Cleaning repos: media</div><div class="line">Cleaning up Everything</div></pre></td></tr></table></figure>
-<h2 id="验证yum配置是否成功"><a href="#验证yum配置是否成功" class="headerlink" title="验证yum配置是否成功"></a>验证yum配置是否成功</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">yum makecache</div></pre></td></tr></table></figure>
+<pre><code class="bash">Loaded plugins: product-id, security, subscription-manager
+This system is not registered to Red Hat Subscription Management. You can use subscription-manager to register.
+Cleaning repos: media
+Cleaning up Everything
+</code></pre>
+<h2 id="验证yum配置是否成功"><a href="#验证yum配置是否成功" class="headerlink" title="验证yum配置是否成功"></a>验证yum配置是否成功</h2><pre><code class="bash">yum makecache
+</code></pre>
 <p>结果如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">Loaded plugins: product-id, refresh-packagekit, security, subscription-manager</div><div class="line">This system is not registered to Red Hat Subscription Management. You can use subscription-manager to register.</div><div class="line">media                                                   | 4.1 kB     00:00 ... </div><div class="line">media/group_gz                                          | 211 kB     00:00 ... </div><div class="line">media/filelists_db                                      | 3.3 MB     00:00 ... </div><div class="line">media/primary_db                                        | 3.1 MB     00:00 ... </div><div class="line">media/other_db                                          | 1.4 MB     00:00 ... </div><div class="line">Metadata Cache Created</div></pre></td></tr></table></figure>
+<pre><code class="bash">Loaded plugins: product-id, refresh-packagekit, security, subscription-manager
+This system is not registered to Red Hat Subscription Management. You can use subscription-manager to register.
+media                                                   | 4.1 kB     00:00 ... 
+media/group_gz                                          | 211 kB     00:00 ... 
+media/filelists_db                                      | 3.3 MB     00:00 ... 
+media/primary_db                                        | 3.1 MB     00:00 ... 
+media/other_db                                          | 1.4 MB     00:00 ... 
+Metadata Cache Created
+</code></pre>
 <p>P.S. file://后面的路径一定要对！</p>
 
 
 
 
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                         
+                            Licensed under <a target="_blank" href="//creativecommons.org/licenses/by-nc-sa/4.0/legalcode">CC BY-NC-SA 4.0</a>
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="http://JohnneyAnn.github.io/2017/09/22/RHEL配置本地YUM源/">http://JohnneyAnn.github.io/2017/09/22/RHEL配置本地YUM源/</a>
+                    </p>
+                </blockquote>
         
     
 

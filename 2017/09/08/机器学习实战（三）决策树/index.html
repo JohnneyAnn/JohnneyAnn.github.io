@@ -486,42 +486,463 @@
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
         <p>决策树是一种简单高效并且具有强解释性的模型，广泛应用于数据分析领域。其本质是一颗由多个判断节点组成的树，在使用模型进行预测时，根据输入参数依次在各个判断节点进行判断游走，最后到叶子节点即为预测结果。<br><a id="more"></a></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div><div class="line">172</div><div class="line">173</div><div class="line">174</div><div class="line">175</div><div class="line">176</div><div class="line">177</div><div class="line">178</div><div class="line">179</div><div class="line">180</div><div class="line">181</div><div class="line">182</div><div class="line">183</div><div class="line">184</div><div class="line">185</div><div class="line">186</div><div class="line">187</div><div class="line">188</div><div class="line">189</div><div class="line">190</div><div class="line">191</div><div class="line">192</div><div class="line">193</div><div class="line">194</div><div class="line">195</div><div class="line">196</div><div class="line">197</div><div class="line">198</div><div class="line">199</div><div class="line">200</div><div class="line">201</div><div class="line">202</div><div class="line">203</div><div class="line">204</div><div class="line">205</div><div class="line">206</div><div class="line">207</div><div class="line">208</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">文件trees</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="keyword">from</span> math <span class="keyword">import</span> log</div><div class="line"><span class="keyword">import</span> operator</div><div class="line">%matplotlib inline <span class="comment">#这一句设置在线显示</span></div><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">创建数据集</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">createDataSet</span><span class="params">()</span>:</span></div><div class="line">    dataSet = [[<span class="number">1</span>, <span class="number">1</span>, <span class="string">'yes'</span>],</div><div class="line">              [<span class="number">1</span>, <span class="number">1</span>, <span class="string">'yes'</span>],</div><div class="line">              [<span class="number">1</span>, <span class="number">0</span>, <span class="string">'no'</span>],</div><div class="line">              [<span class="number">0</span>, <span class="number">1</span>, <span class="string">'no'</span>],</div><div class="line">              [<span class="number">0</span>, <span class="number">1</span>, <span class="string">'no'</span>]]</div><div class="line">    labels = [<span class="string">'no surfacing'</span>,<span class="string">'flippers'</span>]</div><div class="line">    <span class="keyword">return</span> dataSet, labels</div><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">计算给定数据集的信息熵(香农)</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">calcuShannonEnt</span><span class="params">(dataSet)</span>:</span></div><div class="line">    numEntries = len(dataSet)</div><div class="line">    labelCounts = &#123;&#125;</div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">    为所有可能分能创建字典</span></div><div class="line"><span class="string">    """</span></div><div class="line">    <span class="keyword">for</span> featVec <span class="keyword">in</span> dataSet:</div><div class="line">        currentLabel = featVec[<span class="number">-1</span>]</div><div class="line">        <span class="comment">#方法1</span></div><div class="line">        <span class="comment">#   if currentLabel not in labelCounts.keys():</span></div><div class="line">        <span class="comment">#        labelCounts[currentLabel] = 0</span></div><div class="line">        <span class="comment">#   labelCounts[currentLabel] += 1</span></div><div class="line">        <span class="comment">#方法2</span></div><div class="line">        labelCounts[currentLabel] = labelCounts.get(currentLabel,<span class="number">0</span>) + <span class="number">1</span></div><div class="line">    shannonEnt = <span class="number">0.0</span></div><div class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> labelCounts:</div><div class="line">        <span class="string">"""</span></div><div class="line"><span class="string">        每个类别所占的比</span></div><div class="line"><span class="string">        """</span></div><div class="line">        prob = float(labelCounts[key])/numEntries</div><div class="line">        <span class="string">"""</span></div><div class="line"><span class="string">        求对数</span></div><div class="line"><span class="string">        """</span></div><div class="line">        shannonEnt -= prob * log(prob,<span class="number">2</span>)</div><div class="line">    <span class="keyword">return</span> shannonEnt</div><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">按照给定特征划分数据集</span></div><div class="line"><span class="string">三个参数：待划分的数据集、划分数据集的特征、特征的返回值</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">splitDataSet</span><span class="params">(dataSet, axis, value)</span>:</span></div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">    创建新的list对象</span></div><div class="line"><span class="string">    """</span></div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">    理解：按axis这列来划分，若这列的数=value归到一类，并创建一个新列表返回</span></div><div class="line"><span class="string">    """</span></div><div class="line">    retDataSet = []</div><div class="line">    <span class="keyword">for</span> featVec <span class="keyword">in</span> dataSet:</div><div class="line">        <span class="keyword">if</span> featVec[axis] == value:</div><div class="line">            <span class="string">"""</span></div><div class="line"><span class="string">            抽取</span></div><div class="line"><span class="string">            """</span></div><div class="line">            <span class="comment"># 应该是清空列表</span></div><div class="line">            reducedFeatVec = featVec[:axis] </div><div class="line">            <span class="comment"># [0+1:]取下标1之后的，这里是取后两位，将元素塞入reducedFeatVec</span></div><div class="line">            reducedFeatVec.extend(featVec[axis+<span class="number">1</span>:]) </div><div class="line">            <span class="comment">#将reducedFeatVec列表塞入retDataSet</span></div><div class="line">            retDataSet.append(reducedFeatVec)</div><div class="line">    <span class="keyword">return</span> retDataSet</div><div class="line">    </div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">    选择最好的数据集划分方式</span></div><div class="line"><span class="string">    此处使用ID3算法，获取信息增益最大的</span></div><div class="line"><span class="string">    """</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">chooseBestFeatureToSplit</span><span class="params">(dataSet)</span>:</span></div><div class="line">    <span class="comment">#dataSet[0]列数</span></div><div class="line">    <span class="comment">#只用前两列进行分类 -1</span></div><div class="line">    numFeatures = len(dataSet[<span class="number">0</span>]) - <span class="number">1</span></div><div class="line">    baseEntropy = calcuShannonEnt(dataSet)</div><div class="line">    <span class="comment">#信息增益</span></div><div class="line">    bestInfoGain = <span class="number">0.0</span></div><div class="line">    bestFeature = <span class="number">-1</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(numFeatures):</div><div class="line">        <span class="string">"""</span></div><div class="line"><span class="string">        创建唯一的分类标签列表</span></div><div class="line"><span class="string">        """</span></div><div class="line">        featList = [example[i] <span class="keyword">for</span> example <span class="keyword">in</span> dataSet]</div><div class="line">        uniqueVals = set(featList)<span class="comment"># 创建集合</span></div><div class="line">        newEntropy = <span class="number">0.0</span></div><div class="line">        <span class="string">"""</span></div><div class="line"><span class="string">        计算每种划分方式的信息熵</span></div><div class="line"><span class="string">        第一列或第二列的划分方式 表3-1 将其他两列分类</span></div><div class="line"><span class="string">        """</span></div><div class="line">        <span class="keyword">for</span> value <span class="keyword">in</span> uniqueVals:</div><div class="line">            subDataSet = splitDataSet(dataSet, i, value)</div><div class="line">            prob = len(subDataSet)/float(len(dataSet))</div><div class="line">            <span class="string">"""</span></div><div class="line"><span class="string">            将分完的两个类分别计算信息熵，乘以每个分类所出现的概率，相加后得到新的熵</span></div><div class="line"><span class="string">            """</span></div><div class="line">            newEntropy += prob * calcuShannonEnt(subDataSet)</div><div class="line">        <span class="string">"""</span></div><div class="line"><span class="string">        判断信息增益是否大于0</span></div><div class="line"><span class="string">        """</span></div><div class="line">        infoGain = baseEntropy - newEntropy</div><div class="line">        <span class="keyword">if</span>(infoGain &gt; bestInfoGain):</div><div class="line">            <span class="string">"""</span></div><div class="line"><span class="string">            计算最好的信息增益</span></div><div class="line"><span class="string">            """</span></div><div class="line">            bestInfoGain = infoGain</div><div class="line">            <span class="comment">#  i为列数，对应表3-1</span></div><div class="line">            bestFeature = i</div><div class="line">    <span class="keyword">return</span> bestFeature</div><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">类似于投票表决的方法,挑选次数出现最多的类别</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">majorityCnt</span><span class="params">(classList)</span>:</span></div><div class="line">    classCount=&#123;&#125;</div><div class="line">    <span class="keyword">for</span> vote <span class="keyword">in</span> classList:</div><div class="line">        <span class="keyword">if</span> vote <span class="keyword">not</span> <span class="keyword">in</span> classCount.key():</div><div class="line">            classCount[vote] = <span class="number">0</span></div><div class="line">        classCount[vote] += <span class="number">1</span></div><div class="line">    sortedClassCount = sorted(classCount.iteritems(), key=operator.itemgetter(<span class="number">1</span>), reverse=<span class="keyword">True</span>)</div><div class="line">    <span class="keyword">return</span> sortedClassCount[<span class="number">0</span>][<span class="number">0</span>]</div><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">创建树的代码</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">createTree</span><span class="params">(dataSet,labels)</span>:</span></div><div class="line">    <span class="comment"># 把dataSet最后一列放到classList</span></div><div class="line">    classList = [example[<span class="number">-1</span>] <span class="keyword">for</span> example <span class="keyword">in</span> dataSet]</div><div class="line">    <span class="comment">#     print classList</span></div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">    类别完全相同则停止继续划分</span></div><div class="line"><span class="string">    """</span></div><div class="line">    <span class="comment">#     对classList第一个元素进行统计，如果与总长度相同，表示只有一个分类</span></div><div class="line">    <span class="keyword">if</span> classList.count(classList[<span class="number">0</span>]) == len(classList):</div><div class="line">        <span class="keyword">return</span> classList[<span class="number">0</span>]</div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">    遍历完所有特征时返回出现次数最多的</span></div><div class="line"><span class="string">    """</span></div><div class="line">    <span class="comment">#     只剩最后一项的时候，按较多的</span></div><div class="line">    <span class="comment">#     print dataSet[0]</span></div><div class="line">    <span class="comment">#     计算dataSet第一个元素的长度</span></div><div class="line">    <span class="keyword">if</span> len(dataSet[<span class="number">0</span>]) == <span class="number">1</span>:</div><div class="line">        <span class="keyword">return</span> majorityCnt(classList)</div><div class="line">    <span class="comment">#     获取到最佳特征</span></div><div class="line">    bestFeat = chooseBestFeatureToSplit(dataSet)</div><div class="line">    bestFeatLabel = labels[bestFeat]</div><div class="line">    myTree = &#123;bestFeatLabel:&#123;&#125;&#125;</div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">    得到列表包含的所有属性值</span></div><div class="line"><span class="string">    """</span></div><div class="line">    <span class="comment"># 从标签里删除最佳特征标签</span></div><div class="line">    <span class="keyword">del</span>(labels[bestFeat])</div><div class="line">    <span class="comment">#将dataSet每个元素的第一列拿出</span></div><div class="line">    featValues = [example[bestFeat] <span class="keyword">for</span> example <span class="keyword">in</span> dataSet]</div><div class="line">    <span class="comment">#使用set无重复的存入uniqueVals</span></div><div class="line">    uniqueVals = set(featValues)</div><div class="line">    <span class="keyword">for</span> value <span class="keyword">in</span> uniqueVals:</div><div class="line">    <span class="comment">#将标签复制一份，保证每次调用函数时不改变原始列表的内容，使用新变量代替原始列表</span></div><div class="line">        subLabels = labels[:]</div><div class="line">        <span class="comment">#splitDataSet按当前分类方式进行分类，并将其他项作为新列表返回</span></div><div class="line">        myTree[bestFeatLabel][value] = createTree(splitDataSet(dataSet, bestFeat, value),subLabels)</div><div class="line">    <span class="keyword">return</span> myTree</div><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">使用决策树的分类函数</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">classify</span><span class="params">(inputTree,featLabels,testVec)</span>:</span></div><div class="line">    firstStr = inputTree.keys()[<span class="number">0</span>]</div><div class="line">    secondDict = inputTree[firstStr]</div><div class="line">    <span class="comment">#将标签字符串转换成索引</span></div><div class="line">    featIndex = featLabels.index(firstStr)</div><div class="line"><span class="comment">#     for key in secondDict.keys():</span></div><div class="line"><span class="comment">#         if testVec[featIndex] == key:</span></div><div class="line"><span class="comment">#             classLabel = classify(secondDict[key],featLabels,testVec)</span></div><div class="line"><span class="comment">#         else:</span></div><div class="line"><span class="comment">#             classLabel = secondDict[key]</span></div><div class="line">    <span class="comment">#下面是源码中的内容 可以运行</span></div><div class="line">    key = testVec[featIndex]</div><div class="line">    valueOfFeat = secondDict[key]</div><div class="line">    <span class="keyword">if</span> isinstance(valueOfFeat, dict): </div><div class="line">        <span class="comment"># 非叶子节点继续递归判断</span></div><div class="line">        classLabel = classify(valueOfFeat, featLabels, testVec)</div><div class="line">    <span class="keyword">else</span>: classLabel = valueOfFeat</div><div class="line">    <span class="keyword">return</span> classLabel</div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">决策树的存储，每次调用使用已经构造好的决策树，节省时间</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">使用pickle模块存储决策树</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">storeTree</span><span class="params">(inputTree,filename)</span>:</span></div><div class="line">    <span class="keyword">import</span> pickle</div><div class="line">    fw = open(filename,<span class="string">'w'</span>)</div><div class="line">    <span class="comment">#将对象保存到文件中</span></div><div class="line">    pickle.dump(inputTree,fw)</div><div class="line">    fw.close()</div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">grabTree</span><span class="params">(filename)</span>:</span></div><div class="line">    <span class="keyword">import</span> pickle</div><div class="line">    fr = open(filename)</div><div class="line">    <span class="comment">#从文件中读取</span></div><div class="line">    <span class="keyword">return</span> pickle.load(fr)</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">测试决策树分类函数</span></div><div class="line"><span class="string">"""</span></div><div class="line">myDat,labels=createDataSet()</div><div class="line">myTree=retrieveTree(<span class="number">0</span>)</div><div class="line">classify(myTree,labels,[<span class="number">1</span>,<span class="number">1</span>])</div></pre></td></tr></table></figure>
-<pre><code>&apos;yes&apos;
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">测试存储效果</span></div><div class="line"><span class="string">"""</span></div><div class="line">myTree=retrieveTree(<span class="number">0</span>)</div><div class="line">storeTree(myTree,<span class="string">'classfierStorage.txt'</span>)</div><div class="line">grabTree(<span class="string">'classfierStorage.txt'</span>)</div></pre></td></tr></table></figure>
-<pre><code>{&apos;no surfacing&apos;: {0: &apos;no&apos;, 1: {&apos;flippers&apos;: {0: &apos;no&apos;, 1: &apos;yes&apos;}}}}
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">生成决策树字典</span></div><div class="line"><span class="string">"""</span></div><div class="line">myData,labels = createDataSet()</div><div class="line">myTree = createTree(myData,labels)</div><div class="line">myTree</div></pre></td></tr></table></figure>
-<pre><code>{&apos;no surfacing&apos;: {0: &apos;no&apos;, 1: {&apos;flippers&apos;: {0: &apos;no&apos;, 1: &apos;yes&apos;}}}}
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">测试选择最好的数据集划分方式</span></div><div class="line"><span class="string">"""</span></div><div class="line">myData,labels = createDataSet()</div><div class="line">chooseBestFeatureToSplit(myData)</div></pre></td></tr></table></figure>
+<pre><code class="python">&quot;&quot;&quot;
+文件trees
+&quot;&quot;&quot;
+from math import log
+import operator
+%matplotlib inline #这一句设置在线显示
+
+&quot;&quot;&quot;
+创建数据集
+&quot;&quot;&quot;
+def createDataSet():
+    dataSet = [[1, 1, &#39;yes&#39;],
+              [1, 1, &#39;yes&#39;],
+              [1, 0, &#39;no&#39;],
+              [0, 1, &#39;no&#39;],
+              [0, 1, &#39;no&#39;]]
+    labels = [&#39;no surfacing&#39;,&#39;flippers&#39;]
+    return dataSet, labels
+
+&quot;&quot;&quot;
+计算给定数据集的信息熵(香农)
+&quot;&quot;&quot;
+def calcuShannonEnt(dataSet):
+    numEntries = len(dataSet)
+    labelCounts = {}
+    &quot;&quot;&quot;
+    为所有可能分能创建字典
+    &quot;&quot;&quot;
+    for featVec in dataSet:
+        currentLabel = featVec[-1]
+        #方法1
+        #   if currentLabel not in labelCounts.keys():
+        #        labelCounts[currentLabel] = 0
+        #   labelCounts[currentLabel] += 1
+        #方法2
+        labelCounts[currentLabel] = labelCounts.get(currentLabel,0) + 1
+    shannonEnt = 0.0
+    for key in labelCounts:
+        &quot;&quot;&quot;
+        每个类别所占的比
+        &quot;&quot;&quot;
+        prob = float(labelCounts[key])/numEntries
+        &quot;&quot;&quot;
+        求对数
+        &quot;&quot;&quot;
+        shannonEnt -= prob * log(prob,2)
+    return shannonEnt
+
+&quot;&quot;&quot;
+按照给定特征划分数据集
+三个参数：待划分的数据集、划分数据集的特征、特征的返回值
+&quot;&quot;&quot;
+def splitDataSet(dataSet, axis, value):
+    &quot;&quot;&quot;
+    创建新的list对象
+    &quot;&quot;&quot;
+    &quot;&quot;&quot;
+    理解：按axis这列来划分，若这列的数=value归到一类，并创建一个新列表返回
+    &quot;&quot;&quot;
+    retDataSet = []
+    for featVec in dataSet:
+        if featVec[axis] == value:
+            &quot;&quot;&quot;
+            抽取
+            &quot;&quot;&quot;
+            # 应该是清空列表
+            reducedFeatVec = featVec[:axis] 
+            # [0+1:]取下标1之后的，这里是取后两位，将元素塞入reducedFeatVec
+            reducedFeatVec.extend(featVec[axis+1:]) 
+            #将reducedFeatVec列表塞入retDataSet
+            retDataSet.append(reducedFeatVec)
+    return retDataSet
+
+    &quot;&quot;&quot;
+    选择最好的数据集划分方式
+    此处使用ID3算法，获取信息增益最大的
+    &quot;&quot;&quot;
+def chooseBestFeatureToSplit(dataSet):
+    #dataSet[0]列数
+    #只用前两列进行分类 -1
+    numFeatures = len(dataSet[0]) - 1
+    baseEntropy = calcuShannonEnt(dataSet)
+    #信息增益
+    bestInfoGain = 0.0
+    bestFeature = -1
+    for i in range(numFeatures):
+        &quot;&quot;&quot;
+        创建唯一的分类标签列表
+        &quot;&quot;&quot;
+        featList = [example[i] for example in dataSet]
+        uniqueVals = set(featList)# 创建集合
+        newEntropy = 0.0
+        &quot;&quot;&quot;
+        计算每种划分方式的信息熵
+        第一列或第二列的划分方式 表3-1 将其他两列分类
+        &quot;&quot;&quot;
+        for value in uniqueVals:
+            subDataSet = splitDataSet(dataSet, i, value)
+            prob = len(subDataSet)/float(len(dataSet))
+            &quot;&quot;&quot;
+            将分完的两个类分别计算信息熵，乘以每个分类所出现的概率，相加后得到新的熵
+            &quot;&quot;&quot;
+            newEntropy += prob * calcuShannonEnt(subDataSet)
+        &quot;&quot;&quot;
+        判断信息增益是否大于0
+        &quot;&quot;&quot;
+        infoGain = baseEntropy - newEntropy
+        if(infoGain &gt; bestInfoGain):
+            &quot;&quot;&quot;
+            计算最好的信息增益
+            &quot;&quot;&quot;
+            bestInfoGain = infoGain
+            #  i为列数，对应表3-1
+            bestFeature = i
+    return bestFeature
+
+&quot;&quot;&quot;
+类似于投票表决的方法,挑选次数出现最多的类别
+&quot;&quot;&quot;
+def majorityCnt(classList):
+    classCount={}
+    for vote in classList:
+        if vote not in classCount.key():
+            classCount[vote] = 0
+        classCount[vote] += 1
+    sortedClassCount = sorted(classCount.iteritems(), key=operator.itemgetter(1), reverse=True)
+    return sortedClassCount[0][0]
+
+&quot;&quot;&quot;
+创建树的代码
+&quot;&quot;&quot;
+def createTree(dataSet,labels):
+    # 把dataSet最后一列放到classList
+    classList = [example[-1] for example in dataSet]
+    #     print classList
+    &quot;&quot;&quot;
+    类别完全相同则停止继续划分
+    &quot;&quot;&quot;
+    #     对classList第一个元素进行统计，如果与总长度相同，表示只有一个分类
+    if classList.count(classList[0]) == len(classList):
+        return classList[0]
+    &quot;&quot;&quot;
+    遍历完所有特征时返回出现次数最多的
+    &quot;&quot;&quot;
+    #     只剩最后一项的时候，按较多的
+    #     print dataSet[0]
+    #     计算dataSet第一个元素的长度
+    if len(dataSet[0]) == 1:
+        return majorityCnt(classList)
+    #     获取到最佳特征
+    bestFeat = chooseBestFeatureToSplit(dataSet)
+    bestFeatLabel = labels[bestFeat]
+    myTree = {bestFeatLabel:{}}
+    &quot;&quot;&quot;
+    得到列表包含的所有属性值
+    &quot;&quot;&quot;
+    # 从标签里删除最佳特征标签
+    del(labels[bestFeat])
+    #将dataSet每个元素的第一列拿出
+    featValues = [example[bestFeat] for example in dataSet]
+    #使用set无重复的存入uniqueVals
+    uniqueVals = set(featValues)
+    for value in uniqueVals:
+    #将标签复制一份，保证每次调用函数时不改变原始列表的内容，使用新变量代替原始列表
+        subLabels = labels[:]
+        #splitDataSet按当前分类方式进行分类，并将其他项作为新列表返回
+        myTree[bestFeatLabel][value] = createTree(splitDataSet(dataSet, bestFeat, value),subLabels)
+    return myTree
+
+&quot;&quot;&quot;
+使用决策树的分类函数
+&quot;&quot;&quot;
+def classify(inputTree,featLabels,testVec):
+    firstStr = inputTree.keys()[0]
+    secondDict = inputTree[firstStr]
+    #将标签字符串转换成索引
+    featIndex = featLabels.index(firstStr)
+#     for key in secondDict.keys():
+#         if testVec[featIndex] == key:
+#             classLabel = classify(secondDict[key],featLabels,testVec)
+#         else:
+#             classLabel = secondDict[key]
+    #下面是源码中的内容 可以运行
+    key = testVec[featIndex]
+    valueOfFeat = secondDict[key]
+    if isinstance(valueOfFeat, dict): 
+        # 非叶子节点继续递归判断
+        classLabel = classify(valueOfFeat, featLabels, testVec)
+    else: classLabel = valueOfFeat
+    return classLabel
+&quot;&quot;&quot;
+决策树的存储，每次调用使用已经构造好的决策树，节省时间
+&quot;&quot;&quot;
+&quot;&quot;&quot;
+使用pickle模块存储决策树
+&quot;&quot;&quot;
+def storeTree(inputTree,filename):
+    import pickle
+    fw = open(filename,&#39;w&#39;)
+    #将对象保存到文件中
+    pickle.dump(inputTree,fw)
+    fw.close()
+
+def grabTree(filename):
+    import pickle
+    fr = open(filename)
+    #从文件中读取
+    return pickle.load(fr)
+</code></pre>
+<pre><code class="python">&quot;&quot;&quot;
+测试决策树分类函数
+&quot;&quot;&quot;
+myDat,labels=createDataSet()
+myTree=retrieveTree(0)
+classify(myTree,labels,[1,1])
+</code></pre>
+<pre><code>&#39;yes&#39;
+</code></pre><pre><code class="python">&quot;&quot;&quot;
+测试存储效果
+&quot;&quot;&quot;
+myTree=retrieveTree(0)
+storeTree(myTree,&#39;classfierStorage.txt&#39;)
+grabTree(&#39;classfierStorage.txt&#39;)
+</code></pre>
+<pre><code>{&#39;no surfacing&#39;: {0: &#39;no&#39;, 1: {&#39;flippers&#39;: {0: &#39;no&#39;, 1: &#39;yes&#39;}}}}
+</code></pre><pre><code class="python">&quot;&quot;&quot;
+生成决策树字典
+&quot;&quot;&quot;
+myData,labels = createDataSet()
+myTree = createTree(myData,labels)
+myTree
+</code></pre>
+<pre><code>{&#39;no surfacing&#39;: {0: &#39;no&#39;, 1: {&#39;flippers&#39;: {0: &#39;no&#39;, 1: &#39;yes&#39;}}}}
+</code></pre><pre><code class="python">&quot;&quot;&quot;
+测试选择最好的数据集划分方式
+&quot;&quot;&quot;
+myData,labels = createDataSet()
+chooseBestFeatureToSplit(myData)
+</code></pre>
 <pre><code>0
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">测试使用创建的数据集计算信息熵</span></div><div class="line"><span class="string">"""</span></div><div class="line">myData,labels = createDataSet()</div><div class="line"><span class="comment">#增加分类熵变大</span></div><div class="line">myData[<span class="number">0</span>][<span class="number">-1</span>]=<span class="string">'maybe'</span></div><div class="line">calcuShannonEnt(myData)</div></pre></td></tr></table></figure>
+</code></pre><pre><code class="python">&quot;&quot;&quot;
+测试使用创建的数据集计算信息熵
+&quot;&quot;&quot;
+myData,labels = createDataSet()
+#增加分类熵变大
+myData[0][-1]=&#39;maybe&#39;
+calcuShannonEnt(myData)
+</code></pre>
 <pre><code>1.3709505944546687
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">测试划分数据集</span></div><div class="line"><span class="string">"""</span></div><div class="line">myData,labels = createDataSet()</div><div class="line">splitDataSet(myData,<span class="number">0</span>,<span class="number">1</span>)</div></pre></td></tr></table></figure>
-<pre><code>[[1, &apos;yes&apos;], [1, &apos;yes&apos;], [0, &apos;no&apos;]]
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">文件treePlotter</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">使用matplot文本注解回执树节点</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt</div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">定义文本框和箭头格式</span></div><div class="line"><span class="string">"""</span></div><div class="line">decisionNode = dict(boxstyle=<span class="string">"sawtooth"</span>, fc=<span class="string">"0.8"</span>)</div><div class="line">leafNode = dict(boxstyle=<span class="string">"round4"</span>, fc=<span class="string">"0.8"</span>)</div><div class="line">arrow_args = dict(arrowstyle=<span class="string">"&lt;-"</span>)</div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">绘制带箭头的注解</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plotNode</span><span class="params">(nodeTxt, centerPt, parentPt, nodeType)</span>:</span></div><div class="line">    createPlot.ax1.annotate(nodeTxt, xy=parentPt, xycoords=<span class="string">'axes fraction'</span>, \</div><div class="line">                           xytext=centerPt, textcoords=<span class="string">'axes fraction'</span>, \</div><div class="line">                            va=<span class="string">"center"</span>, ha=<span class="string">"center"</span>, bbox=nodeType, arrowprops=arrow_args)</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">createPlot1</span><span class="params">()</span>:</span></div><div class="line">    fig = plt.figure(<span class="number">1</span>, facecolor=<span class="string">'white'</span>)</div><div class="line">    fig.clf()</div><div class="line">    createPlot.ax1 = plt.subplot(<span class="number">111</span>, frameon=<span class="keyword">False</span>)</div><div class="line">    <span class="comment">#decisionNode leafNode 是节点类型，不同节点类型样式不一样 包围文字的box不一样</span></div><div class="line">    plotNode(<span class="string">'a decision node'</span>, (<span class="number">0.5</span>, <span class="number">0.1</span>), (<span class="number">0.1</span>, <span class="number">0.5</span>), decisionNode)</div><div class="line">    plotNode(<span class="string">'a leaf node'</span>, (<span class="number">0.8</span>, <span class="number">0.1</span>), (<span class="number">0.3</span>, <span class="number">0.8</span>), leafNode)</div><div class="line">    plt.show()</div><div class="line">    </div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">画一个完整的树，我们需要知道有多少个叶节点（确定x）,树有多少层（确定y）</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="comment">#获取叶节点的数目</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getNumLeafs</span><span class="params">(myTree)</span>:</span></div><div class="line">    numLeafs = <span class="number">0</span></div><div class="line">    <span class="comment">#获取第一个键</span></div><div class="line">    <span class="comment">#树的第一层一定只有一个节点</span></div><div class="line">    firstStr = myTree.keys()[<span class="number">0</span>]</div><div class="line">    <span class="comment">#获取第一个键所对应的值</span></div><div class="line">    secondDict = myTree[firstStr]</div><div class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> secondDict.keys():</div><div class="line">        <span class="comment">#判断节点数据（键的值）类型是否为字典</span></div><div class="line">        <span class="keyword">if</span> type(secondDict[key]).__name__==<span class="string">'dict'</span>:</div><div class="line">            numLeafs += getNumLeafs(secondDict[key])</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            numLeafs += <span class="number">1</span></div><div class="line">    <span class="keyword">return</span> numLeafs</div><div class="line"><span class="comment">#获取树的层数</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">getTreeDepth</span><span class="params">(myTree)</span>:</span></div><div class="line">    maxDepth = <span class="number">0</span></div><div class="line">    firstStr = myTree.keys()[<span class="number">0</span>]</div><div class="line">    secondDict = myTree[firstStr]</div><div class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> secondDict.keys():</div><div class="line">        <span class="keyword">if</span> type(secondDict[key]).__name__==<span class="string">'dict'</span>:</div><div class="line">            thisDepth = <span class="number">1</span> + getTreeDepth(secondDict[key])</div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            thisDepth = <span class="number">1</span></div><div class="line">        <span class="keyword">if</span> thisDepth &gt; maxDepth : maxDepth = thisDepth</div><div class="line">    <span class="keyword">return</span> maxDepth</div><div class="line"></div><div class="line"><span class="comment">#预先存储下树的信息，避免每次测试都需要创建树，为了节约练习的时间</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">retrieveTree</span><span class="params">(i)</span>:</span></div><div class="line">    listOfTrees = [&#123;<span class="string">'no surfacing'</span>:</div><div class="line">                    &#123;<span class="number">0</span>:<span class="string">'no'</span>,</div><div class="line">                     <span class="number">1</span>:&#123;<span class="string">'flippers'</span>:</div><div class="line">                        &#123;<span class="number">0</span>:<span class="string">'no'</span>,<span class="number">1</span>:<span class="string">'yes'</span>&#125;&#125;&#125;&#125;,</div><div class="line">                  &#123;<span class="string">'no surfacing'</span>:</div><div class="line">                   &#123;<span class="number">0</span>:<span class="string">'no'</span>,<span class="number">1</span>:&#123;<span class="string">'flippers'</span>:</div><div class="line">                     &#123;<span class="number">0</span>:</div><div class="line">                      &#123;<span class="string">'head'</span>:</div><div class="line">                       &#123;<span class="number">0</span>:<span class="string">'no'</span>,<span class="number">1</span>:<span class="string">'yes'</span>&#125;,<span class="number">1</span>:<span class="string">'no'</span>&#125;&#125;&#125;&#125;&#125;]</div><div class="line">    <span class="keyword">return</span> listOfTrees[i]</div><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">在父子节点间填充文本信息</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plotMidText</span><span class="params">(cntrPt, parentPt, txtString)</span>:</span></div><div class="line">    <span class="comment">#计算文本信息的位置</span></div><div class="line">    <span class="comment">#① 0.5 1</span></div><div class="line">    xMid = (parentPt[<span class="number">0</span>] - cntrPt[<span class="number">0</span>])/<span class="number">2.0</span> + cntrPt[<span class="number">0</span>]</div><div class="line">    yMid = (parentPt[<span class="number">1</span>] - cntrPt[<span class="number">1</span>])/<span class="number">2.0</span> + cntrPt[<span class="number">1</span>]</div><div class="line">    createPlot.ax1.text(xMid, yMid, txtString)</div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">plotTree</span><span class="params">(myTree, parentPt, nodeTxt)</span>:</span></div><div class="line">    <span class="comment">#计算宽与高</span></div><div class="line">    numLeafs = getNumLeafs(myTree)</div><div class="line">    depth = getTreeDepth(myTree)</div><div class="line">    <span class="comment">#获取根节点</span></div><div class="line">    firstStr = myTree.keys()[<span class="number">0</span>]</div><div class="line">    cntrPt = (plotTree.xOff + (<span class="number">1.0</span> + float(numLeafs))/<span class="number">2.0</span>/plotTree.totalW, plotTree.yOff)</div><div class="line">    <span class="comment">#① (0.5,1)  (0.5,1)  ""</span></div><div class="line">    <span class="comment"># 在父子节点之间添加文本信息</span></div><div class="line">    plotMidText(cntrPt, parentPt, nodeTxt)</div><div class="line">    <span class="comment">#画节点: 节点内容 子节点坐标  父节点坐标  节点类型</span></div><div class="line">    plotNode(firstStr, cntrPt, parentPt, decisionNode)</div><div class="line">    <span class="comment"># 第二层 </span></div><div class="line">    secondDict = myTree[firstStr]</div><div class="line">    <span class="comment"># 修改y偏移量 1-1/2  有坐标范围0-1 这里从上到下绘制因此依次递减</span></div><div class="line">    plotTree.yOff = plotTree.yOff - <span class="number">1.0</span>/plotTree.totalD</div><div class="line">    <span class="comment"># 判断第二层节点下的节点是否为叶子节点</span></div><div class="line">    <span class="keyword">for</span> key <span class="keyword">in</span> secondDict.keys():</div><div class="line">        <span class="comment">#不是叶子节点  递归执行</span></div><div class="line">        <span class="keyword">if</span> type(secondDict[key]).__name__==<span class="string">'dict'</span>:</div><div class="line">            plotTree(secondDict[key],cntrPt,str(key))</div><div class="line">        <span class="comment">#如果是叶子节点</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="comment">#计算x的偏移量 -1/8+1/4</span></div><div class="line">            plotTree.xOff = plotTree.xOff + <span class="number">1.0</span>/plotTree.totalW</div><div class="line">            plotNode(secondDict[key], (plotTree.xOff,plotTree.yOff), cntrPt, leafNode)</div><div class="line">            plotMidText((plotTree.xOff, plotTree.yOff), cntrPt, str(key))</div><div class="line">    <span class="comment"># 1/2+1/2</span></div><div class="line">    plotTree.yOff = plotTree.yOff + <span class="number">1.0</span>/plotTree.totalD</div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">createPlot</span><span class="params">(inTree)</span>:</span></div><div class="line">    <span class="comment">#facecolor设置背景</span></div><div class="line">    fig = plt.figure(<span class="number">1</span>, facecolor=<span class="string">'white'</span>)</div><div class="line">    <span class="comment">#清除</span></div><div class="line">    fig.clf()</div><div class="line">    <span class="comment">#清空ticks，标线，这里应该就是坐标轴</span></div><div class="line">    axprops = dict(xticks=[], yticks=[])</div><div class="line">    <span class="comment">#这个是没有ticks的</span></div><div class="line">    <span class="comment">#createPlot.ax1 = plt.subplot(111,frameon=False, **axprops)</span></div><div class="line">    <span class="comment">#这个是有ticks的</span></div><div class="line">    createPlot.ax1 = plt.subplot(<span class="number">111</span>,frameon=<span class="keyword">False</span>)</div><div class="line">    <span class="comment">#将树的深度和叶子节点数保存为全局变量</span></div><div class="line">    plotTree.totalW = float(getNumLeafs(inTree))</div><div class="line">    <span class="keyword">print</span> <span class="string">"totalW: %f"</span> % plotTree.totalW</div><div class="line">    plotTree.totalD = float(getTreeDepth(inTree))</div><div class="line">    <span class="keyword">print</span> <span class="string">"totalD: %f"</span>% plotTree.totalD</div><div class="line">    <span class="comment"># -0.5/4</span></div><div class="line">    plotTree.xOff = <span class="number">-0.5</span>/plotTree.totalW;</div><div class="line">    plotTree.yOff = <span class="number">1.0</span></div><div class="line">    <span class="comment">#设置跟节点坐标</span></div><div class="line">    plotTree(inTree, (<span class="number">0.5</span>,<span class="number">1.0</span>), <span class="string">''</span>)</div><div class="line">    plt.show()</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">测试获取树的叶子节点数，树的层数</span></div><div class="line"><span class="string">"""</span></div><div class="line">myTree = retrieveTree(<span class="number">0</span>)</div><div class="line">getNumLeafs(myTree)</div><div class="line">getTreeDepth(myTree)</div></pre></td></tr></table></figure>
+</code></pre><pre><code class="python">&quot;&quot;&quot;
+测试划分数据集
+&quot;&quot;&quot;
+myData,labels = createDataSet()
+splitDataSet(myData,0,1)
+</code></pre>
+<pre><code>[[1, &#39;yes&#39;], [1, &#39;yes&#39;], [0, &#39;no&#39;]]
+</code></pre><pre><code class="python">&quot;&quot;&quot;
+文件treePlotter
+&quot;&quot;&quot;
+&quot;&quot;&quot;
+使用matplot文本注解回执树节点
+&quot;&quot;&quot;
+import matplotlib.pyplot as plt
+&quot;&quot;&quot;
+定义文本框和箭头格式
+&quot;&quot;&quot;
+decisionNode = dict(boxstyle=&quot;sawtooth&quot;, fc=&quot;0.8&quot;)
+leafNode = dict(boxstyle=&quot;round4&quot;, fc=&quot;0.8&quot;)
+arrow_args = dict(arrowstyle=&quot;&lt;-&quot;)
+&quot;&quot;&quot;
+绘制带箭头的注解
+&quot;&quot;&quot;
+def plotNode(nodeTxt, centerPt, parentPt, nodeType):
+    createPlot.ax1.annotate(nodeTxt, xy=parentPt, xycoords=&#39;axes fraction&#39;, \
+                           xytext=centerPt, textcoords=&#39;axes fraction&#39;, \
+                            va=&quot;center&quot;, ha=&quot;center&quot;, bbox=nodeType, arrowprops=arrow_args)
+def createPlot1():
+    fig = plt.figure(1, facecolor=&#39;white&#39;)
+    fig.clf()
+    createPlot.ax1 = plt.subplot(111, frameon=False)
+    #decisionNode leafNode 是节点类型，不同节点类型样式不一样 包围文字的box不一样
+    plotNode(&#39;a decision node&#39;, (0.5, 0.1), (0.1, 0.5), decisionNode)
+    plotNode(&#39;a leaf node&#39;, (0.8, 0.1), (0.3, 0.8), leafNode)
+    plt.show()
+
+&quot;&quot;&quot;
+画一个完整的树，我们需要知道有多少个叶节点（确定x）,树有多少层（确定y）
+&quot;&quot;&quot;
+#获取叶节点的数目
+def getNumLeafs(myTree):
+    numLeafs = 0
+    #获取第一个键
+    #树的第一层一定只有一个节点
+    firstStr = myTree.keys()[0]
+    #获取第一个键所对应的值
+    secondDict = myTree[firstStr]
+    for key in secondDict.keys():
+        #判断节点数据（键的值）类型是否为字典
+        if type(secondDict[key]).__name__==&#39;dict&#39;:
+            numLeafs += getNumLeafs(secondDict[key])
+        else:
+            numLeafs += 1
+    return numLeafs
+#获取树的层数
+def getTreeDepth(myTree):
+    maxDepth = 0
+    firstStr = myTree.keys()[0]
+    secondDict = myTree[firstStr]
+    for key in secondDict.keys():
+        if type(secondDict[key]).__name__==&#39;dict&#39;:
+            thisDepth = 1 + getTreeDepth(secondDict[key])
+        else:
+            thisDepth = 1
+        if thisDepth &gt; maxDepth : maxDepth = thisDepth
+    return maxDepth
+
+#预先存储下树的信息，避免每次测试都需要创建树，为了节约练习的时间
+def retrieveTree(i):
+    listOfTrees = [{&#39;no surfacing&#39;:
+                    {0:&#39;no&#39;,
+                     1:{&#39;flippers&#39;:
+                        {0:&#39;no&#39;,1:&#39;yes&#39;}}}},
+                  {&#39;no surfacing&#39;:
+                   {0:&#39;no&#39;,1:{&#39;flippers&#39;:
+                     {0:
+                      {&#39;head&#39;:
+                       {0:&#39;no&#39;,1:&#39;yes&#39;},1:&#39;no&#39;}}}}}]
+    return listOfTrees[i]
+
+&quot;&quot;&quot;
+在父子节点间填充文本信息
+&quot;&quot;&quot;
+def plotMidText(cntrPt, parentPt, txtString):
+    #计算文本信息的位置
+    #① 0.5 1
+    xMid = (parentPt[0] - cntrPt[0])/2.0 + cntrPt[0]
+    yMid = (parentPt[1] - cntrPt[1])/2.0 + cntrPt[1]
+    createPlot.ax1.text(xMid, yMid, txtString)
+
+def plotTree(myTree, parentPt, nodeTxt):
+    #计算宽与高
+    numLeafs = getNumLeafs(myTree)
+    depth = getTreeDepth(myTree)
+    #获取根节点
+    firstStr = myTree.keys()[0]
+    cntrPt = (plotTree.xOff + (1.0 + float(numLeafs))/2.0/plotTree.totalW, plotTree.yOff)
+    #① (0.5,1)  (0.5,1)  &quot;&quot;
+    # 在父子节点之间添加文本信息
+    plotMidText(cntrPt, parentPt, nodeTxt)
+    #画节点: 节点内容 子节点坐标  父节点坐标  节点类型
+    plotNode(firstStr, cntrPt, parentPt, decisionNode)
+    # 第二层 
+    secondDict = myTree[firstStr]
+    # 修改y偏移量 1-1/2  有坐标范围0-1 这里从上到下绘制因此依次递减
+    plotTree.yOff = plotTree.yOff - 1.0/plotTree.totalD
+    # 判断第二层节点下的节点是否为叶子节点
+    for key in secondDict.keys():
+        #不是叶子节点  递归执行
+        if type(secondDict[key]).__name__==&#39;dict&#39;:
+            plotTree(secondDict[key],cntrPt,str(key))
+        #如果是叶子节点
+        else:
+            #计算x的偏移量 -1/8+1/4
+            plotTree.xOff = plotTree.xOff + 1.0/plotTree.totalW
+            plotNode(secondDict[key], (plotTree.xOff,plotTree.yOff), cntrPt, leafNode)
+            plotMidText((plotTree.xOff, plotTree.yOff), cntrPt, str(key))
+    # 1/2+1/2
+    plotTree.yOff = plotTree.yOff + 1.0/plotTree.totalD
+
+def createPlot(inTree):
+    #facecolor设置背景
+    fig = plt.figure(1, facecolor=&#39;white&#39;)
+    #清除
+    fig.clf()
+    #清空ticks，标线，这里应该就是坐标轴
+    axprops = dict(xticks=[], yticks=[])
+    #这个是没有ticks的
+    #createPlot.ax1 = plt.subplot(111,frameon=False, **axprops)
+    #这个是有ticks的
+    createPlot.ax1 = plt.subplot(111,frameon=False)
+    #将树的深度和叶子节点数保存为全局变量
+    plotTree.totalW = float(getNumLeafs(inTree))
+    print &quot;totalW: %f&quot; % plotTree.totalW
+    plotTree.totalD = float(getTreeDepth(inTree))
+    print &quot;totalD: %f&quot;% plotTree.totalD
+    # -0.5/4
+    plotTree.xOff = -0.5/plotTree.totalW;
+    plotTree.yOff = 1.0
+    #设置跟节点坐标
+    plotTree(inTree, (0.5,1.0), &#39;&#39;)
+    plt.show()
+</code></pre>
+<pre><code class="python">&quot;&quot;&quot;
+测试获取树的叶子节点数，树的层数
+&quot;&quot;&quot;
+myTree = retrieveTree(0)
+getNumLeafs(myTree)
+getTreeDepth(myTree)
+</code></pre>
 <pre><code>2
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">创建树节点</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">前面的createPlot()为了做区分 改名为createPlot1</span></div><div class="line"><span class="string">"""</span></div><div class="line">createPlot1()</div></pre></td></tr></table></figure>
+</code></pre><pre><code class="python">&quot;&quot;&quot;
+创建树节点
+&quot;&quot;&quot;
+&quot;&quot;&quot;
+前面的createPlot()为了做区分 改名为createPlot1
+&quot;&quot;&quot;
+createPlot1()
+</code></pre>
 <p><img src="/img/tree/output_9_0.png" alt="图像输出"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">获取树信息</span></div><div class="line"><span class="string">"""</span></div><div class="line">myTree=retrieveTree(<span class="number">0</span>)</div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">创建树</span></div><div class="line"><span class="string">"""</span></div><div class="line">createPlot(myTree)</div></pre></td></tr></table></figure>
+<pre><code class="python">&quot;&quot;&quot;
+获取树信息
+&quot;&quot;&quot;
+myTree=retrieveTree(0)
+&quot;&quot;&quot;
+创建树
+&quot;&quot;&quot;
+createPlot(myTree)
+</code></pre>
 <pre><code>totalW: 3.000000
 totalD: 2.000000
 </code></pre><p><img src="/img/tree/output_10_1.png" alt="图像输出"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">添加节点，测试输出效果</span></div><div class="line"><span class="string">"""</span></div><div class="line">myTree=retrieveTree(<span class="number">0</span>)</div><div class="line">myTree[<span class="string">'no surfacing'</span>][<span class="number">3</span>]=<span class="string">'maybe'</span></div><div class="line">createPlot(myTree)</div></pre></td></tr></table></figure>
+<pre><code class="python">&quot;&quot;&quot;
+添加节点，测试输出效果
+&quot;&quot;&quot;
+myTree=retrieveTree(0)
+myTree[&#39;no surfacing&#39;][3]=&#39;maybe&#39;
+createPlot(myTree)
+</code></pre>
 <p><img src="/img/tree/output_11_0.png" alt="图像输出"></p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">fr=open(<span class="string">'F:\study\lenses.txt'</span>)</div><div class="line">lences=[inst.strip().split(<span class="string">'\t'</span>) <span class="keyword">for</span> inst <span class="keyword">in</span> fr.readlines()]</div><div class="line">lensesLabels=[<span class="string">'age'</span>,<span class="string">'preascript'</span>,<span class="string">'astigmatic'</span>,<span class="string">'tearRate'</span>]</div><div class="line">lensesTree = createTree(lences,lensesLabels)</div><div class="line">lensesTree</div></pre></td></tr></table></figure>
-<pre><code>{&apos;tearRate&apos;: {&apos;normal&apos;: {&apos;astigmatic&apos;: {&apos;no&apos;: {&apos;age&apos;: {&apos;pre&apos;: &apos;soft&apos;,
-      &apos;presbyopic&apos;: {&apos;preascript&apos;: {&apos;hyper&apos;: &apos;soft&apos;, &apos;myope&apos;: &apos;no lenses&apos;}},
-      &apos;young&apos;: &apos;soft&apos;}},
-    &apos;yes&apos;: {&apos;preascript&apos;: {&apos;hyper&apos;: {&apos;age&apos;: {&apos;pre&apos;: &apos;no lenses&apos;,
-        &apos;presbyopic&apos;: &apos;no lenses&apos;,
-        &apos;young&apos;: &apos;hard&apos;}},
-      &apos;myope&apos;: &apos;hard&apos;}}}},
-  &apos;reduced&apos;: &apos;no lenses&apos;}}
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">createPlot(lensesTree)</div></pre></td></tr></table></figure>
+<pre><code class="python">fr=open(&#39;F:\study\lenses.txt&#39;)
+lences=[inst.strip().split(&#39;\t&#39;) for inst in fr.readlines()]
+lensesLabels=[&#39;age&#39;,&#39;preascript&#39;,&#39;astigmatic&#39;,&#39;tearRate&#39;]
+lensesTree = createTree(lences,lensesLabels)
+lensesTree
+</code></pre>
+<pre><code>{&#39;tearRate&#39;: {&#39;normal&#39;: {&#39;astigmatic&#39;: {&#39;no&#39;: {&#39;age&#39;: {&#39;pre&#39;: &#39;soft&#39;,
+      &#39;presbyopic&#39;: {&#39;preascript&#39;: {&#39;hyper&#39;: &#39;soft&#39;, &#39;myope&#39;: &#39;no lenses&#39;}},
+      &#39;young&#39;: &#39;soft&#39;}},
+    &#39;yes&#39;: {&#39;preascript&#39;: {&#39;hyper&#39;: {&#39;age&#39;: {&#39;pre&#39;: &#39;no lenses&#39;,
+        &#39;presbyopic&#39;: &#39;no lenses&#39;,
+        &#39;young&#39;: &#39;hard&#39;}},
+      &#39;myope&#39;: &#39;hard&#39;}}}},
+  &#39;reduced&#39;: &#39;no lenses&#39;}}
+</code></pre><pre><code class="python">createPlot(lensesTree)
+</code></pre>
 <p><img src="/img/tree/output_13_0.png" alt="图像输出"></p>
 
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                         
+                            Licensed under <a target="_blank" href="//creativecommons.org/licenses/by-nc-sa/4.0/legalcode">CC BY-NC-SA 4.0</a>
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="http://JohnneyAnn.github.io/2017/09/08/机器学习实战（三）决策树/">http://JohnneyAnn.github.io/2017/09/08/机器学习实战（三）决策树/</a>
+                    </p>
+                </blockquote>
         
     
 

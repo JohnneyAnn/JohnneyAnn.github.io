@@ -532,9 +532,13 @@
 <li>锁定时间（Lock time），4字节</li>
 </ul>
 <h3 id="UTXO"><a href="#UTXO" class="headerlink" title="UTXO"></a>UTXO</h3><p>UTXO（Unspent Transaction Outputs）结构。UTXO是未花费的交易输出，这是比特币交易生成及验证的一个核心概念。比特币规定每一笔新交易的输入必须是某笔交易未花费的输出。至此，比特币的交易输入有3种：标准输入、花费挖矿奖励、产生挖矿奖励（上文说到，对于记账成功的节点会获得比特币奖励）。</p>
-<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>脚本是交易里另一个比较重要的技术。每一笔交易的每一项输出，严格意义上讲并不是指向一个地址，而是指向一个脚本。脚本类似于一套规则，它约束着接收方怎样才能花掉这个输出上锁定的资产。目前常用的比特币脚本主要分为两种，一种是普通的P2PKH类型（Pay-to-Public-Key-Hash），即支付给公钥的哈希值是地址，接收方只需要使用地址对应的私钥对该输出进行签名，即可花掉该输出。另一种是P2SH（Pay-to-Script-Hash），支付脚本的哈希值。拿多重签名来举例，它要求该输出要有N把私钥中的M把私钥（M≤N）同时签名才能花掉该资产，它类似于现实生活中需要多把钥匙才能同时打开的保险柜，只是更加灵活。<br>比如在比特币中，P2PKH的脚本规则如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Pubkey script:OP_DUP OP_HASH160 &lt;PubkeyHash&gt; OP_CHECKSIG</div><div class="line">Signature script:&lt;sig&gt;&lt;pubkey&gt;</div></pre></td></tr></table></figure></p>
-<p>P2SH脚本规则如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">Pubkey script:OP_HASH160 &lt;Hash160 (redeemScript) &gt; OP_EQUAL</div><div class="line">Signature script:&lt;sig&gt;[sig][sig...] &lt;redeemScript&gt;</div></pre></td></tr></table></figure></p>
-<p>这个脚本我也不懂，放出来给大家观赏，可以看出P2SH中多重签名的概念，脚本执行很类似于Java执行再JVM中，”VM”来解析指令。脚本的存在，近实现了区块链可编程。但是，比特币区块链的脚本机制相对简单，是非图灵完备的，目前以太坊实现了一个支持图灵完备脚本语言的区块链平台。</p>
+<h3 id="脚本"><a href="#脚本" class="headerlink" title="脚本"></a>脚本</h3><p>脚本是交易里另一个比较重要的技术。每一笔交易的每一项输出，严格意义上讲并不是指向一个地址，而是指向一个脚本。脚本类似于一套规则，它约束着接收方怎样才能花掉这个输出上锁定的资产。目前常用的比特币脚本主要分为两种，一种是普通的P2PKH类型（Pay-to-Public-Key-Hash），即支付给公钥的哈希值是地址，接收方只需要使用地址对应的私钥对该输出进行签名，即可花掉该输出。另一种是P2SH（Pay-to-Script-Hash），支付脚本的哈希值。拿多重签名来举例，它要求该输出要有N把私钥中的M把私钥（M≤N）同时签名才能花掉该资产，它类似于现实生活中需要多把钥匙才能同时打开的保险柜，只是更加灵活。<br>比如在比特币中，P2PKH的脚本规则如下：</p>
+<pre><code>Pubkey script:OP_DUP OP_HASH160 &lt;PubkeyHash&gt; OP_CHECKSIG
+Signature script:&lt;sig&gt;&lt;pubkey&gt;
+</code></pre><p>P2SH脚本规则如下：</p>
+<pre><code>Pubkey script:OP_HASH160 &lt;Hash160 (redeemScript) &gt; OP_EQUAL
+Signature script:&lt;sig&gt;[sig][sig...] &lt;redeemScript&gt;
+</code></pre><p>这个脚本我也不懂，放出来给大家观赏，可以看出P2SH中多重签名的概念，脚本执行很类似于Java执行再JVM中，”VM”来解析指令。脚本的存在，近实现了区块链可编程。但是，比特币区块链的脚本机制相对简单，是非图灵完备的，目前以太坊实现了一个支持图灵完备脚本语言的区块链平台。</p>
 <h3 id="区块"><a href="#区块" class="headerlink" title="区块"></a>区块</h3><p>区块结构如下（Merkle Tree基本特点请百度）：</p>
 <ul>
 <li>魔术码：固定值0xD9B4BEF9，4字节</li>
@@ -553,9 +557,11 @@
 <li>6.其他（挖矿）节点表示接受该区块，并在该区块的末尾制造新的区块以延长整个区块的链条。</li>
 </ul>
 <h2 id="共识算法"><a href="#共识算法" class="headerlink" title="共识算法"></a>共识算法</h2><p>毕竟是个去中心化的系统，得保证整个P2P网络数据是一样的，还得保证对大家都是公平的，那就得有一套规约，也就是大家都遵守的协议，这里叫共识算法。两大核心：工作量证明与最长链机制。</p>
-<h3 id="工作量证明"><a href="#工作量证明" class="headerlink" title="工作量证明"></a>工作量证明</h3><p>工作量证明（POW）可简单地理解为一份证明，用来确认你做过一定量的工作。说说比特币网了中的POW，如果想生成一个新的区块并写入区块链，则必须解出比特币网络出的工作量证明的迷题。这道题的3个关键要素是工作量证明函数、区块及难度值。其中难度值是用来调控的，就是在不管你有多大的挖矿能力，新区块的产生速率都保持在10分钟一个。计算公式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">新难度值=旧难度值*（过去2016个区块话费时长/20160分钟）</div></pre></td></tr></table></figure></p>
-<p>另外POW需要有一个目标值，极计算公式如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">目标值 = 最大目标值/难度值</div></pre></td></tr></table></figure></p>
-<p>其中最大目标值为一个恒定值：0x00000000FFFFFFFFFFFF FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF，目标值的大小与难度值成反比，比特币工作量证明的达成条件就是矿工计算出来的<strong><em>区块哈希值必须小于目标值</em></strong>。</p>
+<h3 id="工作量证明"><a href="#工作量证明" class="headerlink" title="工作量证明"></a>工作量证明</h3><p>工作量证明（POW）可简单地理解为一份证明，用来确认你做过一定量的工作。说说比特币网了中的POW，如果想生成一个新的区块并写入区块链，则必须解出比特币网络出的工作量证明的迷题。这道题的3个关键要素是工作量证明函数、区块及难度值。其中难度值是用来调控的，就是在不管你有多大的挖矿能力，新区块的产生速率都保持在10分钟一个。计算公式如下：</p>
+<pre><code>新难度值=旧难度值*（过去2016个区块话费时长/20160分钟）
+</code></pre><p>另外POW需要有一个目标值，极计算公式如下：</p>
+<pre><code>目标值 = 最大目标值/难度值
+</code></pre><p>其中最大目标值为一个恒定值：0x00000000FFFFFFFFFFFF FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF，目标值的大小与难度值成反比，比特币工作量证明的达成条件就是矿工计算出来的<strong><em>区块哈希值必须小于目标值</em></strong>。</p>
 <p>解题步骤大致如下：</p>
 <ul>
 <li>1.生成coinbase交易，并与其他所有准备打包进区块的交易组成交易列表，通过Merkle Tree算法生成Merkle Root Hash。</li>
@@ -578,6 +584,16 @@
 
 <p>2018.01.27 00:36 -  完</p>
 
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                         
+                            Licensed under <a target="_blank" href="//creativecommons.org/licenses/by-nc-sa/4.0/legalcode">CC BY-NC-SA 4.0</a>
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="http://JohnneyAnn.github.io/2018/01/27/区块链-BlockChain/">http://JohnneyAnn.github.io/2018/01/27/区块链-BlockChain/</a>
+                    </p>
+                </blockquote>
         
     
 

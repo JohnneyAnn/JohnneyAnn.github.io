@@ -501,17 +501,40 @@
 <p>同源策略，它是由Netscape提出的一个著名的安全策略。现在所有支持JavaScript 的浏览器都会使用这个策略。所谓同源是指，域名，协议，端口相同。当一个浏览器的两个tab页中分别打开来 百度和谷歌的页面当一个百度浏览器执行一个脚本的时候会检查这个脚本是属于哪个页面的，即检查是否同源，只有和百度同源的脚本才会被执行。</p>
 </blockquote>
 <h2 id="跨域报错信息"><a href="#跨域报错信息" class="headerlink" title="跨域报错信息"></a>跨域报错信息</h2><pre><code>Origin null is not allowed by Access-Control-Allow-Origin
-</code></pre><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="在服务端填上响应头"><a href="#在服务端填上响应头" class="headerlink" title="在服务端填上响应头"></a>在服务端填上响应头</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">response.setHeader(&quot;Access-Control-Allow-Origin&quot;,&quot;*&quot;); </div><div class="line">response.setHeader(&quot;Access-Control-Allow-Methods:GET,POST&quot;);</div></pre></td></tr></table></figure>
-<p>*号表示所有的域都接受，HTML5中提供的XMLHTTPREQUEST Level2（即XHR2）已经实现了跨域访问，添加上这些即可。</p>
+</code></pre><h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><h3 id="在服务端填上响应头"><a href="#在服务端填上响应头" class="headerlink" title="在服务端填上响应头"></a>在服务端填上响应头</h3><pre><code>response.setHeader(&quot;Access-Control-Allow-Origin&quot;,&quot;*&quot;); 
+response.setHeader(&quot;Access-Control-Allow-Methods:GET,POST&quot;);
+</code></pre><p>*号表示所有的域都接受，HTML5中提供的XMLHTTPREQUEST Level2（即XHR2）已经实现了跨域访问，添加上这些即可。</p>
 <p>目前遇到的一个跨域问题使用这个方法解决了，只添加了第一条。</p>
 <h2 id="另一种解决方案"><a href="#另一种解决方案" class="headerlink" title="另一种解决方案"></a>另一种解决方案</h2><h3 id="JSONP-JSON-with-Padding"><a href="#JSONP-JSON-with-Padding" class="headerlink" title="JSONP(JSON with Padding)"></a>JSONP(JSON with Padding)</h3><p>JSONP还需要去理解，这里先记个笔记，可无视。。。不保证记录的正确性。</p>
 <p>百度百科</p>
 <blockquote>
 <p>JSONP(JSON with Padding)是JSON的一种“使用模式”，可用于解决主流浏览器的跨域数据访问的问题。用 JSONP 抓到的资料并不是 JSON，而是任意的JavaScript，用 JavaScript 直译器执行而不是用 JSON 解析器解析。</p>
 </blockquote>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">$.ajax(&#123;  </div><div class="line">   url: &quot;http://异域IP:port/getSomeData.do&quot;,  </div><div class="line">   dataType: &quot;jsonp&quot;,  </div><div class="line">   jsonpCallback: &quot;callbank&quot;,  //设置一个回调函数，请求的JSON将会被包裹在callback()内</div><div class="line">   success: function(data) &#123;</div><div class="line">//...</div><div class="line">&#125;  </div><div class="line">&#125;);  </div><div class="line">function callbank(data) &#123;  </div><div class="line">    console.log(data);  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>JSONP对于GET适用，对于POST并没有完美支持，也需在服务端添上相应头，下面两行代码都需要。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">response.setHeader(&quot;Access-Control-Allow-Origin&quot;,&quot;*&quot;); </div><div class="line">response.setHeader(&quot;Access-Control-Allow-Methods:GET,POST&quot;);</div></pre></td></tr></table></figure></p>
-
+<pre><code> $.ajax({  
+    url: &quot;http://异域IP:port/getSomeData.do&quot;,  
+    dataType: &quot;jsonp&quot;,  
+    jsonpCallback: &quot;callbank&quot;,  //设置一个回调函数，请求的JSON将会被包裹在callback()内
+    success: function(data) {
+    //...
+    }  
+ });  
+ function callbank(data) {  
+     console.log(data);  
+ }
+</code></pre><p>JSONP对于GET适用，对于POST并没有完美支持，也需在服务端添上相应头，下面两行代码都需要。</p>
+<pre><code>response.setHeader(&quot;Access-Control-Allow-Origin&quot;,&quot;*&quot;); 
+response.setHeader(&quot;Access-Control-Allow-Methods:GET,POST&quot;);
+</code></pre>
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                         
+                            Licensed under <a target="_blank" href="//creativecommons.org/licenses/by-nc-sa/4.0/legalcode">CC BY-NC-SA 4.0</a>
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="http://JohnneyAnn.github.io/2017/09/08/AjaxCrossDomain/">http://JohnneyAnn.github.io/2017/09/08/AjaxCrossDomain/</a>
+                    </p>
+                </blockquote>
         
     
 

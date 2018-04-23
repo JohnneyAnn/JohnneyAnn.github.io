@@ -491,8 +491,147 @@
         <p>基于概率论的分类方法：朴素贝叶斯。（条件概率）</p>
 <p>朴素贝叶斯：朴素贝叶斯是一种简单但是非常强大的线性分类器。它在垃圾邮件分类，疾病诊断中都取得了很大的成功。它只所以称为朴素，是因为它假设特征之间是相互独立的，但是在现实生活中，这种假设基本上是不成立的。那么即使是在假设不成立的条件下，它依然表现的很好，尤其是在小规模样本的情况下。但是，如果每个特征之间有很强的关联性和非线性的分类问题会导致朴素贝叶斯模型有很差的分类效果。</p>
 <a id="more"></a>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">数据集</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">loadDataSet</span><span class="params">()</span>:</span></div><div class="line">    postingList=[[<span class="string">'my'</span>, <span class="string">'dog'</span>, <span class="string">'has'</span>, <span class="string">'flea'</span>, <span class="string">'problems'</span>, <span class="string">'help'</span>, <span class="string">'please'</span>],</div><div class="line">                 [<span class="string">'maybe'</span>, <span class="string">'not'</span>, <span class="string">'take'</span>, <span class="string">'him'</span>, <span class="string">'to'</span>, <span class="string">'dog'</span>, <span class="string">'park'</span>, <span class="string">'stupid'</span>],</div><div class="line">                 [<span class="string">'my'</span>, <span class="string">'dalmation'</span>, <span class="string">'is'</span>, <span class="string">'so'</span>, <span class="string">'cute'</span>, <span class="string">'I'</span>, <span class="string">'love'</span>, <span class="string">'him'</span>],</div><div class="line">                 [<span class="string">'stop'</span>, <span class="string">'posting'</span>, <span class="string">'stupid'</span>, <span class="string">'worthless'</span>, <span class="string">'garbage'</span>],</div><div class="line">                 [<span class="string">'mr'</span>, <span class="string">'licks'</span>, <span class="string">'ate'</span>, <span class="string">'my'</span>, <span class="string">'steak'</span>, <span class="string">'how'</span>, <span class="string">'to'</span>, <span class="string">'stop'</span>, <span class="string">'him'</span>],</div><div class="line">                 [<span class="string">'quit'</span>, <span class="string">'buying'</span>, <span class="string">'worthless'</span>, <span class="string">'dog'</span>, <span class="string">'food'</span>, <span class="string">'stupid'</span>]]</div><div class="line">    <span class="comment"># 0代表正常言论，1代表侮辱性</span></div><div class="line">    classVec = [<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">1</span>]</div><div class="line">    <span class="keyword">return</span> postingList,classVec</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">createVocabList</span><span class="params">(dataSet)</span>:</span></div><div class="line">    <span class="comment">#创建一个空集</span></div><div class="line">    vocabSet = set([])</div><div class="line">    <span class="comment">#将文档中的词存放到set，不重复</span></div><div class="line">    <span class="keyword">for</span> document <span class="keyword">in</span> dataSet:</div><div class="line">        <span class="comment">#创建两个集合的并集</span></div><div class="line">        vocabSet = vocabSet | set(document)</div><div class="line">    <span class="keyword">return</span> list(vocabSet)</div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">词集模型(set-of-words) 每个词出现一次</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">setOfWords2Vec</span><span class="params">(vocabList, inputSet)</span>:</span></div><div class="line">    <span class="comment"># 创建一个其中所含袁术都为0的向量</span></div><div class="line">    returnVec = [<span class="number">0</span>]*len(vocabList)</div><div class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> inputSet:</div><div class="line">        <span class="keyword">if</span> word <span class="keyword">in</span> vocabList:</div><div class="line">            <span class="comment"># 若存在就记为1</span></div><div class="line">            returnVec[vocabList.index(word)] = <span class="number">1</span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            <span class="keyword">print</span> <span class="string">"the word: %s is not in my vocabulary!"</span> % word</div><div class="line">    <span class="keyword">return</span> returnVec</div><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">词袋模型(bag-of-words model) 每个词出现多次</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">bagOfWords2VecMN</span><span class="params">(vocabList, inputSet)</span>:</span></div><div class="line">    returnVec = [<span class="number">0</span>]*len(vocabList)</div><div class="line">    <span class="keyword">for</span> word <span class="keyword">in</span> inputSet:</div><div class="line">        <span class="comment"># 每当遇到一个单词 就会增加词向量中的对应值，而不是设为1</span></div><div class="line">        <span class="keyword">if</span> word <span class="keyword">in</span> vocabList:</div><div class="line">            returnVec[vocabList.index(word)] += <span class="number">1</span></div><div class="line">    <span class="keyword">return</span> returnVec</div><div class="line"></div><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">朴素贝叶斯分类器训练函数</span></div><div class="line"><span class="string">trainMatrix:文档矩阵</span></div><div class="line"><span class="string">trainCategory:由每篇文档类别标签所构成的向量</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">trainNB0</span><span class="params">(trainMatrix,trainCategory)</span>:</span></div><div class="line">    <span class="comment">#print trainMatrix</span></div><div class="line">    <span class="comment">#print trainCategory</span></div><div class="line">    <span class="comment">#有多少个文件</span></div><div class="line">    numTrainDocs = len(trainMatrix)</div><div class="line">    <span class="comment">#print numTrainDocs</span></div><div class="line">    <span class="comment">#获取训练词有多少个</span></div><div class="line">    numWords = len(trainMatrix[<span class="number">0</span>])</div><div class="line">    <span class="comment"># 统计trainCategory中1的个数，因为里面只有1,0</span></div><div class="line">    <span class="comment">#文档概率</span></div><div class="line">    pAbusive = sum(trainCategory)/float(numTrainDocs)</div><div class="line">    <span class="comment"># 初始化概率</span></div><div class="line">    p0Num = ones(numWords)<span class="comment">#修改前：zeros(numWords) 构造0矩阵，所有的值都为0</span></div><div class="line">    p1Num = ones(numWords)<span class="comment">#修改前：zeros(numWords)</span></div><div class="line">    p0Denom = <span class="number">2.0</span> <span class="comment">#分母 修改前：0.0</span></div><div class="line">    p1Denom = <span class="number">2.0</span> <span class="comment">#修改前：0.0</span></div><div class="line">    <span class="comment">#遍历训练集trainMatrix中所有文档，一旦某个词在某一文档中出现，对应个数(p1Num侮辱性/p0Num正常)就+1 </span></div><div class="line">    <span class="comment">#-而且在所有文档中，该文档的总词数也相应+1 ? 统计总侮辱性次数</span></div><div class="line">    <span class="comment">#print numTrainDocs</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(numTrainDocs):</div><div class="line">        <span class="keyword">if</span> trainCategory[i] == <span class="number">1</span>:</div><div class="line">            <span class="comment">#向量相加</span></div><div class="line">            p1Num += trainMatrix[i]</div><div class="line">            p1Denom += sum(trainMatrix[i]) <span class="comment"># 总侮辱性词数  </span></div><div class="line">        <span class="keyword">else</span>:</div><div class="line">            p0Num += trainMatrix[i]</div><div class="line">            p0Denom += sum(trainMatrix[i])</div><div class="line">    <span class="comment">#对每个元素做除法</span></div><div class="line">    <span class="comment"># 修改后：对乘积去自然对数，防止因大部分因子非常小导致程序下溢出，最终得到0</span></div><div class="line">    <span class="comment"># f(x)与ln(f(x))在相同区域同时增加或减少，也在相同点上取到极值，因此虽然他们取值不同，但不影响最终结果</span></div><div class="line">    <span class="comment"># ln(a*b)=ln(a)+ln(b)</span></div><div class="line">    p1Vect = log(p1Num/p1Denom) <span class="comment">#修改前p1Num/p1Denom  某个词占总侮辱性词的概率的对数</span></div><div class="line">    p0Vect = log(p0Num/p0Denom) <span class="comment">#修改前p0Num/p0Denom</span></div><div class="line">    <span class="keyword">return</span> p0Vect,p1Vect,pAbusive</div><div class="line"></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">朴素贝叶斯分类函数</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">vec2Classify:待分类的向量</span></div><div class="line"><span class="string">p0Vec, p1Vec, pClass1:使用trainNB0计算得到的3个概率</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">classifyNB</span><span class="params">(vec2Classify, p0Vec, p1Vec, pClass1)</span>:</span></div><div class="line">    <span class="comment">#print vec2Classify</span></div><div class="line">    <span class="comment"># 元素相乘,numpy的数组计算链两个向量相乘，这里的相乘是对应元素相乘</span></div><div class="line">    <span class="comment">#先将两个向量第一个元素相乘，然后将第二个元素相乘 ...</span></div><div class="line">    <span class="comment">#再将词汇表中所有的词对应值相加，再将该值加到类别的对数概率上</span></div><div class="line">    p1 = sum(vec2Classify * p1Vec) + log(pClass1)</div><div class="line">    p0 = sum(vec2Classify * p0Vec) + log(<span class="number">1.0</span>-pClass1)</div><div class="line">    <span class="keyword">if</span> p1 &gt; p0:</div><div class="line">        <span class="keyword">return</span> <span class="number">1</span></div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">return</span> <span class="number">0</span></div><div class="line">    </div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">testingNB</span><span class="params">()</span>:</span></div><div class="line">    listOPosts,listClasses = loadDataSet()</div><div class="line">    myVocabList = createVocabList(listOPosts)</div><div class="line">    trainMat=[]</div><div class="line">    <span class="keyword">for</span> postinDoc <span class="keyword">in</span> listOPosts:</div><div class="line">        trainMat.append(setOfWords2Vec(myVocabList, postinDoc))</div><div class="line">    p0V,p1V,pAb = trainNB0(array(trainMat),array(listClasses))</div><div class="line">    testEntry = [<span class="string">'love'</span>, <span class="string">'my'</span>, <span class="string">'dalmation'</span>]</div><div class="line">    thisDoc = array(setOfWords2Vec(myVocabList, testEntry))</div><div class="line">    <span class="keyword">print</span> testEntry,<span class="string">'Classified as: '</span>,classifyNB(thisDoc,p0V,p1V,pAb)</div><div class="line">    testEntry = [<span class="string">'stupid'</span>,<span class="string">'garbage'</span>]</div><div class="line">    thisDoc = array(setOfWords2Vec(myVocabList, testEntry))</div><div class="line">    <span class="keyword">print</span> testEntry,<span class="string">'Classified as: '</span>,classifyNB(thisDoc,p0V,p1V,pAb)</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">测试训练函数</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="comment">#从预先加载值中调入数据</span></div><div class="line">listOPosts,listClasses=loadDataSet()</div><div class="line"><span class="comment">#构建一个包含所有词列表的myVocabList</span></div><div class="line">myVocabList = createVocabList(listOPosts)</div><div class="line"><span class="comment">#print myVocabList</span></div><div class="line"><span class="comment">#使用词向量来填充trainMat列表</span></div><div class="line">trainMat = []</div><div class="line"><span class="keyword">for</span> postinDoc <span class="keyword">in</span> listOPosts:</div><div class="line">    trainMat.append(setOfWords2Vec(myVocabList,postinDoc))</div><div class="line">    <span class="comment">#print postinDoc</span></div><div class="line"><span class="comment">#print trainMat</span></div><div class="line"><span class="comment">#print listClasses</span></div><div class="line"><span class="comment">#给出属于侮辱性文档的概率以及两个类别的概率向量</span></div><div class="line">p0V,p1V,pAb=trainNB0(trainMat,listClasses)</div><div class="line">p0V</div></pre></td></tr></table></figure>
+<pre><code class="python">&quot;&quot;&quot;
+数据集
+&quot;&quot;&quot;
+from numpy import *
+def loadDataSet():
+    postingList=[[&#39;my&#39;, &#39;dog&#39;, &#39;has&#39;, &#39;flea&#39;, &#39;problems&#39;, &#39;help&#39;, &#39;please&#39;],
+                 [&#39;maybe&#39;, &#39;not&#39;, &#39;take&#39;, &#39;him&#39;, &#39;to&#39;, &#39;dog&#39;, &#39;park&#39;, &#39;stupid&#39;],
+                 [&#39;my&#39;, &#39;dalmation&#39;, &#39;is&#39;, &#39;so&#39;, &#39;cute&#39;, &#39;I&#39;, &#39;love&#39;, &#39;him&#39;],
+                 [&#39;stop&#39;, &#39;posting&#39;, &#39;stupid&#39;, &#39;worthless&#39;, &#39;garbage&#39;],
+                 [&#39;mr&#39;, &#39;licks&#39;, &#39;ate&#39;, &#39;my&#39;, &#39;steak&#39;, &#39;how&#39;, &#39;to&#39;, &#39;stop&#39;, &#39;him&#39;],
+                 [&#39;quit&#39;, &#39;buying&#39;, &#39;worthless&#39;, &#39;dog&#39;, &#39;food&#39;, &#39;stupid&#39;]]
+    # 0代表正常言论，1代表侮辱性
+    classVec = [0,1,0,1,0,1]
+    return postingList,classVec
+
+def createVocabList(dataSet):
+    #创建一个空集
+    vocabSet = set([])
+    #将文档中的词存放到set，不重复
+    for document in dataSet:
+        #创建两个集合的并集
+        vocabSet = vocabSet | set(document)
+    return list(vocabSet)
+&quot;&quot;&quot;
+词集模型(set-of-words) 每个词出现一次
+&quot;&quot;&quot;
+def setOfWords2Vec(vocabList, inputSet):
+    # 创建一个其中所含袁术都为0的向量
+    returnVec = [0]*len(vocabList)
+    for word in inputSet:
+        if word in vocabList:
+            # 若存在就记为1
+            returnVec[vocabList.index(word)] = 1
+        else:
+            print &quot;the word: %s is not in my vocabulary!&quot; % word
+    return returnVec
+
+&quot;&quot;&quot;
+词袋模型(bag-of-words model) 每个词出现多次
+&quot;&quot;&quot;
+def bagOfWords2VecMN(vocabList, inputSet):
+    returnVec = [0]*len(vocabList)
+    for word in inputSet:
+        # 每当遇到一个单词 就会增加词向量中的对应值，而不是设为1
+        if word in vocabList:
+            returnVec[vocabList.index(word)] += 1
+    return returnVec
+
+
+&quot;&quot;&quot;
+朴素贝叶斯分类器训练函数
+trainMatrix:文档矩阵
+trainCategory:由每篇文档类别标签所构成的向量
+&quot;&quot;&quot;
+def trainNB0(trainMatrix,trainCategory):
+    #print trainMatrix
+    #print trainCategory
+    #有多少个文件
+    numTrainDocs = len(trainMatrix)
+    #print numTrainDocs
+    #获取训练词有多少个
+    numWords = len(trainMatrix[0])
+    # 统计trainCategory中1的个数，因为里面只有1,0
+    #文档概率
+    pAbusive = sum(trainCategory)/float(numTrainDocs)
+    # 初始化概率
+    p0Num = ones(numWords)#修改前：zeros(numWords) 构造0矩阵，所有的值都为0
+    p1Num = ones(numWords)#修改前：zeros(numWords)
+    p0Denom = 2.0 #分母 修改前：0.0
+    p1Denom = 2.0 #修改前：0.0
+    #遍历训练集trainMatrix中所有文档，一旦某个词在某一文档中出现，对应个数(p1Num侮辱性/p0Num正常)就+1 
+    #-而且在所有文档中，该文档的总词数也相应+1 ? 统计总侮辱性次数
+    #print numTrainDocs
+    for i in range(numTrainDocs):
+        if trainCategory[i] == 1:
+            #向量相加
+            p1Num += trainMatrix[i]
+            p1Denom += sum(trainMatrix[i]) # 总侮辱性词数  
+        else:
+            p0Num += trainMatrix[i]
+            p0Denom += sum(trainMatrix[i])
+    #对每个元素做除法
+    # 修改后：对乘积去自然对数，防止因大部分因子非常小导致程序下溢出，最终得到0
+    # f(x)与ln(f(x))在相同区域同时增加或减少，也在相同点上取到极值，因此虽然他们取值不同，但不影响最终结果
+    # ln(a*b)=ln(a)+ln(b)
+    p1Vect = log(p1Num/p1Denom) #修改前p1Num/p1Denom  某个词占总侮辱性词的概率的对数
+    p0Vect = log(p0Num/p0Denom) #修改前p0Num/p0Denom
+    return p0Vect,p1Vect,pAbusive
+
+&quot;&quot;&quot;
+朴素贝叶斯分类函数
+&quot;&quot;&quot;
+&quot;&quot;&quot;
+vec2Classify:待分类的向量
+p0Vec, p1Vec, pClass1:使用trainNB0计算得到的3个概率
+&quot;&quot;&quot;
+def classifyNB(vec2Classify, p0Vec, p1Vec, pClass1):
+    #print vec2Classify
+    # 元素相乘,numpy的数组计算链两个向量相乘，这里的相乘是对应元素相乘
+    #先将两个向量第一个元素相乘，然后将第二个元素相乘 ...
+    #再将词汇表中所有的词对应值相加，再将该值加到类别的对数概率上
+    p1 = sum(vec2Classify * p1Vec) + log(pClass1)
+    p0 = sum(vec2Classify * p0Vec) + log(1.0-pClass1)
+    if p1 &gt; p0:
+        return 1
+    else:
+        return 0
+
+def testingNB():
+    listOPosts,listClasses = loadDataSet()
+    myVocabList = createVocabList(listOPosts)
+    trainMat=[]
+    for postinDoc in listOPosts:
+        trainMat.append(setOfWords2Vec(myVocabList, postinDoc))
+    p0V,p1V,pAb = trainNB0(array(trainMat),array(listClasses))
+    testEntry = [&#39;love&#39;, &#39;my&#39;, &#39;dalmation&#39;]
+    thisDoc = array(setOfWords2Vec(myVocabList, testEntry))
+    print testEntry,&#39;Classified as: &#39;,classifyNB(thisDoc,p0V,p1V,pAb)
+    testEntry = [&#39;stupid&#39;,&#39;garbage&#39;]
+    thisDoc = array(setOfWords2Vec(myVocabList, testEntry))
+    print testEntry,&#39;Classified as: &#39;,classifyNB(thisDoc,p0V,p1V,pAb)
+</code></pre>
+<pre><code class="python">&quot;&quot;&quot;
+测试训练函数
+&quot;&quot;&quot;
+#从预先加载值中调入数据
+listOPosts,listClasses=loadDataSet()
+#构建一个包含所有词列表的myVocabList
+myVocabList = createVocabList(listOPosts)
+#print myVocabList
+#使用词向量来填充trainMat列表
+trainMat = []
+for postinDoc in listOPosts:
+    trainMat.append(setOfWords2Vec(myVocabList,postinDoc))
+    #print postinDoc
+#print trainMat
+#print listClasses
+#给出属于侮辱性文档的概率以及两个类别的概率向量
+p0V,p1V,pAb=trainNB0(trainMat,listClasses)
+p0V
+</code></pre>
 <pre><code>array([-2.56494936, -2.56494936, -2.56494936, -3.25809654, -3.25809654,
        -2.56494936, -2.56494936, -2.56494936, -3.25809654, -2.56494936,
        -2.56494936, -2.56494936, -2.56494936, -3.25809654, -3.25809654,
@@ -500,15 +639,110 @@
        -2.56494936, -2.56494936, -3.25809654, -2.56494936, -2.56494936,
        -2.56494936, -3.25809654, -2.56494936, -3.25809654, -2.56494936,
        -2.56494936, -1.87180218])
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">测试朴素贝叶斯分类器</span></div><div class="line"><span class="string">"""</span></div><div class="line">testingNB()</div></pre></td></tr></table></figure>
-<pre><code>[&apos;love&apos;, &apos;my&apos;, &apos;dalmation&apos;] Classified as:  0
-[&apos;stupid&apos;, &apos;garbage&apos;] Classified as:  1
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">文本解析</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="keyword">import</span> re</div><div class="line"><span class="comment">#除单词、数字外的任意字符串</span></div><div class="line">regEx = re.compile(<span class="string">'\\W*'</span>)</div><div class="line">mySent = <span class="string">'This book is the best book on Python or M.L. I have ever laid wtes upon.'</span></div><div class="line">listOfTokens = regEx.split(mySent)</div><div class="line"><span class="comment"># 去除空字符串</span></div><div class="line">[tok <span class="keyword">for</span> tok <span class="keyword">in</span> listOfTokens <span class="keyword">if</span> len(tok) &gt; <span class="number">0</span>]</div><div class="line"><span class="comment">#全装成小写</span></div><div class="line">[tok.lower() <span class="keyword">for</span> tok <span class="keyword">in</span> listOfTokens <span class="keyword">if</span> len(tok)] </div><div class="line"><span class="comment">#读取文本文件</span></div><div class="line">emailText = open(<span class="string">'F:\\study\\email\\ham\\6.txt'</span>).read()</div><div class="line">listOfTokens=regEx.split(emailText)</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">使用朴素贝叶斯进行交叉验证</span></div><div class="line"><span class="string">文本解析及完整的垃圾邮件测试函数</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">textParse</span><span class="params">(bigString)</span>:</span></div><div class="line">    <span class="keyword">import</span> re</div><div class="line">    <span class="string">"""</span></div><div class="line"><span class="string">    分割从文本在读取的串</span></div><div class="line"><span class="string">    """</span></div><div class="line">    <span class="comment">#拆分</span></div><div class="line">    listOfTokens = re.split(<span class="string">r'\w'</span>, bigString)</div><div class="line">    <span class="comment">#长度&gt;2  全转化成小写</span></div><div class="line">    <span class="keyword">return</span> [tok.lower() <span class="keyword">for</span> tok <span class="keyword">in</span> listOfTokens <span class="keyword">if</span> len(tok) &gt; <span class="number">2</span>]</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">spamTest</span><span class="params">()</span>:</span></div><div class="line">    docList = [];classList = [];fullText = []</div><div class="line">    <span class="comment">#导入并解析文件</span></div><div class="line">    <span class="comment">#读取文件，设置类别spam(垃圾邮件) 1 ham 0</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">26</span>):</div><div class="line">        wordList = textParse(open(<span class="string">'F:\\study\\email\\spam\\%d.txt'</span> % i).read())</div><div class="line">        docList.append(wordList)</div><div class="line">        fullText.extend(wordList)</div><div class="line">        classList.append(<span class="number">1</span>)</div><div class="line">        wordList = textParse(open(<span class="string">'F:\\study\\email\\ham\\%d.txt'</span> % i).read())</div><div class="line">        docList.append(wordList)</div><div class="line">        fullText.extend(wordList)</div><div class="line">        classList.append(<span class="number">0</span>)</div><div class="line">    <span class="comment">#创建无重复的词集</span></div><div class="line">    vocabList = createVocabList(docList)</div><div class="line">    trainingSet = range(<span class="number">50</span>);</div><div class="line">    testSet = []</div><div class="line">    <span class="comment">#随机构建训练集</span></div><div class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">10</span>):</div><div class="line">        <span class="comment">#random.uniform(x,y)随机生成下一个实数，范围[x,)</span></div><div class="line">        <span class="comment">#是否会重复？（即使每次的len(trainingSet)不一样）</span></div><div class="line">        randIndex = int(random.uniform(<span class="number">0</span>,len(trainingSet)))</div><div class="line">        <span class="comment">#将选取的文档编号添加到测试集</span></div><div class="line">        testSet.append(trainingSet[randIndex])</div><div class="line">        <span class="comment">#并将其从训练集删除</span></div><div class="line">        <span class="keyword">del</span>(trainingSet[randIndex])</div><div class="line">    trainMat = []</div><div class="line">    trainClasses = []</div><div class="line">    <span class="keyword">for</span> docIndex <span class="keyword">in</span> trainingSet:</div><div class="line">        <span class="comment">#创建词集模型，若docList[docIndex]在vocabList中出现，则记1</span></div><div class="line">        <span class="comment">#并将得到的矩阵添加到trainMat</span></div><div class="line">        trainMat.append(setOfWords2Vec(vocabList, docList[docIndex]))</div><div class="line">        <span class="comment">#将对应的分类添加到trainClasses</span></div><div class="line">        trainClasses.append(classList[docIndex])</div><div class="line">    <span class="comment">#调用trainNBO获取到对应的概率向量 pSpam：训练样本中，垃圾邮件占总邮件的概率</span></div><div class="line">    <span class="comment">#trainNB0(trainMat, trainClasses)</span></div><div class="line">    p0V,p1V,pSpam = trainNB0(array(trainMat), array(trainClasses))</div><div class="line">    errorCount = <span class="number">0</span></div><div class="line">    <span class="keyword">for</span> docIndex <span class="keyword">in</span> testSet:</div><div class="line">        <span class="comment">#创建测试集</span></div><div class="line">        wordVector = setOfWords2Vec(vocabList, docList[docIndex])</div><div class="line">        <span class="comment">#进行分类，并将分类结果与正式分类结果比较，错误则错误数+1</span></div><div class="line">        <span class="comment">#print classifyNB(array(wordVector), p0V, p1V, pSpam),classList[docIndex]</span></div><div class="line">        <span class="keyword">if</span> classifyNB(array(wordVector), p0V, p1V, pSpam) != classList[docIndex]:</div><div class="line">            errorCount += <span class="number">1</span></div><div class="line">    <span class="keyword">print</span> <span class="string">'the error rate is: '</span>,float(errorCount)/len(testSet)</div></pre></td></tr></table></figure>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">使用朴素贝叶斯进行交叉验证，测试垃圾邮件分类器</span></div><div class="line"><span class="string">"""</span></div><div class="line">spamTest();</div></pre></td></tr></table></figure>
-<pre><code>the error rate is:  0.1
-</code></pre><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#4.7节 使用朴素贝叶斯分类器从个人广告中获取区域倾向</span></div><div class="line"><span class="comment">#目前在内网环境，暂时先放着</span></div></pre></td></tr></table></figure>
+</code></pre><pre><code class="python">&quot;&quot;&quot;
+测试朴素贝叶斯分类器
+&quot;&quot;&quot;
+testingNB()
+</code></pre>
+<pre><code>[&#39;love&#39;, &#39;my&#39;, &#39;dalmation&#39;] Classified as:  0
+[&#39;stupid&#39;, &#39;garbage&#39;] Classified as:  1
+</code></pre><pre><code class="python">&quot;&quot;&quot;
+文本解析
+&quot;&quot;&quot;
+import re
+#除单词、数字外的任意字符串
+regEx = re.compile(&#39;\\W*&#39;)
+mySent = &#39;This book is the best book on Python or M.L. I have ever laid wtes upon.&#39;
+listOfTokens = regEx.split(mySent)
+# 去除空字符串
+[tok for tok in listOfTokens if len(tok) &gt; 0]
+#全装成小写
+[tok.lower() for tok in listOfTokens if len(tok)] 
+#读取文本文件
+emailText = open(&#39;F:\\study\\email\\ham\\6.txt&#39;).read()
+listOfTokens=regEx.split(emailText)
+</code></pre>
+<pre><code class="python">&quot;&quot;&quot;
+使用朴素贝叶斯进行交叉验证
+文本解析及完整的垃圾邮件测试函数
+&quot;&quot;&quot;
+def textParse(bigString):
+    import re
+    &quot;&quot;&quot;
+    分割从文本在读取的串
+    &quot;&quot;&quot;
+    #拆分
+    listOfTokens = re.split(r&#39;\w&#39;, bigString)
+    #长度&gt;2  全转化成小写
+    return [tok.lower() for tok in listOfTokens if len(tok) &gt; 2]
 
+def spamTest():
+    docList = [];classList = [];fullText = []
+    #导入并解析文件
+    #读取文件，设置类别spam(垃圾邮件) 1 ham 0
+    for i in range(1,26):
+        wordList = textParse(open(&#39;F:\\study\\email\\spam\\%d.txt&#39; % i).read())
+        docList.append(wordList)
+        fullText.extend(wordList)
+        classList.append(1)
+        wordList = textParse(open(&#39;F:\\study\\email\\ham\\%d.txt&#39; % i).read())
+        docList.append(wordList)
+        fullText.extend(wordList)
+        classList.append(0)
+    #创建无重复的词集
+    vocabList = createVocabList(docList)
+    trainingSet = range(50);
+    testSet = []
+    #随机构建训练集
+    for i in range(10):
+        #random.uniform(x,y)随机生成下一个实数，范围[x,)
+        #是否会重复？（即使每次的len(trainingSet)不一样）
+        randIndex = int(random.uniform(0,len(trainingSet)))
+        #将选取的文档编号添加到测试集
+        testSet.append(trainingSet[randIndex])
+        #并将其从训练集删除
+        del(trainingSet[randIndex])
+    trainMat = []
+    trainClasses = []
+    for docIndex in trainingSet:
+        #创建词集模型，若docList[docIndex]在vocabList中出现，则记1
+        #并将得到的矩阵添加到trainMat
+        trainMat.append(setOfWords2Vec(vocabList, docList[docIndex]))
+        #将对应的分类添加到trainClasses
+        trainClasses.append(classList[docIndex])
+    #调用trainNBO获取到对应的概率向量 pSpam：训练样本中，垃圾邮件占总邮件的概率
+    #trainNB0(trainMat, trainClasses)
+    p0V,p1V,pSpam = trainNB0(array(trainMat), array(trainClasses))
+    errorCount = 0
+    for docIndex in testSet:
+        #创建测试集
+        wordVector = setOfWords2Vec(vocabList, docList[docIndex])
+        #进行分类，并将分类结果与正式分类结果比较，错误则错误数+1
+        #print classifyNB(array(wordVector), p0V, p1V, pSpam),classList[docIndex]
+        if classifyNB(array(wordVector), p0V, p1V, pSpam) != classList[docIndex]:
+            errorCount += 1
+    print &#39;the error rate is: &#39;,float(errorCount)/len(testSet)
+</code></pre>
+<pre><code class="python">&quot;&quot;&quot;
+使用朴素贝叶斯进行交叉验证，测试垃圾邮件分类器
+&quot;&quot;&quot;
+spamTest();
+</code></pre>
+<pre><code>the error rate is:  0.1
+</code></pre><pre><code class="python">#4.7节 使用朴素贝叶斯分类器从个人广告中获取区域倾向
+#目前在内网环境，暂时先放着
+</code></pre>
+
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                         
+                            Licensed under <a target="_blank" href="//creativecommons.org/licenses/by-nc-sa/4.0/legalcode">CC BY-NC-SA 4.0</a>
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="http://JohnneyAnn.github.io/2017/09/08/机器学习实战（四）朴素贝叶斯（NaivaBayes）/">http://JohnneyAnn.github.io/2017/09/08/机器学习实战（四）朴素贝叶斯（NaivaBayes）/</a>
+                    </p>
+                </blockquote>
         
     
 

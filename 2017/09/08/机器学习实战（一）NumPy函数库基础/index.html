@@ -499,7 +499,27 @@
     
         <p>NumPy函数库基础。</p>
 <p>机器学习实战这本书的第一章，下面是这章的代码，添加了些本人的注释，欢迎指正。<br><a id="more"></a></p>
-<h2 id="In"><a href="#In" class="headerlink" title="In"></a>In</h2><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> numpy <span class="keyword">import</span> *</div><div class="line">random.rand(<span class="number">4</span>,<span class="number">4</span>)</div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">mat()函数将数组转化为矩阵</span></div><div class="line"><span class="string">"""</span></div><div class="line">randMat = mat(random.rand(<span class="number">4</span>,<span class="number">4</span>))</div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">.I操作实现矩阵求逆运算</span></div><div class="line"><span class="string">"""</span></div><div class="line"><span class="comment"># randMat.I</span></div><div class="line">invRandMat = randMat.I</div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">执行矩阵乘法，矩阵与逆矩阵相乘</span></div><div class="line"><span class="string">"""</span></div><div class="line">randMat*invRandMat</div><div class="line"><span class="string">"""</span></div><div class="line"><span class="string">有误差，得到误差值</span></div><div class="line"><span class="string">"""</span></div><div class="line">myEye = randMat*invRandMat</div><div class="line">myEye - eye(<span class="number">4</span>)</div></pre></td></tr></table></figure>
+<h2 id="In"><a href="#In" class="headerlink" title="In"></a>In</h2><pre><code class="python">from numpy import *
+random.rand(4,4)
+&quot;&quot;&quot;
+mat()函数将数组转化为矩阵
+&quot;&quot;&quot;
+randMat = mat(random.rand(4,4))
+&quot;&quot;&quot;
+.I操作实现矩阵求逆运算
+&quot;&quot;&quot;
+# randMat.I
+invRandMat = randMat.I
+&quot;&quot;&quot;
+执行矩阵乘法，矩阵与逆矩阵相乘
+&quot;&quot;&quot;
+randMat*invRandMat
+&quot;&quot;&quot;
+有误差，得到误差值
+&quot;&quot;&quot;
+myEye = randMat*invRandMat
+myEye - eye(4)
+</code></pre>
 <h2 id="OUT"><a href="#OUT" class="headerlink" title="OUT"></a>OUT</h2><pre><code>matrix([[  0.00000000e+00,   2.26241858e-17,  -6.05935799e-17,
            1.76115404e-16],
         [ -2.15279060e-17,   2.22044605e-16,  -1.18162824e-16,
@@ -509,6 +529,16 @@
         [  1.00142668e-16,   1.50352035e-17,  -3.19207407e-16,
            0.00000000e+00]])
 </code></pre>
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                         
+                            Licensed under <a target="_blank" href="//creativecommons.org/licenses/by-nc-sa/4.0/legalcode">CC BY-NC-SA 4.0</a>
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="http://JohnneyAnn.github.io/2017/09/08/机器学习实战（一）NumPy函数库基础/">http://JohnneyAnn.github.io/2017/09/08/机器学习实战（一）NumPy函数库基础/</a>
+                    </p>
+                </blockquote>
         
     
 

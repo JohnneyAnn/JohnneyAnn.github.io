@@ -488,12 +488,22 @@
         <p>数据库刷在mysql5.5版本上没有问题，但刷在5.7上之后出了这个问题，导致页面请求出错。</p>
 <a id="more"></a>
 <p>错误信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">Expression #1 of SELECT list is not in GROUP BY clause and contains </div><div class="line">nonaggregated column &apos;dept.label&apos; which is not functionally </div><div class="line">dependent on columns in GROUP BY clause; this is incompatible with </div><div class="line">sql_mode=only_full_group_by</div></pre></td></tr></table></figure>
-<p>问题原因：</p>
+<pre><code>Expression #1 of SELECT list is not in GROUP BY clause and contains 
+nonaggregated column &#39;dept.label&#39; which is not functionally 
+dependent on columns in GROUP BY clause; this is incompatible with 
+sql_mode=only_full_group_by
+</code></pre><p>问题原因：</p>
 <p>MySQL 5.7.5及以上功能依赖检测功能。默认情况下启用ONLY_FULL_GROUP_BY SQL模式，MySQL将拒绝选择列表，HAVING条件或ORDER BY列表的查询引用在GROUP BY子句中既未命名的非集合列，也不在功能上依赖于它们。（5.7.5之前，MySQL没有检测到功能依赖关系，默认情况下不启用ONLY_FULL_GROUP_BY）。</p>
 <p>解决方案：<br>（关闭ONLY_FULL_GROUP_BY模式）</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> @@global.sql_mode </div><div class="line">=<span class="string">'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION'</span>;</div><div class="line"><span class="keyword">FLUSH</span> <span class="keyword">PRIVILEGES</span>;</div><div class="line">（以前是ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION，可用<span class="keyword">select</span> @@global.sql_mode查出来）</div></pre></td></tr></table></figure>
-<p>我在执行过程中报了错，说没有NO_AUTO_CREATE_USER，于是把这个也给去了，之后页面就正常显示了。<br><figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">set</span> @@global.sql_mode</div><div class="line">=<span class="string">'STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'</span>;</div></pre></td></tr></table></figure></p>
+<pre><code class="sql">set @@global.sql_mode 
+=&#39;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION&#39;;
+FLUSH PRIVILEGES;
+（以前是ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION，可用select @@global.sql_mode查出来）
+</code></pre>
+<p>我在执行过程中报了错，说没有NO_AUTO_CREATE_USER，于是把这个也给去了，之后页面就正常显示了。</p>
+<pre><code class="sql">set @@global.sql_mode
+=&#39;STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION&#39;;
+</code></pre>
 <p>这里作为个人笔记，其他解决办法及介绍可移步：<br><a href="https://blog.csdn.net/MissWwg/article/details/77719085" target="_blank" rel="external">Error Code: 1055. Expression #2 of SELECT list is not in GROUP BY clause and contains nonaggregated</a></p>
 <hr>
 
@@ -501,6 +511,16 @@
 
 
 
+        
+                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
+                    <p><strong>
+                         
+                            Licensed under <a target="_blank" href="//creativecommons.org/licenses/by-nc-sa/4.0/legalcode">CC BY-NC-SA 4.0</a>
+                        </strong>
+                        <br>
+                        <strong>本文链接：</strong><a href="http://JohnneyAnn.github.io/2018/03/29/MySQL-ONLY_FULL_GROUP_BY模式问题/">http://JohnneyAnn.github.io/2018/03/29/MySQL-ONLY_FULL_GROUP_BY模式问题/</a>
+                    </p>
+                </blockquote>
         
     
 
