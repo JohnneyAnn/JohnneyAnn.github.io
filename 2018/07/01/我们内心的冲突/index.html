@@ -47,7 +47,7 @@
     
     <title>
         
-            Logistic回归部分公式推导 | 
+            我们内心的冲突 | 
         
         安阳
     </title>
@@ -57,8 +57,8 @@
     <link rel="icon" href="/favicon.ico">
 
     <meta name="format-detection" content="telephone=no"/>
-    <meta name="description" itemprop="description" content="代码的转换跳跃太大，还得自己去推到一边才知道下句代码为什么这样写。数学：你还是不是栽在我手里！">
-    <meta name="keywords" content="编程,书籍,分享,机器学习">
+    <meta name="description" itemprop="description" content="每个人都有心理疾病，或轻或重。大多数人有着部分神经症的症状，不过还没有到患有神经症的地步，在认识、正视心理问题的过程中，能够防止心理问题的扩大化，拥有良好的心态，某种程度上也是一种自救。">
+    <meta name="keywords" content="编程,书籍,分享,读书笔记,记录,心理学,精神分析">
     <meta name="theme-color" content="#0097A7">
 
     <!-- Disable Fucking Bloody Baidu Tranformation -->
@@ -214,7 +214,7 @@
     <!-- WebAPP Icons -->
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="application-name" content="安阳">
-    <meta name="msapplication-starturl" content="http://JohnneyAnn.github.io/2017/11/27/Logistic回归部分公式推导/">
+    <meta name="msapplication-starturl" content="http://JohnneyAnn.github.io/2018/07/01/我们内心的冲突/">
     <meta name="msapplication-navbutton-color" content="#0097A7">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-title" content="安阳">
@@ -229,16 +229,16 @@
     
 
     <!-- The Open Graph protocol -->
-    <meta property="og:url" content="http://JohnneyAnn.github.io/2017/11/27/Logistic回归部分公式推导/">
+    <meta property="og:url" content="http://JohnneyAnn.github.io/2018/07/01/我们内心的冲突/">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Logistic回归部分公式推导 | 安阳">
+    <meta property="og:title" content="我们内心的冲突 | 安阳">
     <meta property="og:image" content="/favicon.ico">
-    <meta property="og:description" content="代码的转换跳跃太大，还得自己去推到一边才知道下句代码为什么这样写。数学：你还是不是栽在我手里！">
-    <meta property="og:article:tag" content="机器学习"> 
+    <meta property="og:description" content="每个人都有心理疾病，或轻或重。大多数人有着部分神经症的症状，不过还没有到患有神经症的地步，在认识、正视心理问题的过程中，能够防止心理问题的扩大化，拥有良好的心态，某种程度上也是一种自救。">
+    <meta property="og:article:tag" content="读书笔记"> <meta property="og:article:tag" content="记录"> <meta property="og:article:tag" content="心理学"> <meta property="og:article:tag" content="精神分析"> 
 
     
-        <meta property="article:published_time" content="Mon Nov 27 2017 21:56:01 GMT+0800">
-        <meta property="article:modified_time" content="Mon Nov 27 2017 21:56:01 GMT+0800">
+        <meta property="article:published_time" content="Sun Jul 01 2018 23:44:29 GMT+0800">
+        <meta property="article:modified_time" content="Sun Jul 01 2018 23:44:29 GMT+0800">
     
 
     <!-- The Twitter Card protocol -->
@@ -246,7 +246,7 @@
 
     <!-- Add canonical link for SEO -->
     
-        <link rel="canonical" href="http://JohnneyAnn.github.io/2017/11/27/Logistic回归部分公式推导/index.html" />
+        <link rel="canonical" href="http://JohnneyAnn.github.io/2018/07/01/我们内心的冲突/index.html" />
     
 
     <!-- Structured-data for SEO -->
@@ -258,10 +258,10 @@
 {
     "@context": "https://schema.org",
     "@type": "BlogPosting",
-    "mainEntityOfPage": "http://JohnneyAnn.github.io/2017/11/27/Logistic回归部分公式推导/index.html",
-    "headline": "Logistic回归部分公式推导",
-    "datePublished": "Mon Nov 27 2017 21:56:01 GMT+0800",
-    "dateModified": "Mon Nov 27 2017 21:56:01 GMT+0800",
+    "mainEntityOfPage": "http://JohnneyAnn.github.io/2018/07/01/我们内心的冲突/index.html",
+    "headline": "我们内心的冲突",
+    "datePublished": "Sun Jul 01 2018 23:44:29 GMT+0800",
+    "dateModified": "Sun Jul 01 2018 23:44:29 GMT+0800",
     "author": {
         "@type": "Person",
         "name": "安 阳",
@@ -279,8 +279,8 @@
             "url": "/favicon.ico"
         }
     },
-    "keywords": ",机器学习编程,书籍,分享",
-    "description": "代码的转换跳跃太大，还得自己去推到一边才知道下句代码为什么这样写。数学：你还是不是栽在我手里！",
+    "keywords": ",读书笔记,记录,心理学,精神分析编程,书籍,分享",
+    "description": "每个人都有心理疾病，或轻或重。大多数人有着部分神经症的症状，不过还没有到患有神经症的地步，在认识、正视心理问题的过程中，能够防止心理问题的扩大化，拥有良好的心态，某种程度上也是一种自救。",
 }
 </script>
 
@@ -345,7 +345,7 @@
     </button>
 
     <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#直接上图片"><span class="post-toc-number">1.</span> <span class="post-toc-text">直接上图片</span></a></li></ol>
+        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#先扯几句"><span class="post-toc-number">1.</span> <span class="post-toc-text">先扯几句</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#记了些笔记"><span class="post-toc-number">2.</span> <span class="post-toc-text">记了些笔记</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#写在后面"><span class="post-toc-number">3.</span> <span class="post-toc-text">写在后面</span></a></li></ol>
     </ul>
     
 
@@ -377,7 +377,7 @@
         
     
             <p class="article-headline-p">
-                Logistic回归部分公式推导
+                我们内心的冲突
             </p>
         </div>
 
@@ -396,7 +396,7 @@
     <!-- Author Name & Date -->
     <div>
         <strong>安 阳</strong>
-        <span>11月 27, 2017</span>
+        <span>7月 01, 2018</span>
     </div>
 
     <div class="section-spacer"></div>
@@ -420,7 +420,7 @@
     </button>
     <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
         <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/机器学习/">机器学习</a>
+        <a class="post_tag-link" href="/tags/心理学/">心理学</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/精神分析/">精神分析</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/记录/">记录</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/读书笔记/">读书笔记</a>
     </ul>
     
 
@@ -448,7 +448,7 @@
 
     <!-- Share Weibo -->
     
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=Logistic回归部分公式推导&url=http://JohnneyAnn.github.io/2017/11/27/Logistic回归部分公式推导/index.html&pic=http://JohnneyAnn.github.io/favicon.ico&searchPic=false&style=simple" target="_blank">
+        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=我们内心的冲突&url=http://JohnneyAnn.github.io/2018/07/01/我们内心的冲突/index.html&pic=http://JohnneyAnn.github.io/favicon.ico&searchPic=false&style=simple" target="_blank">
             <li class="mdl-menu__item">
                 分享到微博
             </li>
@@ -466,7 +466,7 @@
 
     <!-- Share LinkedIn -->
     
-        <a class="post_share-link" href="https://www.linkedin.com/shareArticle?mini=true&url=http://JohnneyAnn.github.io/2017/11/27/Logistic回归部分公式推导/index.html&title=Logistic回归部分公式推导" target="_blank">
+        <a class="post_share-link" href="https://www.linkedin.com/shareArticle?mini=true&url=http://JohnneyAnn.github.io/2018/07/01/我们内心的冲突/index.html&title=我们内心的冲突" target="_blank">
             <li class="mdl-menu__item">
                 分享到 LinkedIn
             </li>
@@ -475,7 +475,7 @@
 
     <!-- Share QQ -->
     
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=安阳&title=Logistic回归部分公式推导&summary=JAVA，读书，旅行，分享，BBox。&pics=http://JohnneyAnn.github.io/favicon.ico&url=http://JohnneyAnn.github.io/2017/11/27/Logistic回归部分公式推导/index.html" target="_blank">
+        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=安阳&title=我们内心的冲突&summary=JAVA，读书，旅行，分享，BBox。&pics=http://JohnneyAnn.github.io/favicon.ico&url=http://JohnneyAnn.github.io/2018/07/01/我们内心的冲突/index.html" target="_blank">
             <li class="mdl-menu__item">
                 分享到 QQ
             </li>
@@ -494,8 +494,35 @@
                 <!-- Post Content -->
                 <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
     
-        <p>代码的转换跳跃太大，还得自己去推到一边才知道下句代码为什么这样写。<br>数学：你还是不是栽在我手里！<br><a id="more"></a></p>
-<h1 id="直接上图片"><a href="#直接上图片" class="headerlink" title="直接上图片"></a>直接上图片</h1><p><img src="/img/logistic/logistic.jpg" alt="回归公式推倒"></p>
+        <p>每个人都有心理疾病，或轻或重。大多数人有着部分神经症的症状，不过还没有到患有神经症的地步，在认识、正视心理问题的过程中，能够防止心理问题的扩大化，拥有良好的心态，某种程度上也是一种自救。</p>
+<a id="more"></a>
+<h1 id="先扯几句"><a href="#先扯几句" class="headerlink" title="先扯几句"></a>先扯几句</h1><p>《我们内心的冲突》这本书是卡伦•霍妮的成熟之作，她是社会心理学最早的倡导者之一。在书中，可以看出卡伦•霍妮在试图证明她的理论比弗洛伊德的理论更先进，弗洛伊德的精神分析在说明人格的混乱时，着重点在于本能（或者说一种被称之为力比多的力量）的分析上，认为人是注定要承受痛苦的，人受死本能的支配只能在自己受苦和毁灭他人之间做出选择；而卡伦•霍妮认同弗洛伊德学说中最基本的原理，但分析方向不同，她认为环境对人们的影响不亚于本能的影响，人类虽在本能的驱动下行动，但这种本能基本上只能被支配最多被提高，人们能够去改变自己，可以随着人际关系的改善发生改变，并且坚信能够做到这一点。从这一点可看出在神经症的治疗上，弗洛伊德较为悲观，卡伦•霍妮则较为乐观。 </p>
+<p>研究方向的分歧似曾相识，这里如同社会心理学与人格心理学的分歧，后面成为心理学研究的不同的分支，我们不能够说明某个理论的对与错，我们所做的都是为了解释这个世界，解释存在于这个世界的我们，理论在不断进化，卡伦•霍妮也被称为“新佛洛依伊德主义”的代表人物之一，这也能说明理论在改进，是为了更好的解释。对于我们来说，我们并非心理学的研究人员，我们的目的是为了了解，通过他们的解释、研究能够认识到本身问题的存在，如前文所说，这已经是一种治疗。 </p>
+<h1 id="记了些笔记"><a href="#记了些笔记" class="headerlink" title="记了些笔记"></a>记了些笔记</h1><p>1.有冲突并不等于得了神经症，我们绝对不会缺少内心的冲突，我们时刻做着选择，但我们的愿望有时候可能是完全相反的，比如我们想要有人陪伴却有不希望被打扰，再比如我们必须要做的事可能并不是我们想做的事。 </p>
+<p>2.作者将个体分为三种类型：顺从型、对抗型和疏离型。<br>顺从型人格：明显的表现出对喜欢和赞扬的需求，体现出所有“亲近他人”的特点，他最需要的是一位“能够控制他，也能帮助他判断对和错，还能让他生活中的所有希望都得到满足的伙伴”，这些需求的核心其实都是心中对于亲密关系的渴望。<br>对抗型人格：觉得所有人都敌视他，就算发现人并不是他们想象的那样，也坚决不承认自己的错误。在他看来，世界就是一个角斗场，想要生活其中就要明白“物竞天择，适者生存”的观点，因此他才产生了自己的需求。<br>疏离型人格：过分远离人群中的人身上的显著和特别的表现，不想与任何人靠的太近，对自己认知不清，对于自己爱的、恨的、想要的、害怕的、相信的、痛恨的都没办法联系。 </p>
+<p>3.神经症患者会不断失去与他人的联系，与世界的联系，最终失去和自己的联系。 </p>
+<p>4.理想化形象：与弗洛伊德所谈论的“超我”类似。患者喜欢什么，他所创造的理想化形象就能够提供什么，并且无限放大，通过这些假象获得优越感。“优越”的实际内涵是将不具备或者心在未体现出来的品质当成自己所拥有的品质，因为是假象，患者的这种优越感极为脆弱，所以迫切需要得到别人的认可和肯定。<br>这里书中区分了理想化形象和真正理想的区别，希望不要误解： </p>
+<blockquote>
+<p>理想化形象是一种永远无法达成的目标，它是静止的，是一个人们所膜拜的没有生命力的石偶泥胎。而真正的理想具有能动性，它能刺激人们去接近它，在人的成长和发展过程中不可或缺。真正的理想引导人谦逊，理想化形象让人自高自大。理想化形象要么让人否认自己的缺点，要么让人过分谴责自己的缺点，所以它只会成为实现理想的障碍。</p>
+</blockquote>
+<p>5.外化作用： 患者将内在的变化过程感受为发生在自身之外，于是笃信是这些外在的因素导致了自己的麻烦。 </p>
+<p>6.投射作用：把自己不喜欢的倾向或品质视为他人身上存在的东西，如伪善、卑微、支配、背叛、野心等，假如自己身上存在这类倾向，便怀疑他人身上也有。 </p>
+<p>7.盲区作用能够让患者意识不到自己的内在冲突，如区隔化，让一个局域所发生的事情与另一个局域所发生的事情隔绝开来，我们对做某件事的渴望程度，决定了我们对这件事的无视程度，说白了就是我们很不愿意看到内在的矛盾。 </p>
+<p>7.畏惧： 人们害怕自己是个虚伪的人，这种害怕通常都涉及某个客观事实，但虚伪具体所指的事实，往往和他自认为的那一个并不一致。患者除了惧怕改变本身外，还惧怕因改变带来的更糟糕的局面。他害怕理想化形象破灭后，变成自己最厌恶的那种模样；他害怕分析会让他体无完肤，变得一无是处；他害怕变得像其他人那样庸俗；他害怕任何未知的东西；他害怕现有的满足感和安全感遭到损害；最后，他还害怕不能改变。 </p>
+<p>8.人格衰竭：如果有未解决的冲突会表现出三种紊乱失调的症状，这三种症状都能够欧导致精力的消耗或错误的应用。第一种是犹豫不决，这类人都会下意识地避免做选择，所以尽管有时候明显犹豫不决，可自身却察觉不到。第二种是普遍的低效率，患者对任何事情都会花费超乎正常所需的精力，身上隐藏的矛盾倾向越多，他的压力就越大，生活成本就越高。第三种是普遍的怠情，患者被自己的毛病拖累得苦不堪言，而且也经常责怪自己太懒惰，但这并不代表他们真的认为自己懒惰，这根本不是发自真心的自省。相反，他们对任何努力都很排斥，而且他们能意识到这种排斥，千方百计为自己辩护，将其合理化。他们把自己视为出主意的智囊，至于具体工作，那是别人需要完成的。对努力的抗拒，发展到一定程度变为恐惧，即害怕努力的结果有害无益。神经症性质的怠惰，意味着主动性和行动能力的瘫痪。严重的自我疏离，以及找不到生活的方向，是导致这种症状的主要原因。</p>
+<p>9.内心分裂的人不可能做到完全正常，将产生很多不实的现象，如：不实的爱、不实的善良、不实的学识和兴趣、不实的公证和真诚、不实的痛苦、无意识的骄傲等。</p>
+<p>10.神经症患者通常使用三种手段来避免承认自己的问题，以及承认受苦源于内心冲突的事实。三种手段分别为：外化、视而不见、否认受苦的真正原因。</p>
+<p>11.无法成为我们自己是一切绝望的根源——索伦·克尔凯郭尔在《致命疾病》</p>
+<p>12.施虐者把受虐者调教成自己的傀儡，但他从不认为自己该为此负责，而是反过来埋怨对方太过依赖他。</p>
+<p>13.施虐者固然有破坏倾向，这一点毋庸置疑，可是当我们理解了它们后就会明白，实际上，这些表面上有失人性的行为，只是一个承受着巨大痛苦的人用来将自己藏起来的屏障。这种观点的意义在于，它让我们看到了通过分析影响这个人的希望。我们已经知道，他是一个被生活击垮的人，因此一边在绝望之中挣扎，一边努力寻求补偿。</p>
+<p>14.如何解决神经症冲突：从人格中产生这些冲突的因素入手，这是釜底抽薪之策。分析师想要有效应对患者的基本冲突，就必须先了解，患者用什么样的方法来应对他自身的冲突，以及达到了什么样的效果，之后再处理冲突本身。</p>
+<h1 id="写在后面"><a href="#写在后面" class="headerlink" title="写在后面"></a>写在后面</h1><blockquote>
+<p>对于我们自身（并非神经症患者）而言，也需要了解我们内心的冲突，我们是我们自己的分析师，发现自己冲突最深层次的需求，在分析、认识的过程中可可以使我们从参与者变为旁观者，对于冲突的解决将有着很大的帮助，从而避免心理问题影响我们的正常生活以及身心健康，实现内心真正的独立。那么我们该如何去认识我们内心的冲突呢，我想这本书可能是个不错的选择。</p>
+</blockquote>
+<p>书中引用了麦克马雷对爱的定义，也送给大家：</p>
+<p>爱是什么？麦克马雷说：“一段关系，代表着一种目的。我们在这段关系中彼此联系在了一起，这是自然而然的一件事，因为人类天生就有与他人分享经历的愿望。我们向对方敞开心灵，相互理解和包容，在合二为一的生活中分享彼此的快乐，满足彼此的心愿。”</p>
+<hr>
+<p>写于 2018.7.1 23:38</p>
 
         
                 <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
@@ -504,7 +531,7 @@
                             Licensed under <a target="_blank" href="//creativecommons.org/licenses/by-nc-sa/4.0/legalcode">CC BY-NC-SA 4.0</a>
                         </strong>
                         <br>
-                        <strong>本文链接：</strong><a href="http://JohnneyAnn.github.io/2017/11/27/Logistic回归部分公式推导/">http://JohnneyAnn.github.io/2017/11/27/Logistic回归部分公式推导/</a>
+                        <strong>本文链接：</strong><a href="http://JohnneyAnn.github.io/2018/07/01/我们内心的冲突/">http://JohnneyAnn.github.io/2018/07/01/我们内心的冲突/</a>
                     </p>
                 </blockquote>
         
@@ -549,21 +576,13 @@
             <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
     <!-- Prev Nav -->
     
-        <a href="/2017/12/01/机器学习实战（五）Logistic回归/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
 
     <!-- Section Spacer -->
     <div class="section-spacer"></div>
 
     <!-- Next Nav -->
     
-        <a href="/2017/11/10/一周记事/" id="post_nav-older" class="next-content">
+        <a href="/2018/06/04/安静的五月/" id="post_nav-older" class="next-content">
             旧篇
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
             <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
