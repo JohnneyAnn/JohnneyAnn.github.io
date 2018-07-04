@@ -3,6 +3,33 @@
   
     
     <entry>
+      <title>SpringBoot搭建入门</title>
+      <link href="/2018/07/05/SpringBoot%E6%90%AD%E5%BB%BA%E5%85%A5%E9%97%A8/"/>
+      <url>/2018/07/05/SpringBoot%E6%90%AD%E5%BB%BA%E5%85%A5%E9%97%A8/</url>
+      <content type="html"><![CDATA[<p>终于开始写小程序服务端了，备案也下来了。顺便学习一下SpringBoot吧。SpringBoot的设计理念是“习惯优于配置” ，是为了尽可能的减少Spring项目的配置，让项目更快的跑起来。</p><a id="more"></a><h1 id="快速搭建"><a href="#快速搭建" class="headerlink" title="快速搭建"></a>快速搭建</h1><p>使用IDEA可以快速的搭建SpringBoot项目，差不多是傻瓜式的…, 具体步骤如下：</p><h2 id="新建"><a href="#新建" class="headerlink" title="新建"></a>新建</h2><p>新建一个项目，选择<code>Spring Initializr</code>, 然后点击<code>Next</code>:</p><p><img src="/img/springboot/build/1.jpg" alt="新建一个项目"></p><h2 id="项目信息"><a href="#项目信息" class="headerlink" title="项目信息"></a>项目信息</h2><p>填写项目信息，比如我这里项目是<code>cn.thechaos.mini</code>, 点击<code>Next</code>:</p><p><img src="/img/springboot/build/2.jpg" alt="填写项目信息"></p><h2 id="项目类型"><a href="#项目类型" class="headerlink" title="项目类型"></a>项目类型</h2><p>选择web模板, 点击<code>Next</code>:</p><p><img src="/img/springboot/build/3.jpg" alt="填写项目信息"></p><h2 id="项目位置"><a href="#项目位置" class="headerlink" title="项目位置"></a>项目位置</h2><p>可以选择项目位置, 点击<code>Finish</code>:</p><p><img src="/img/springboot/build/4.jpg" alt="选择项目位置"></p><h2 id="完成"><a href="#完成" class="headerlink" title="完成"></a>完成</h2><p>接下来只需要等待就好了，第一次初始化项目较慢，需要下载很多以来，但是下载完成后发现，正如你看到的，项目结构相对很简单:</p><p><img src="/img/springboot/structure/1.jpg" alt="项目结构"></p><h1 id="部分结构解释"><a href="#部分结构解释" class="headerlink" title="部分结构解释"></a>部分结构解释</h1><p>此项目由maven构建，当初始化依赖加载完成后，默认帮我们创建了几个文件：<code>MiniApplication.java</code>, <code>application.properties</code>, <code>MiniApplicationTests.java</code>, <code>pom.xml</code>。<br>这里简单说明一下：</p><h2 id="MiniApplication-java"><a href="#MiniApplication-java" class="headerlink" title="MiniApplication.java"></a>MiniApplication.java</h2><p><img src="/img/springboot/structure/2.jpg" alt="MiniApplication默认文件内容"></p><p>是SpringBoot的核心类，如上图所示，此类中有一个main方法，与标准java应用类似，方法内调用SpringApplication类的run()方法，以启动该Spring应用，实质上是为Spring应用创建并初始化Spring上下文。。第一个参数MiniApplication.class就是Spring应用的入口类；第二个参数args是启动Spring应用的命令行参数，该参数可以在Spring应用中被访问。<br>其中，</p><p><code>@SpringBootApplication = @Configuration + @EnableAutoConfiguration + @ComponentScan。</code>    </p><p>功能也是三个注解的和（也可以用这三个注解代替），<code>@Configuration</code>的注解类标识这个类可以使用Spring IoC容器作为bean定义的来源；<code>@EnableAutoConfiguration</code>能够自动配置spring的上下文；<code>@ComponentScan</code>会自动扫描指定包下的全部标有@Component（包含其子注解，都是一个东西）的类，并注册成bean。</p><h2 id="MiniApplicationTests-java"><a href="#MiniApplicationTests-java" class="headerlink" title="MiniApplicationTests.java"></a>MiniApplicationTests.java</h2><p><img src="/img/springboot/structure/3.jpg" alt="MiniApplicationTests默认文件内容"></p><p>这个看着就很明显了，是个单元测试类，使用的是junit4。其中<code>@RunWith(SpringRunner.class)</code>就是一个运行器，表示让测试运行于Spring测试环境。<code>SpringRunner.class</code>通过官网的解释，它只是简单的继承<code>SpringJUnit4ClassRunner</code>，作为别名，简短一点而已。<br><img src="/img/springboot/structure/4.jpg" alt="SpringRunner"></p><h2 id="application-properties"><a href="#application-properties" class="headerlink" title="application.properties"></a>application.properties</h2><p>默认是个空的文件，是个全局配置文件，可根据需要配置一些属性。SpringBoot不仅支持常规的 properties 配置文件，还支持 yaml 语言的配置文件（yaml格式是以缩进及空格来展示的，这里不赘述了）。我们可以在这个文件里面配置应用访问端口、路径等等，示例如下：</p><p><img src="/img/springboot/structure/5.jpg" alt="application.properties配置"></p><h2 id="pom-xml"><a href="#pom-xml" class="headerlink" title="pom.xml"></a>pom.xml</h2><p>这个与往常一样是Maven的构建说明文件，内容也与普通的pom文件类似。配置如下图：</p><p><img src="/img/springboot/structure/6.jpg" alt="pom配置"><br><img src="/img/springboot/structure/7.jpg" alt="pom配置"></p><h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><p>这里就写一个 Hello, SpringBoot 吧！</p><h2 id="创建Controller"><a href="#创建Controller" class="headerlink" title="创建Controller"></a>创建Controller</h2><p>我们在cn.thechaos.mini包下创建一个HelloController.java类。</p><p><img src="/img/springboot/hello/1.jpg" alt="Hello, SpringBoot"></p><h2 id="启动"><a href="#启动" class="headerlink" title="启动"></a>启动</h2><p>SpringBoot集成了tomcat，我们回到应用入口类，运行main方法即可启动。启动后可看到控制台输出信息如下，则运行成功：</p><p><img src="/img/springboot/hello/2.jpg" alt="run"></p><h2 id="查看"><a href="#查看" class="headerlink" title="查看"></a>查看</h2><p>此时根据我们配置的端口，在浏览器输入localhost:8080/hello，即可看到返回的信息：</p><p><img src="/img/springboot/hello/3.jpg" alt="check"></p><hr><p>完于 2018.7.5 00:27</p>]]></content>
+      
+      <categories>
+          
+          <category> 编程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 记录 </tag>
+            
+            <tag> Java </tag>
+            
+            <tag> SpringBoot </tag>
+            
+            <tag> 学习 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>我们内心的冲突</title>
       <link href="/2018/07/02/%E6%88%91%E4%BB%AC%E5%86%85%E5%BF%83%E7%9A%84%E5%86%B2%E7%AA%81/"/>
       <url>/2018/07/02/%E6%88%91%E4%BB%AC%E5%86%85%E5%BF%83%E7%9A%84%E5%86%B2%E7%AA%81/</url>
@@ -485,9 +512,9 @@
       
         <tags>
             
-            <tag> 设计 </tag>
-            
             <tag> 学习 </tag>
+            
+            <tag> 设计 </tag>
             
         </tags>
       
