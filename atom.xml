@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://JohnneyAnn.github.io/"/>
-  <updated>2018-07-04T16:36:43.070Z</updated>
+  <updated>2018-07-05T03:53:37.703Z</updated>
   <id>http://JohnneyAnn.github.io/</id>
   
   <author>
@@ -15,6 +15,34 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>MAC-IDEA-SpringBoot热部署</title>
+    <link href="http://JohnneyAnn.github.io/2018/07/05/MAC-IDEA-SpringBoot%E7%83%AD%E9%83%A8%E7%BD%B2/"/>
+    <id>http://JohnneyAnn.github.io/2018/07/05/MAC-IDEA-SpringBoot热部署/</id>
+    <published>2018-07-05T03:09:29.000Z</published>
+    <updated>2018-07-05T03:53:37.703Z</updated>
+    
+    <content type="html"><![CDATA[<p>每次修改完代码，都需要重新启动应用程序，很麻烦，自然希望有个热部署。当你做修改后保存时，SpringBoot的热部署是重启了Spring应用。</p><a id="more"></a><p>配置热部署流程如下：</p><h2 id="1-在pom-xml配置依赖："><a href="#1-在pom-xml配置依赖：" class="headerlink" title="1.在pom.xml配置依赖："></a>1.在pom.xml配置依赖：</h2><pre><code>&lt;dependency&gt;   &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;   &lt;artifactId&gt;spring-boot-devtools&lt;/artifactId&gt;   &lt;optional&gt;true&lt;/optional&gt;&lt;/dependency&gt;</code></pre><p>本来我以为这样就结束了，发现一个劲的Ctrl+S页面没有任何变化。。。</p><h2 id="2-修改IDEA的配置："><a href="#2-修改IDEA的配置：" class="headerlink" title="2.修改IDEA的配置："></a>2.修改IDEA的配置：</h2><p>MAC下可使用<code>command + SHIFT + A</code>组合键唤起查询框，搜索相关配置进行修改。</p><p>1) <code>command + SHIFT + A</code> –&gt;<br>    查找<code>make project automatically</code> –&gt; 选中<br>2) <code>command + SHIFT + A</code> –&gt;<br>    查找Registry –&gt; 找到<code>compiler.automake.allow.when.app.running</code>并勾选</p><p>完成之后重启下IDEA,之后修改后保存就可看见控制台SpringBoot被重启的信息了。</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;每次修改完代码，都需要重新启动应用程序，很麻烦，自然希望有个热部署。当你做修改后保存时，SpringBoot的热部署是重启了Spring应用。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="http://JohnneyAnn.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="记录" scheme="http://JohnneyAnn.github.io/tags/%E8%AE%B0%E5%BD%95/"/>
+    
+      <category term="Java" scheme="http://JohnneyAnn.github.io/tags/Java/"/>
+    
+      <category term="SpringBoot" scheme="http://JohnneyAnn.github.io/tags/SpringBoot/"/>
+    
+      <category term="学习" scheme="http://JohnneyAnn.github.io/tags/%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
   
   <entry>
     <title>SpringBoot搭建入门</title>
@@ -472,30 +500,6 @@
     <summary type="html">
     
       &lt;p&gt;《地铁》&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="生活" scheme="http://JohnneyAnn.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="随笔" scheme="http://JohnneyAnn.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
-    
-      <category term="诗" scheme="http://JohnneyAnn.github.io/tags/%E8%AF%97/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>醒来</title>
-    <link href="http://JohnneyAnn.github.io/2018/01/27/%E9%86%92%E6%9D%A5/"/>
-    <id>http://JohnneyAnn.github.io/2018/01/27/醒来/</id>
-    <published>2018-01-27T03:22:11.764Z</published>
-    <updated>2018-01-27T03:22:11.764Z</updated>
-    
-    <content type="html"><![CDATA[<p>《醒来》<br><a id="more"></a></p><p>我在这醒来<br>看着周围漆黑一片<br>可能是深渊<br>或者是<br>我的境遇</p><p>我用尽力气<br>睁大眼睛<br>可光<br>藏掩的厉害<br>唤不起她</p><p>我感到绝望<br>但我不能停下</p><p>我试着行走<br>摸索<br>终于触碰到了温暖<br>是这片黑暗给予的温存<br>我尝试抱起它<br>无果</p><p>我想<br>我带不走它<br>带走的<br>是它给的信念</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;《醒来》&lt;br&gt;
     
     </summary>
     
