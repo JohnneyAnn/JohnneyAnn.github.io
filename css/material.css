@@ -3367,7 +3367,7 @@ _:-ms-input-placeholder, :root .mdl-slider.mdl-slider.is-upgraded {
   width: 100%;
   background: 16px;
   text-align: left;
-  color: inherit
+  color: #fff
 }
 
 .mdl-textfield.is-focused .mdl-textfield__input {
