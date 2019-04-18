@@ -3,6 +3,27 @@
   
     
     <entry>
+      <title>用Python实现简单的微信机器人</title>
+      <link href="/2019/04/19/%E7%94%A8Python%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84%E5%BE%AE%E4%BF%A1%E6%9C%BA%E5%99%A8%E4%BA%BA/"/>
+      <url>/2019/04/19/%E7%94%A8Python%E5%AE%9E%E7%8E%B0%E7%AE%80%E5%8D%95%E7%9A%84%E5%BE%AE%E4%BF%A1%E6%9C%BA%E5%99%A8%E4%BA%BA/</url>
+      <content type="html"><![CDATA[<p>虽然不知道这个东西对个人来说有什么用，但感觉还是蛮好玩的。</p><a id="more"></a><p>不过如果需要进行群组管理时，还是很有效的，比如陪群里人聊天，活跃氛围，或者提供一些第三方查询功能，或者进行群组成员的管理都是可行的。 </p><p>动手吧。</p><h2 id="环境准备"><a href="#环境准备" class="headerlink" title="环境准备"></a>环境准备</h2><p>必要环境准备：python软件环境（2.7或3.x都可），itchat。</p><p>假设你pyhton环境已经安装完毕了，现在需要安装itchat，itchat是一个可以模拟微信登录以及进行操作的python库，我们可以用下面的命令安装：</p><pre><code class="python">pip install itchat</code></pre><p>安装完成后就可以进行代码编写了，由于主要功能来自于itchat，那么实现一个机器人需要人为进行编码是没有什么技术含量的。</p><p>IDE我使用的是jupyter，你也可以使用记事本开发。</p><h2 id="代码实现"><a href="#代码实现" class="headerlink" title="代码实现"></a>代码实现</h2><p><img src="/img/robot/1.png" alt="新建一个项目"></p><p>点击项目名，修改下，好看一些:</p><p><img src="/img/robot/2.png" alt="修改项目名称"></p><p>下面开始编写代码，导包，定义函数，先写个简单版的，完成基本功能：</p><p><img src="/img/robot/3.png" alt="编写代码"></p><p>好了，架子写完了。运行它，会让你扫码登录，虽然你找他聊天并不会给你想要的回复，但功能已经可用了。</p><p><img src="/img/robot/4.png" alt="运行结果"></p><p>因为itchat封装了很多功能，所以我们可以自己编写其他逻辑，完成更多的可能性。</p><p>我们继续完善下机器人，现在它只能登录，但无法做到自动回复，如果想快速完成，使用第三方api是很方便的。这里使用的是<a href="http://www.tuling123.com" target="_blank" rel="external">图灵机器人</a>，点击可进入网址，注册下很方便。</p><p>修改下代码，需要新引入requests包，以及定义方法，请求数据进行回复。</p><p><img src="/img/robot/5.png" alt="请求api"></p><p>使用上图的方式请求api即可，然后把key换成你自己的图灵给的key（很明显，上图的key是假的），userid你随意填写，然后你就可以测试了，免费的api每天只可调用100次。 </p><p>另外图灵还可添加私有语料库：</p><p><img src="/img/robot/7.png" alt="语料库"></p><p>以及可设置是否开放某些功能：</p><p><img src="/img/robot/6.png" alt="更多功能"></p><p>至此一个简单的自动回复就做好了，主要是搭个架子。 </p><h2 id="其他可能的场景"><a href="#其他可能的场景" class="headerlink" title="其他可能的场景"></a>其他可能的场景</h2><h3 id="消息转发"><a href="#消息转发" class="headerlink" title="消息转发"></a>消息转发</h3><p>接收消息后转发给某人（如管理员，以及管理员回复），使用以下方法 </p><pre><code class="python"># 通过备注名获取用户 adminUser = itchat.search_friends(name=u&#39;醒来&#39;)[0] # 主动发送 adminUser.send(nickName + &quot;:&quot; + receiveText + &quot;\n我:&quot; + responseText)</code></pre><p>同样的，根据发送者姓名（msg对象中有），来确认发送者是否是管理员以及确认是否是指令信息，从而进行一些操作。</p><h3 id="分析微信好友列表"><a href="#分析微信好友列表" class="headerlink" title="分析微信好友列表"></a>分析微信好友列表</h3><p>通过代码代码获取好友列表（返回一个字典）： </p><pre><code class="python">friends = itchat.get_friends(update=True)[0:]</code></pre><p>通过返回的数据进行解析处理，我们可以进行性别分布，地区分布，签名语义分布，再往后，我们可以将好友列表信息导入到我们自己的程序，之前一直想做一个朋友关系管理的，有了这些初始化数据，与itchat相结合，应该还有很多好玩的东西。</p><h2 id="更多有趣的"><a href="#更多有趣的" class="headerlink" title="更多有趣的"></a>更多有趣的</h2><p>完整代码：</p><pre><code class="python">import itchat import requests# 装饰器 接收文本信息 @itchat.msg_register(itchat.content.TEXT)def receive_msg(msg):    user = msg[&#39;User&#39;]    nickName = user[&#39;NickName&#39;]    receiveText = msg[&#39;Text&#39;]    responseText = get_auto_response(receiveText)    adminUser = itchat.search_friends(name=u&#39;醒来&#39;)[0]    adminUser.send(nickName + &quot;:&quot; + receiveText + &quot;\n我:&quot; + responseText)    return responseText# 获取自动回复def get_auto_response(msg):     # 填写信息回复逻辑  可定义自己的词库等等    apiUrl = &#39;http://www.tuling123.com/openapi/api&#39;    data = {&#39;key&#39;: &#39;d1dc55f479479f2&#39;, &#39;info&#39;: msg, &#39;userid&#39;: &#39;russell&#39;}    rtv = requests.post(apiUrl, data=data).json()    return rtv.get(&#39;text&#39;)# 通过微信扫描二维码登录itchat.auto_login()itchat.run()</code></pre><p>itchat更多功能可查看：<a href="https://itchat.readthedocs.io/zh/latest/#itchat" target="_blank" rel="external">itchat项目简介</a></p><hr><p>完于 2019-04-19 00:16</p>]]></content>
+      
+      <categories>
+          
+          <category> 编程 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    <entry>
       <title>习俗</title>
       <link href="/2019/03/24/%E4%B9%A0%E4%BF%97/"/>
       <url>/2019/03/24/%E4%B9%A0%E4%BF%97/</url>
