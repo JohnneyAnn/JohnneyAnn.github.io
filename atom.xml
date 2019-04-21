@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://JohnneyAnn.github.io/"/>
-  <updated>2019-04-18T16:28:54.389Z</updated>
+  <updated>2019-04-21T08:14:15.906Z</updated>
   <id>http://JohnneyAnn.github.io/</id>
   
   <author>
@@ -15,6 +15,36 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>记录一次以太坊投票智能合约的调试过程</title>
+    <link href="http://JohnneyAnn.github.io/2019/04/21/%E8%AE%B0%E5%BD%95%E4%B8%80%E6%AC%A1%E4%BB%A5%E5%A4%AA%E5%9D%8A%E6%8A%95%E7%A5%A8%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6%E7%9A%84%E8%B0%83%E8%AF%95%E8%BF%87%E7%A8%8B/"/>
+    <id>http://JohnneyAnn.github.io/2019/04/21/记录一次以太坊投票智能合约的调试过程/</id>
+    <published>2019-04-21T08:06:29.000Z</published>
+    <updated>2019-04-21T08:14:15.906Z</updated>
+    
+    <content type="html"><![CDATA[<p>在看到这个代码以及编译部署方式后，就想着来执行下，但路途坎坷.</p><a id="more"></a><p>根据书上的说法，我把代码放进IDE，点这再点那，就可以了，但事实并没有这么简单。 </p><p>记录下坎坷的过程。</p><h2 id="打开IDE"><a href="#打开IDE" class="headerlink" title="打开IDE"></a>打开IDE</h2><p>Remix是官方推荐的智能合约开发IDE，适合新手，可以在浏览器中快速部署测试智能合约。打开这个网址就行（<a href="https://remix.ethereum.org）。" target="_blank" rel="external">https://remix.ethereum.org）。</a></p><p><img src="/img/eth/ballot/1.png" alt="打开IDE"></p><p>点击左上角小加号，添加名为Ballot.sol的文件</p><p><img src="/img/eth/ballot/2.png" alt="新增项目"></p><p>然后将书上的代码贴入，以下是源码：</p><pre><code class="js">pragma solidity ^0.4.0;    contract BallotPro {            /// 投票者Voter的数据结构            struct Voter {        uint weight;                // 该投票者的投票所占的权重        bool voted;                 // 是否已经投过票         uint vote;                  // 投票对应的提案编号（Index）        address delegate;           // 该投票者投票权的委托对象    }    /// 提案Proposal的数据结构    struct Proposal {        bytes32 name;              // 提案的名称        uint voteCount;            // 该提案目前的票数    }     /// 投票的主持人     address chairperson;    /// 投票者地址和状态的对应关系    mapping(address =&gt; Voter) voters;    /// 提案的列表    Proposal[] proposals;    /// 在初始化合约时，给定一个提案名称的列表    function BallotPro(bytes32[] proposalNames) {        chairperson = msg.sender;        voters[chairperson].weight = 1;        for (uint i = 0; i &lt; proposalNames.length; i++) {            proposals.push(Proposal({                name: proposalNames[i],                voteCount: 0              }));        }    }    /// 只有chairperson有给toVoter地址投票的权利    function giveRightToVote(address voter) public {      require((msg.sender == chairperson) &amp;&amp; ! voters[voter].voted &amp;&amp;  (voters[voter].weight == 0));      voters[voter].weight = 1;    }    /// 批量授予投票权    function giveRightToVoteByBatch(address[] batch) public {      require( msg.sender == chairperson );      for (uint i = 0; i &lt; batch.length; i++) {          address voter = batch[i];              require( ! voters[voter].voted &amp;&amp; (voters[voter].weight == 0) );              voters[voter].weight = 1;      }    }    /// 投票者将自己的投票机会授权另外一个地址    function delegate(address to) {      Voter storage sender = voters[msg.sender];      require((! sender.voted) &amp;&amp;  (sender.weight !=0 ));      require(to != msg.sender);      while (voters[to].delegate != address(0)) {          to = voters[to].delegate;          require(to != msg.sender);      }      sender.voted = true;      sender.delegate = to;      Voter storage delegate = voters[to];      if (delegate.voted) {          proposals[delegate.vote].voteCount += sender.weight;      } else {          delegate.weight += sender.weight;      }    }    /// 投票者根据提案编号proposal进行投票    function vote(uint proposal) {      require(proposal &lt; proposals.length);      Voter storage sender = voters[msg.sender];      require((! sender.voted) &amp;&amp;  (sender.weight !=0 ));      sender.voted = true;      sender.vote = proposal;      proposals[proposal].voteCount += sender.weight;    }    /// 根据proposals里的票数统计voteCount计算出票数最多的提案编号    function winningProposal() constant returns(uint[] winningProposals)    {        uint[] memory tempWinner = new uint[](proposals.length);        uint winningCount = 0;        uint winningVoteCount = 0;        for ( uint p = 0; p &lt; proposals.length; p++) {            if (proposals[p].voteCount &gt; winningVoteCount) {                winningVoteCount = proposals[p].voteCount;                tempWinner[0] = p;                winningCount = 1;            }else if (proposals[p].voteCount == winningVoteCount) {                tempWinner[winningCount] = p;                winningCount ++;            }        }        winningProposals = new uint[](winningCount);        for ( uint q = 0; q &lt; winningCount; q++){            winningProposals[q] = tempWinner[q];        }        return winningProposals;    }    // 获取票数最多的提案名称。其中调用了winningProposal()函数    function winnerName() constant returns (bytes32[] winnerNames)    {        uint[] memory winningProposals = winningProposal();        winnerNames = new bytes32[](winningProposals.length);        for (uint p = 0; p &lt; winningProposals.length; p++){            winnerNames[p] = proposals[winningProposals[p]].name ;        }        return winnerNames;    }}</code></pre><p>然后就报错了。</p><h2 id="开始调试"><a href="#开始调试" class="headerlink" title="开始调试"></a>开始调试</h2><h3 id="错误1-版本不兼容"><a href="#错误1-版本不兼容" class="headerlink" title="错误1:版本不兼容"></a>错误1:版本不兼容</h3><p><img src="/img/eth/ballot/3.png" alt="版本不兼容"></p><p>原因：书中的代码是机遇solidity0.4.0写的，在0.5.0版本及以后，如果要指明当执行函数时不会去修改区块中的数据状态时(如只读)，应当使用view关键字代替constant，view在0.4+版本里面与constant共存，官方解释是view的替代，constant在0.5.0版本中将会被去掉。依据这个，对代码中constant进行修改，并修改当前合约首行对版本的声明。</p><pre><code>pragma solidity ^0.4.0; /// 改为 pragma solidity ^0.5.1;  （当前最新版本）</code></pre><p>还没结束，新的错误出现了，如下图所示，我们一个一个来。</p><p><img src="/img/eth/ballot/4.png" alt="整体错误"></p><h3 id="版本问题-构造函数"><a href="#版本问题-构造函数" class="headerlink" title="版本问题-构造函数"></a>版本问题-构造函数</h3><p><img src="/img/eth/ballot/5.png" alt="版本不兼容-构造函数"></p><p>原因：新的版本中，构造函数应当使用<code>constructor(...) { ... }</code>声明，代码中定义的<code>function BallotPro(bytes32[] proposalNames){...}</code>会被认为与合约名重名。</p><p>因此我们进行以下修改：</p><pre><code>function BallotPro(bytes32[] proposalNames) {        chairperson = msg.sender;        voters[chairperson].weight = 1;        for (uint i = 0; i &lt; proposalNames.length; i++) {            proposals.push(Proposal({                name: proposalNames[i],                voteCount: 0              }));        }    }</code></pre><p>修改为</p><pre><code>constructor (bytes32[] proposalNames){        chairperson = msg.sender;        voters[chairperson].weight = 1;        for (uint i = 0; i &lt; proposalNames.length; i++) {            proposals.push(Proposal({                name: proposalNames[i],                voteCount: 0              }));        }}</code></pre><h3 id="函数权限"><a href="#函数权限" class="headerlink" title="函数权限"></a>函数权限</h3><p><img src="/img/eth/ballot/6.png" alt="函数权限"></p><p>原因：新版本中需要给函数显示设置权限。</p><blockquote><p>扩展：solidity的函数权限<br>public类型的状态变量和函数的权限最大，可供外部、子合约、合约内部访问。<br>internal类型的状态变量可供外部和子合约调用。internal类型的函数和private类型的函数一样，智能合约自己内部调用，它和其他语言中的protected不完全一样。<br>private私有类型，修饰的状态变量及函数只能在当前合约内部使用，子合约也无法使用</p></blockquote><p>因此，我们对代码中，需要进行修饰的函数添加public关键字，逐个修改。(小提示：public关键字需要在returns关键字之前声明)。</p><h3 id="数据位置属性"><a href="#数据位置属性" class="headerlink" title="数据位置属性"></a>数据位置属性</h3><p><img src="/img/eth/ballot/7.png" alt="数据位置属性"></p><p>原因：首先要理解在区块链里，区块链本身就是一个数据库。如果你使用区块链标记物产的所有权，<br>归属信息将会被记录到区块链上，所有人都无法篡改，以标明不可争议的拥有权。在solidity中，有一个数据位置的属性用来标识变量是否需要持久化到区块链中。其中storage修饰的变量是指永久存储在区块链中的变量，memory修饰变量则是临时的，当外部函数对某合约调用完成时，内存型变量即被移除。任何函数参数当它的类型为引用类型时，这个函数参数都默认为memory类型，在当前版本中我们需要指明变量的数据位置。因此我们需要做以下修改，对引用类型做参的提供memory关键字声明。</p><p>如：将<code>function winningProposal() view public returns(uint[] winningProposals) {...}</code>修改为<code>function winningProposal() view public returns(uint[] memory winningProposals){...}</code>，逐个修改。</p><p>至此，所以编译时错误都修改完毕，但还存在一个无法编译通过的warning。</p><h3 id="声明重复"><a href="#声明重复" class="headerlink" title="声明重复"></a>声明重复</h3><p>这个waring出现在下面代码中（书中代码不严谨）：</p><pre><code>function delegate(address to) public{      Voter storage sender = voters[msg.sender];      require((! sender.voted) &amp;&amp;  (sender.weight !=0 ));      require(to != msg.sender);      while (voters[to].delegate != address(0)) {          to = voters[to].delegate;          require(to != msg.sender);      }      sender.voted = true;      sender.delegate = to;      Voter storage delegate = voters[to];      if (delegate.voted) {          proposals[delegate.vote].voteCount += sender.weight;      } else {          delegate.weight += sender.weight;      }    }</code></pre><p><img src="/img/eth/ballot/8.png" alt="声明重复"></p><p>原因：定义的delegate声明与当前方法名重复了，可以任意修改一处，比如将方法名修改为<code>delegateTo</code>,改完你会发现，右侧编译工具栏，终于绿了（开心）。</p><p><img src="/img/eth/ballot/9.png" alt="编译成功"></p><p>虽然还存在一些warning，但不影响编译，主要是一些安全性、语法性建议，可以在工具栏的Analysis里面查看。</p><h2 id="部署运行"><a href="#部署运行" class="headerlink" title="部署运行"></a>部署运行</h2><h3 id="代码逻辑"><a href="#代码逻辑" class="headerlink" title="代码逻辑"></a>代码逻辑</h3><p>投票智能合约代码逻辑简单，与其他语言编写的逻辑一样，有点C++与JS结合的味道，语法上略有区别。因此逻辑看看代码都能明白，要去理解的是智能合约的机制。</p><p>按照当前代码的编写，合约初始化时，需要传入相关提案的数组（告知有哪些提案可以进行投票，为bytes32的数组）。这是我的测试数组(5个)，可拿来使用，这就是每个提案在链中的代号：</p><pre><code>[&quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;,&quot;0x0000000000000000000000000000000000000000000000000000000000000001&quot;,&quot;0x0000000000000000000000000000000000000000000000000000000000000002&quot;,&quot;0x0000000000000000000000000000000000000000000000000000000000000003&quot;,&quot;0x0000000000000000000000000000000000000000000000000000000000000004&quot;]</code></pre><p>初始化过程中（对应当前合约的构造函数），现将合约部署者地址作为投票主持人地址，并且主持人默认成为参加投票的一份子，之后将传入的提案放进全局变量中，这样合约就部署完成了。</p><p>接下来按照代码的设计，合约部署者需要给给相关人（地址）进行投票权的赋予（赋权过程公开，不违背去中心化原则），对应代码中<code>giveRightToVote</code>以及<code>giveRightToVoteByBatch</code>方法，后者是批量授权，授权过程首先检测方法调用者是否为主持人（<code>require( msg.sender == chairperson )</code>，require用来进行断定，条件为false时抛出异常），之后开始给每个地址赋权，如果传入的地址已投票过了，则不进行授权。</p><p>授权完成后，各地址可调用<code>vote()</code>方法进行投票，传入体案的数组下标，即可完成。与赋权方法一样，每次执行前都会进行必要的检查，这也是智能合约开发的范式，检查-生效-交互。另外，还有一种投票方式，委托。委托就是我不想投了，你帮我来吧，但我会告诉你你可以代表我。地址A可以使用<code>delegateTo()</code>方法，将自己的投票权赋予另一个地址B，那么B的意见就代表了A。如果出现链式委托，最终被委托者的意见代表前面所有委托者。</p><p>投票完成后，主持人开始唱票了，根据每个提案的投票人数，将得票最多的提案公布出来，对应<code>winningProposal()</code>或<code>winnerName()</code>方法。</p><h3 id="运行测试"><a href="#运行测试" class="headerlink" title="运行测试"></a>运行测试</h3><p>Remix提供了一系列工具帮助我们进行测试运行。</p><p>点击右侧工具栏的Run，可看到下列信息:</p><p><img src="/img/eth/ballot/10.png" alt="运行栏"></p><p>依次是：<br>Environment执行环境<br>Account账户（测试账户，默认含有100以太币）<br>Gas limit合约执行消耗的最大gas（可理解为执行成本）<br>Value 金额（单位，wei，以太币的单位，1 eth = 1e18 wei）<br>以上填写默认的就行。</p><p>接下来的下拉框是你编译成功的合约，选择需要部署的合约<br>下面有两个框框，第一个框框是合约的初始化数据，可通过初试化数据部署，第二个框框可通过合约地址部署，我们选择第一种。将上节举例用的bytes32数据组填入，点击Deploy。</p><p>在控制台能够看到，部署的中间信息，在后面的每一步执行过程只中，都可看到过程信息。</p><p><img src="/img/eth/ballot/11.png" alt="debug"></p><p>此时在右下侧的部署列表里，即可看到部署好的合约。其中红色按钮代表函数会改变变量，蓝色表示函数为只读。传入相关的正确的参数格式，可以开始玩了。</p><p><img src="/img/eth/ballot/12.png" alt="部署列表"></p><p>比如，我对下标为1的提案进行投票，之后查看获胜的提案：</p><p><img src="/img/eth/ballot/13.png" alt="函数执行"></p><h2 id="必要说明"><a href="#必要说明" class="headerlink" title="必要说明"></a>必要说明</h2><p>1.在remix开发环境中，每次部署，都会部署都会进行合约的发布（测试环境），那么部署多次（点击Deploy按钮多次）都是在发布新的合约，每个合约的发布者都是主持人，并不代表连上的不同节点，所以在这种情况下，委托、赋权方法都可执行成功，但并不会对部署多次的其他合约有影响，因此看不出此方法的成效，可以从控制台查看过程信息。（我还没找到生成多个节点调用一个合约的方法，不知道是不是在测试链不可用，只是为了调通合约，如果有知道的请指教）</p><p>2.对于solidity语言的特性，本文没有过多的说明，比如数组特性，存储特性，映射方法等等，篇幅不易过长。</p><p>3.虽说是调试过程，但更多的是像因对编程语言升级而做的调整，顺便熟悉一下remix编辑器。</p><p>4.remix还有很多功能，还在摸索中，除调试运行提供的工具外，他还可以将代码发布的gist上，发布成功了，发现gist还是在墙外… </p><p>周末愉快</p><hr><p>完于 2019-04-21 16:06</p>]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在看到这个代码以及编译部署方式后，就想着来执行下，但路途坎坷.&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="编程" scheme="http://JohnneyAnn.github.io/categories/%E7%BC%96%E7%A8%8B/"/>
+    
+    
+      <category term="区块链" scheme="http://JohnneyAnn.github.io/tags/%E5%8C%BA%E5%9D%97%E9%93%BE/"/>
+    
+      <category term="以太坊" scheme="http://JohnneyAnn.github.io/tags/%E4%BB%A5%E5%A4%AA%E5%9D%8A/"/>
+    
+      <category term="solidity" scheme="http://JohnneyAnn.github.io/tags/solidity/"/>
+    
+      <category term="智能合约" scheme="http://JohnneyAnn.github.io/tags/%E6%99%BA%E8%83%BD%E5%90%88%E7%BA%A6/"/>
+    
+      <category term="remix" scheme="http://JohnneyAnn.github.io/tags/remix/"/>
+    
+  </entry>
   
   <entry>
     <title>用Python实现简单的微信机器人</title>
@@ -497,30 +527,6 @@
     
     
       <category term="mysql" scheme="http://JohnneyAnn.github.io/tags/mysql/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>这里有一座孤岛</title>
-    <link href="http://JohnneyAnn.github.io/2018/03/25/%E8%BF%99%E9%87%8C%E6%9C%89%E4%B8%80%E5%BA%A7%E5%AD%A4%E5%B2%9B/"/>
-    <id>http://JohnneyAnn.github.io/2018/03/25/这里有一座孤岛/</id>
-    <published>2018-03-24T16:09:43.228Z</published>
-    <updated>2018-03-24T16:09:43.228Z</updated>
-    
-    <content type="html"><![CDATA[<p>我像一座孤岛，四面环水，孤立无援。喜欢热闹，也喜欢安静，可能就是这样一个矛盾的人。</p><a id="more"></a><p>去年三月份来到南京实习，带着心中的目标，想着一切都在变好的道路上前行着，可是后来我把人弄丢了，也差点丢了自己。现在又三月了，一年的时间一切变化的很快，也不知是什么有了变化。 </p><p>开始朋友圈一条动态，“流浪在合肥街头”，我没有关注“流浪”两个字，倒是“合肥”这两个字眼让我感触颇深，于是，就把想到的写在这里。或许不是因为我算半个合肥人而感触远离家乡的悲愁，而是因为在合肥生活的大学四年。 </p><p>至少在大学之前，合肥对我来说也是个陌生的城市，在某种程度上与来南京的陌生并无不同。我来到这两个城市都有着一定的目的性，是为了维持某种关系，说起来有些媚俗，但似乎也是人之常情。如今，这些都不存在，我还在南京。 </p><p>南京相较于合肥那自然是好的，差就差在少了那四年的境遇。倒是有高中好友也在南京，除此好像确实没有任何熟悉的事物，你不能让他把所有的周末都放置在你这里，每个人很多关系需要去维护，人不就一致处在维持关系的状态中。就当是我一个人在这。我喜欢周末出去走走，这是我喜欢热闹的表现，我冲进人群，听到别人的谈话，我走到一些有趣的地方，看不一样的场景，这些听起来都是那么得有意境，我将其放到微博、朋友圈，难免让别人误会。而这恰巧体现出我的孤立无援，渴望获得别人的认可，实话说出来有显的如此低俗。甚至，当我正在进行这些事的时候，连我自己都骗了，当时这些事情完成，静下心来去回想，逛着的三两小时，我竟一句话没有说，如空气一般，飘着飘着，看似与所有人都接触，而没有人能真切感知，何等悲哀。 </p><p>现在住的离公司远了，每天一个多小时的车程，大家都说这人怕是傻了，这不找罪受呢。当你做某个决定时，你一定想好了一万个理由来与朋友说服。在此，我想赋予这个决定形而上的意义。摧残人的不是肉体，而是精神。相较于被孤独这个情感的摧残我更希望是来自“跋涉”这个物理上的摧残。梁文道在《我执》里说到“一旦又较稳当的晚上，才发现自己竟又恢复了独处的生活”，这于就是路程的遥远与加班能让我独处的时间短点，不失为一件乐事。连续几个星期晚上都加班，其中有一两个晚上没有加班，回来竟觉得百般不适，是对工作的痴迷？对加班的痴迷？我可能还没有那么高尚，只是回来太安静了。同事说我有闲情雅致，回来还看看书，我将自己摆在文艺好学的位置表示出对知识的渴望，实则我并不知道我能干嘛，只能借此打发时间，或许解决孤独之外还能获得意外之喜。来回的路程给了看书的更多的时间，在其他物质需求满足不了的情况下，或许能够满足精神需求，抑或第三层次需求。如此看来，我还没啥，该知道的我都知道。 </p><p>如果不幸，独处的时间降临，除了靠这些精神食粮来充实，我还会和朋友打打电话开视屏，这是我维系异地朋友关系的方式，也是我满足自身需求的一种表现。我想我也没找到其他更好的方式，毕业之后或者说工作之时，大家都为生活所迫，又是处在不同的城市，常见已是种奢侈。进来得朋友一决定，颇为钦佩。他离开合肥来到杭州，合肥的工作不喜欢是一个理由，还有个理由是她在杭州，他说他对很多事都后知后觉，现在想去争取一下。冲动么？冲动。对么？个人觉得无法评判。我钦佩的是他想做就去做的态度，我做不到。我劝他大家都是后知后觉的，去杭州自然不会那么顺利，但决定做了自然就无法更改了，那就别谈什么懊悔。关于对错，这事还没玩，你刚做决定怎么知道对错，只有等你为这个决定付出了行动得到了结果你才知道对错，可从另一个方面来看，贯穿于整件事，对错早已没有了意义。如果后来真的要评个对错，那一定得让它是对的，后来觉得是错的，那一定是你没做好，没有给这个决定赋予实际有意义的行动。 </p><p>跟他聊完，我又想抽自己几个嘴巴子。大道理一堆一堆的，说得跟自己是个明白人似的，可实际自己的生活都过不好。我们都处在某个伤愁的境遇，我也好，他也好，其他的朋友也罢，谁都有烦心的事。我似乎与其他人又有些不同，我只能跟另一个我诉说，如同他们跟我诉说一样。也是我自己在作祟，不愿提及这些，我还能在这里发发牢骚，想与他们聊点开心的事，聊些曾经的高中、大学生活，想想都会情不自禁的笑。 </p><p>是啊，多么有趣啊。大学毕业一年了，高中五年了，人也丢失了很多，留下来实属不易，那该是我们的财富。你会感叹时间的迅速，也感叹时间的恐怖，在不同的阶段，不同的时间，人都不一样，此刻写博客的我与写博客之前的我也不一样，你看，变化多快。好在，我们总是在适应这个世界，每个阶段的想法、做法都是为了去让自己活得更好。希望大家都好，至少没有我这样的孤独。 </p><p>牢骚发完，今晚的独处到这里就结束了，接下来想去做个梦，会有很多人在，是能够去接触的，能够被他人感知的，这样或许还能赶上你们还没有过去的今天。 </p><p>明天见。 </p><hr><p>写于 2018.3.25 00:06</p>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;我像一座孤岛，四面环水，孤立无援。喜欢热闹，也喜欢安静，可能就是这样一个矛盾的人。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="生活" scheme="http://JohnneyAnn.github.io/categories/%E7%94%9F%E6%B4%BB/"/>
-    
-    
-      <category term="记录" scheme="http://JohnneyAnn.github.io/tags/%E8%AE%B0%E5%BD%95/"/>
-    
-      <category term="随笔" scheme="http://JohnneyAnn.github.io/tags/%E9%9A%8F%E7%AC%94/"/>
     
   </entry>
   
