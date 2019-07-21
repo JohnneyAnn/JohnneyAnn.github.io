@@ -1,505 +1,138 @@
 <!DOCTYPE html>
-<html style="display: none;" lang="zh">
-    <head>
-    <meta charset="utf-8">
-    <!--
-        © Material Theme
-        https://github.com/viosey/hexo-theme-material
-        Version: 1.5.2 -->
-    <script>
-        window.materialVersion = "1.5.2"
-        // Delete localstorage with these tags
-        window.oldVersion = [
-            'codestartv1',
-            '1.3.4',
-            '1.4.0',
-            '1.4.0b1',
-            '1.5.0'
-        ]
-    </script>
-
-    <!-- dns prefetch -->
-    <meta http-equiv="x-dns-prefetch-control" content="on">
-
-
-    <link rel="dns-prefetch" href="https://cdn1.lncld.net"/>
-
-
-    <link rel="dns-prefetch" href="https://busuanzi.ibruce.info"/>
-
-
-
-
-
-
-
-
-
-
-
-
-    <!-- Meta & Info -->
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="renderer" content="webkit">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-
-    <!-- Title -->
+<html lang="">
+  <head>
     
-    <title>
-        
-            后焦虑思考 | 
-        
-        安阳
-    </title>
+<meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,user-scalable=no,initial-scale=1,minimum-scale=1,maximum-scale=1">
 
-    <!-- Favicons -->
-    <link rel="icon shortcut" type="image/ico" href="/favicon.ico">
-    <link rel="icon" href="/favicon.ico">
 
-    <meta name="format-detection" content="telephone=no"/>
-    <meta name="description" itemprop="description" content="焦虑是不是这个时代的产物？这周又体会到了焦虑，是什么导致了焦虑？你的焦虑来自于自身还是外界？我生活在这个时代，很难去考证上个时代的人们是否同我一样有各种焦虑，也可能每个时代的焦虑都不一样，我想说的是我处在的焦虑，那就这个时代吧。">
-    <meta name="keywords" content="编程,书籍,分享,随笔,愚见">
-    <meta name="theme-color" content="#0097A7">
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <!-- Disable Fucking Bloody Baidu Tranformation -->
-    <meta http-equiv="Cache-Control" content="no-transform" />
-    <meta http-equiv="Cache-Control" content="no-siteapp" />
 
-    <!--[if lte IE 9]>
-        <link rel="stylesheet" href="/css/ie-blocker.css">
 
-        
-            <script src="/js/ie-blocker.zhCN.js"></script>
-        
-    <![endif]-->
+  <meta name="description" content="后焦虑思考"/>
 
-    <!-- Import lsloader -->
-    <script>(function(){window.lsloader={jsRunSequence:[],jsnamemap:{},cssnamemap:{}};lsloader.removeLS=function(a){try{localStorage.removeItem(a)}catch(b){}};lsloader.setLS=function(a,c){try{localStorage.setItem(a,c)}catch(b){}};lsloader.getLS=function(a){var c="";try{c=localStorage.getItem(a)}catch(b){c=""}return c};versionString="/*"+(window.materialVersion||"unknownVersion")+"*/";lsloader.clean=function(){try{var b=[];for(var a=0;a<localStorage.length;a++){b.push(localStorage.key(a))}b.forEach(function(e){var f=lsloader.getLS(e);if(window.oldVersion){var d=window.oldVersion.reduce(function(g,h){return g||f.indexOf("/*"+h+"*/")!==-1},false);if(d){lsloader.removeLS(e)}}})}catch(c){}};lsloader.clean();lsloader.load=function(f,a,b,d){if(typeof b==="boolean"){d=b;b=undefined}d=d||false;b=b||function(){};var e;e=this.getLS(f);if(e&&e.indexOf(versionString)===-1){this.removeLS(f);this.requestResource(f,a,b,d);return}if(e){var c=e.split(versionString)[0];if(c!=a){console.log("reload:"+a);this.removeLS(f);this.requestResource(f,a,b,d);return}e=e.split(versionString)[1];if(d){this.jsRunSequence.push({name:f,code:e});this.runjs(a,f,e)}else{document.getElementById(f).appendChild(document.createTextNode(e));b()}}else{this.requestResource(f,a,b,d)}};lsloader.requestResource=function(b,e,a,c){var d=this;if(c){this.iojs(e,b,function(h,f,g){d.setLS(f,h+versionString+g);d.runjs(h,f,g)})}else{this.iocss(e,b,function(f){document.getElementById(b).appendChild(document.createTextNode(f));d.setLS(b,e+versionString+f)},a)}};lsloader.iojs=function(d,b,g){var a=this;a.jsRunSequence.push({name:b,code:""});try{var f=new XMLHttpRequest();f.open("get",d,true);f.onreadystatechange=function(){if(f.readyState==4){if((f.status>=200&&f.status<300)||f.status==304){if(f.response!=""){g(d,b,f.response);return}}a.jsfallback(d,b)}};f.send(null)}catch(c){a.jsfallback(d,b)}};lsloader.iocss=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.iofonts=function(f,c,h,a){var b=this;try{var g=new XMLHttpRequest();g.open("get",f,true);g.onreadystatechange=function(){if(g.readyState==4){if((g.status>=200&&g.status<300)||g.status==304){if(g.response!=""){h(g.response);a();return}}b.cssfallback(f,c,a)}};g.send(null)}catch(d){b.cssfallback(f,c,a)}};lsloader.runjs=function(f,c,e){if(!!c&&!!e){for(var b in this.jsRunSequence){if(this.jsRunSequence[b].name==c){this.jsRunSequence[b].code=e}}}if(!!this.jsRunSequence[0]&&!!this.jsRunSequence[0].code&&this.jsRunSequence[0].status!="failed"){var a=document.createElement("script");a.appendChild(document.createTextNode(this.jsRunSequence[0].code));a.type="text/javascript";document.getElementsByTagName("head")[0].appendChild(a);this.jsRunSequence.shift();if(this.jsRunSequence.length>0){this.runjs()}}else{if(!!this.jsRunSequence[0]&&this.jsRunSequence[0].status=="failed"){var d=this;var a=document.createElement("script");a.src=this.jsRunSequence[0].path;a.type="text/javascript";this.jsRunSequence[0].status="loading";a.onload=function(){d.jsRunSequence.shift();if(d.jsRunSequence.length>0){d.runjs()}};document.body.appendChild(a)}}};lsloader.tagLoad=function(b,a){this.jsRunSequence.push({name:a,code:"",path:b,status:"failed"});this.runjs()};lsloader.jsfallback=function(c,b){if(!!this.jsnamemap[b]){return}else{this.jsnamemap[b]=b}for(var a in this.jsRunSequence){if(this.jsRunSequence[a].name==b){this.jsRunSequence[a].code="";this.jsRunSequence[a].status="failed";this.jsRunSequence[a].path=c}}this.runjs()};lsloader.cssfallback=function(e,c,b){if(!!this.cssnamemap[c]){return}else{this.cssnamemap[c]=1}var d=document.createElement("link");d.type="text/css";d.href=e;d.rel="stylesheet";d.onload=d.onerror=b;var a=document.getElementsByTagName("script")[0];a.parentNode.insertBefore(d,a)};lsloader.runInlineScript=function(c,b){var a=document.getElementById(b).innerText;this.jsRunSequence.push({name:c,code:a});this.runjs()}})();</script>
 
-    <!-- Import queue -->
-    <script>function Queue(){this.dataStore=[];this.offer=b;this.poll=d;this.execNext=a;this.debug=false;this.startDebug=c;function b(e){if(this.debug){console.log("Offered a Queued Function.")}if(typeof e==="function"){this.dataStore.push(e)}else{console.log("You must offer a function.")}}function d(){if(this.debug){console.log("Polled a Queued Function.")}return this.dataStore.shift()}function a(){var e=this.poll();if(e!==undefined){if(this.debug){console.log("Run a Queued Function.")}e()}}function c(){this.debug=true}}var queue=new Queue();</script>
 
-    <!-- Import CSS -->
-    
-        <style id="material_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_css","/css/material.min.css?Z7a72R1E4SxzBKR/WGctOA==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-        <style id="style_css"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("style_css","/css/style.min.css?MKetZV3cUTfDxvMffaOezg==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
 
-        
+  <meta name="keywords" content="随笔,愚见," />
 
-    
 
-    
 
-    <!-- Config CSS -->
 
-<!-- Other Styles -->
-<style>
-  body, html {
-    font-family: Roboto, "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
-    overflow-x: hidden !important;
-  }
+
+  <link rel="alternate" href="/atom.xml" title="Russell">
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=1.1" />
+
+
+
+<link rel="canonical" href="http://JohnneyAnn.github.io/2017/12/17/后焦虑思考/"/>
+
+
+<meta name="description" content="焦虑是不是这个时代的产物？这周又体会到了焦虑，是什么导致了焦虑？你的焦虑来自于自身还是外界？我生活在这个时代，很难去考证上个时代的人们是否同我一样有各种焦虑，也可能每个时代的焦虑都不一样，我想说的是我处在的焦虑，那就这个时代吧。">
+<meta name="keywords" content="随笔,愚见">
+<meta property="og:type" content="article">
+<meta property="og:title" content="后焦虑思考">
+<meta property="og:url" content="http://JohnneyAnn.github.io/2017/12/17/后焦虑思考/index.html">
+<meta property="og:site_name" content="Russell">
+<meta property="og:description" content="焦虑是不是这个时代的产物？这周又体会到了焦虑，是什么导致了焦虑？你的焦虑来自于自身还是外界？我生活在这个时代，很难去考证上个时代的人们是否同我一样有各种焦虑，也可能每个时代的焦虑都不一样，我想说的是我处在的焦虑，那就这个时代吧。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2017-12-17T15:24:21.179Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="后焦虑思考">
+<meta name="twitter:description" content="焦虑是不是这个时代的产物？这周又体会到了焦虑，是什么导致了焦虑？你的焦虑来自于自身还是外界？我生活在这个时代，很难去考证上个时代的人们是否同我一样有各种焦虑，也可能每个时代的焦虑都不一样，我想说的是我处在的焦虑，那就这个时代吧。">
+
+
+<link rel="stylesheet" type="text/css" href="/css/style.css?v=1.1" />
+<link href='https://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet'>
+
+
+  <link rel="stylesheet" type="text/css" href="/lib/fancybox/jquery.fancybox.css" />
+
+
+
+
+<script type="text/javascript">
+  var themeConfig = {
+    fancybox: {
+      enable: true
+    },
+  };
+</script>
+
+
+
+
   
-  code {
-    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-  }
-
-  a {
-    color: #00838F;
-  }
-
-  .mdl-card__media,
-  #search-label,
-  #search-form-label:after,
-  #scheme-Paradox .hot_tags-count,
-  #scheme-Paradox .sidebar_archives-count,
-  #scheme-Paradox .sidebar-colored .sidebar-header,
-  #scheme-Paradox .sidebar-colored .sidebar-badge{
-    background-color: #0097A7 !important;
-  }
-
-  /* Sidebar User Drop Down Menu Text Color */
-  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:hover,
-  #scheme-Paradox .sidebar-colored .sidebar-nav>.dropdown>.dropdown-menu>li>a:focus {
-    color: #0097A7 !important;
-  }
-
-  #post_entry-right-info,
-  .sidebar-colored .sidebar-nav li:hover > a,
-  .sidebar-colored .sidebar-nav li:hover > a i,
-  .sidebar-colored .sidebar-nav li > a:hover,
-  .sidebar-colored .sidebar-nav li > a:hover i,
-  .sidebar-colored .sidebar-nav li > a:focus i,
-  .sidebar-colored .sidebar-nav > .open > a,
-  .sidebar-colored .sidebar-nav > .open > a:hover,
-  .sidebar-colored .sidebar-nav > .open > a:focus,
-  #ds-reset #ds-ctx .ds-ctx-entry .ds-ctx-head a {
-    color: #0097A7 !important;
-  }
-
-  .toTop {
-    background: #757575 !important;
-  }
-
-  .material-layout .material-post>.material-nav,
-  .material-layout .material-index>.material-nav,
-  .material-nav a {
-    color: #757575;
-  }
-
-  #scheme-Paradox .MD-burger-layer {
-    background-color: #757575;
-  }
-
-  #scheme-Paradox #post-toc-trigger-btn {
-    color: #757575;
-  }
-
-  .post-toc a:hover {
-    color: #00838F;
-    text-decoration: underline;
-  }
-
-</style>
-
-
-<!-- Theme Background Related-->
-
-    <style>
-      body{
-        background-color: #5b7085;
-      }
-
-      /* blog_info bottom background */
-      #scheme-Paradox .material-layout .something-else .mdl-card__supporting-text{
-        background-color: #fff;
-      }
-    </style>
 
 
 
+    <title> 后焦虑思考 - Russell </title>
+  </head>
 
-<!-- Fade Effect -->
+  <body>
+    <div id="page">
+      <header id="masthead"><div class="site-header-inner">
+    <h1 class="site-title">
+        <a href="/." class="logo">Russell</a>
+    </h1>
 
-    <style>
-      .fade {
-        transition: all 800ms linear;
-        -webkit-transform: translate3d(0,0,0);
-        -moz-transform: translate3d(0,0,0);
-        -ms-transform: translate3d(0,0,0);
-        -o-transform: translate3d(0,0,0);
-        transform: translate3d(0,0,0);
-        opacity: 1;
-      }
-
-      .fade.out{
-        opacity: 0;
-      }
-    </style>
-
-
-<!-- Import Font -->
-<!-- Import Roboto -->
-
-    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
-
-
-<!-- Import Material Icons -->
-
-
-    <style id="material_icons"></style><script>if(typeof window.lsLoadCSSMaxNums === "undefined")window.lsLoadCSSMaxNums = 0;window.lsLoadCSSMaxNums++;lsloader.load("material_icons","/css/material-icons.css?pqhB/Rd/ab0H2+kZp0RDmw==",function(){if(typeof window.lsLoadCSSNums === "undefined")window.lsLoadCSSNums = 0;window.lsLoadCSSNums++;if(window.lsLoadCSSNums == window.lsLoadCSSMaxNums)document.documentElement.style.display="";}, false)</script>
-
-
-
-
-    <!-- Import jQuery -->
-    
-        <script>lsloader.load("jq_js","/js/jquery.min.js?qcusAULNeBksqffqUM2+Ig==", true)</script>
-    
-
-    <!-- WebAPP Icons -->
-    <meta name="mobile-web-app-capable" content="yes">
-    <meta name="application-name" content="安阳">
-    <meta name="msapplication-starturl" content="http://JohnneyAnn.github.io/2017/12/17/后焦虑思考/">
-    <meta name="msapplication-navbutton-color" content="#0097A7">
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="apple-mobile-web-app-title" content="安阳">
-    <meta name="apple-mobile-web-app-status-bar-style" content="black">
-    <link rel="apple-touch-icon" href="/favicon.ico">
-
-    <!-- Site Verification -->
-    
-    
-
-    <!-- RSS -->
-    
-
-    <!-- The Open Graph protocol -->
-    <meta property="og:url" content="http://JohnneyAnn.github.io/2017/12/17/后焦虑思考/">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="后焦虑思考 | 安阳">
-    <meta property="og:image" content="/favicon.ico">
-    <meta property="og:description" content="焦虑是不是这个时代的产物？这周又体会到了焦虑，是什么导致了焦虑？你的焦虑来自于自身还是外界？我生活在这个时代，很难去考证上个时代的人们是否同我一样有各种焦虑，也可能每个时代的焦虑都不一样，我想说的是我处在的焦虑，那就这个时代吧。">
-    <meta property="og:article:tag" content="随笔"> <meta property="og:article:tag" content="愚见"> 
-
-    
-        <meta property="article:published_time" content="Sun Dec 17 2017 23:24:21 GMT+0800">
-        <meta property="article:modified_time" content="Sun Dec 17 2017 23:24:21 GMT+0800">
-    
-
-    <!-- The Twitter Card protocol -->
-    <meta name="twitter:card" content="summary_large_image">
-
-    <!-- Add canonical link for SEO -->
-    
-        <link rel="canonical" href="http://JohnneyAnn.github.io/2017/12/17/后焦虑思考/index.html" />
-    
-
-    <!-- Structured-data for SEO -->
-    
+    <nav id="nav-top">
         
-
-
-<script type="application/ld+json">
-{
-    "@context": "https://schema.org",
-    "@type": "BlogPosting",
-    "mainEntityOfPage": "http://JohnneyAnn.github.io/2017/12/17/后焦虑思考/index.html",
-    "headline": "后焦虑思考",
-    "datePublished": "Sun Dec 17 2017 23:24:21 GMT+0800",
-    "dateModified": "Sun Dec 17 2017 23:24:21 GMT+0800",
-    "author": {
-        "@type": "Person",
-        "name": "安 阳",
-        "image": {
-            "@type": "ImageObject",
-            "url": "/img/avatar.jpg"
-        },
-        "description": "You deserve better."
-    },
-    "publisher": {
-        "@type": "Organization",
-        "name": "安阳",
-        "logo": {
-            "@type":"ImageObject",
-            "url": "/favicon.ico"
-        }
-    },
-    "keywords": ",随笔,愚见编程,书籍,分享",
-    "description": "焦虑是不是这个时代的产物？这周又体会到了焦虑，是什么导致了焦虑？你的焦虑来自于自身还是外界？我生活在这个时代，很难去考证上个时代的人们是否同我一样有各种焦虑，也可能每个时代的焦虑都不一样，我想说的是我处在的焦虑，那就这个时代吧。",
-}
-</script>
-
-
-    
-
-    <!-- Analytics -->
-    
-    
-    
-
-    <!-- Custom Head -->
-    
-
-</head>
-
-
-    
-        <body id="scheme-Paradox" class="lazy">
-            <div class="material-layout  mdl-js-layout has-drawer is-upgraded">
+            <ul id="menu-top" class="nav-top-items">
                 
-
-                <!-- Main Container -->
-                <main class="material-layout__content" id="main">
-
-                    <!-- Top Anchor -->
-                    <div id="top"></div>
-
-                    
-                        <!-- Hamburger Button -->
-                        <button class="MD-burger-icon sidebar-toggle">
-                            <span class="MD-burger-layer" style="background-color: #fff"></span>
-                        </button>
-                    
-
-                    <!-- Post TOC -->
-
-    
-    <!-- Back Button -->
-    <!--
-    <div class="material-back" id="backhome-div" tabindex="0">
-        <a class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon"
-           href="#" onclick="window.history.back();return false;"
-           target="_self"
-           role="button"
-           data-upgraded=",MaterialButton,MaterialRipple">
-            <i class="material-icons" role="presentation">arrow_back</i>
-            <span class="mdl-button__ripple-container">
-                <span class="mdl-ripple"></span>
-            </span>
-        </a>
-    </div>
-    -->
-
-
-    <!-- Left aligned menu below button -->
-    
-    
-    <button id="post-toc-trigger-btn"
-        class="mdl-button mdl-js-button mdl-button--icon">
-        <i class="material-icons" style="color:#fff">format_list_numbered</i>
-    </button>
-
-    <ul class="post-toc-wrap mdl-menu mdl-menu--bottom-left mdl-js-menu mdl-js-ripple-effect" for="post-toc-trigger-btn" style="max-height:80vh; overflow-y:scroll;">
-        <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#焦虑"><span class="post-toc-number">1.</span> <span class="post-toc-text">焦虑</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#公司团建前后"><span class="post-toc-number">2.</span> <span class="post-toc-text">公司团建前后</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#团建前"><span class="post-toc-number">2.1.</span> <span class="post-toc-text">团建前</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#团建中"><span class="post-toc-number">2.2.</span> <span class="post-toc-text">团建中</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#团建后"><span class="post-toc-number">2.3.</span> <span class="post-toc-text">团建后</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#团结后之后"><span class="post-toc-number">2.4.</span> <span class="post-toc-text">团结后之后</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#展望"><span class="post-toc-number">2.5.</span> <span class="post-toc-text">展望</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#分享"><span class="post-toc-number">3.</span> <span class="post-toc-text">分享</span></a></li></ol>
-    </ul>
-    
-
-
-
-
-<!-- Layouts -->
-
-    <!-- Post Module -->
-    <div class="material-post_container">
-
-        <div class="material-post mdl-grid">
-            <div class="mdl-card mdl-shadow--4dp mdl-cell mdl-cell--12-col">
-
-                <!-- Post Header(Thumbnail & Title) -->
+                    <li class="menu-item">
+                        <a href="/archives">
+                            
+                            
+                                Archives
+                            
+                        </a>
+                    </li>
                 
-    <!-- Paradox Post Header -->
-    
-        
-            <!-- Random Thumbnail -->
-            <div class="post_thumbnail-random mdl-card__media mdl-color-text--grey-50">
-            <script type="text/ls-javascript" id="post-thumbnail-script">
-    var randomNum = Math.floor(Math.random() * 19 + 1);
-
-    $('.post_thumbnail-random').attr('data-original', '/img/random/material-' + randomNum + '.png');
-    $('.post_thumbnail-random').addClass('lazy');
-</script>
-
-        
-    
-            <p class="article-headline-p">
-                后焦虑思考
-            </p>
-        </div>
-
-
-
-
-
+                    <li class="menu-item">
+                        <a href="/about">
+                            
+                            
+                                About
+                            
+                        </a>
+                    </li>
                 
-                    <!-- Paradox Post Info -->
-                    <div class="mdl-color-text--grey-700 mdl-card__supporting-text meta">
-
-    <!-- Author Avatar -->
-    <div id="author-avatar">
-        <img src="/img/avatar.jpg" width="44px" height="44px" alt="Author Avatar"/>
-    </div>
-    <!-- Author Name & Date -->
-    <div>
-        <strong>安 阳</strong>
-        <span>12月 17, 2017</span>
-    </div>
-
-    <div class="section-spacer"></div>
-
-    <!-- Favorite -->
-    <!--
-        <button id="article-functions-like-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon btn-like">
-            <i class="material-icons" role="presentation">favorite</i>
-            <span class="visuallyhidden">favorites</span>
-        </button>
-    -->
-
-    <!-- Qrcode -->
-    
-
-    <!-- Tags (bookmark) -->
-    
-    <button id="article-functions-viewtags-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-        <i class="material-icons" role="presentation">bookmark</i>
-        <span class="visuallyhidden">bookmark</span>
-    </button>
-    <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-functions-viewtags-button">
-        <li class="mdl-menu__item">
-        <a class="post_tag-link" href="/tags/愚见/">愚见</a></li><li class="mdl-menu__item"><a class="post_tag-link" href="/tags/随笔/">随笔</a>
-    </ul>
-    
-
-    <!-- Share -->
-    
-        <button id="article-fuctions-share-button" class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon">
-    <i class="material-icons" role="presentation">share</i>
-    <span class="visuallyhidden">share</span>
-</button>
-<ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect" for="article-fuctions-share-button">
-    
-
-    
+            </ul>
         
-            <!-- Busuanzi Views -->
-            <a class="post_share-link" href="#">
-                <li class="mdl-menu__item">
-                    <span id="busuanzi_container_page_pv">
-                        <span id="busuanzi_value_page_pv"></span>&nbsp;浏览量
-                    </span>
-                </li>
-            </a>
-        
-    
-
-    <!-- Share Weibo -->
-    
-        <a class="post_share-link" href="http://service.weibo.com/share/share.php?appkey=&title=后焦虑思考&url=http://JohnneyAnn.github.io/2017/12/17/后焦虑思考/index.html&pic=http://JohnneyAnn.github.io/favicon.ico&searchPic=false&style=simple" target="_blank">
-            <li class="mdl-menu__item">
-                分享到微博
-            </li>
-        </a>
-    
-
-    <!-- Share Twitter -->
-    
-
-    <!-- Share Facebook -->
-    
-
-    <!-- Share Google+ -->
-    
-
-    <!-- Share LinkedIn -->
-    
-        <a class="post_share-link" href="https://www.linkedin.com/shareArticle?mini=true&url=http://JohnneyAnn.github.io/2017/12/17/后焦虑思考/index.html&title=后焦虑思考" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 LinkedIn
-            </li>
-        </a>
-    
-
-    <!-- Share QQ -->
-    
-        <a class="post_share-link" href="http://connect.qq.com/widget/shareqq/index.html?site=安阳&title=后焦虑思考&summary=JAVA，读书，旅行，分享，BBox。&pics=http://JohnneyAnn.github.io/favicon.ico&url=http://JohnneyAnn.github.io/2017/12/17/后焦虑思考/index.html" target="_blank">
-            <li class="mdl-menu__item">
-                分享到 QQ
-            </li>
-        </a>
-    
-
-    <!-- Share Telegram -->
-    
-</ul>
-
-    
+  </nav>
 </div>
 
-                
+      </header>
+      <div id="content">
+        
+    <div id="primary">
+        
+  <article class="post">
+    <header class="post-header">
+      <h1 class="post-title">
+        
+          后焦虑思考
+        
+      </h1>
 
-                <!-- Post Content -->
-                <div id="post-content" class="mdl-color-text--grey-700 mdl-card__supporting-text fade out">
+      <time class="post-time">
+          12月 17 2017
+      </time>
+    </header>
+
+
+
     
-        <p>焦虑是不是这个时代的产物？<br>这周又体会到了焦虑，是什么导致了焦虑？你的焦虑来自于自身还是外界？<br>我生活在这个时代，很难去考证上个时代的人们是否同我一样有各种焦虑，也可能每个时代的焦虑都不一样，我想说的是我处在的焦虑，那就这个时代吧。<br><a id="more"></a></p>
+            <div class="post-content">
+            <p>焦虑是不是这个时代的产物？<br>这周又体会到了焦虑，是什么导致了焦虑？你的焦虑来自于自身还是外界？<br>我生活在这个时代，很难去考证上个时代的人们是否同我一样有各种焦虑，也可能每个时代的焦虑都不一样，我想说的是我处在的焦虑，那就这个时代吧。<br><a id="more"></a></p>
 <h1 id="焦虑"><a href="#焦虑" class="headerlink" title="焦虑"></a>焦虑</h1><p>个人认为，来自于自身的焦虑是自己能够去感知自己的不足而产生的焦虑，这种焦虑可能是正性的，能够意识到自己不足从而促进个人的提升，既然是可能，意味着也不排除破罐子破摔的情况存在。而来自外界的焦虑是别人向你灌输你存在不足从而促进你去接受这个思想而产生的焦虑，其中有一种情况很常见，大多是环境的影响或是商家的手段：“别人都在做而你没有或者你做的与别人不一样”。</p><br><p>举个例子，几个月前开始使用的一款app，得到。罗振宇老师创办的，提供的是知识服务，通俗点说是卖知识的。于我这个刚步入社会，眼界小的可怜的喽啰来说，说发现新大陆一点也不过分，早期可谓是如饥似渴，打开软件，启动图上显示的“和你一起终身学习、一起建设一所终生大学”，瞬间感觉自己有了文化，正在知识的海洋里翻滚。从小到大没有看过什么书，这里的一切都是新鲜的，可以看到很多的观点，也因此看完了罗振宇老师的书，我把时间安排的死死的。正如得到app的核心思想嘛，“利用碎片化时间终生学习”。公交车上、洗澡、上厕所、排队我都在听，每天充实的要死。几个月后，我也能跟你说说什么新奇的观点，可是我更焦虑了。这么多知识我怎么才能看的完？看完忘了怎么办？本想消除我无知的焦虑，却加剧了我的无知，带来了时间上的焦虑和生活上的疲惫。这时就有人发言了：“罗胖子啊，你这哪是卖知识，你这是在卖焦虑啊”。</p><br><p>这个例子我说的两种焦虑都包含，我不仅感受了焦虑也感受了疲惫。这个时候就该反思了，是罗胖子的说法对还是这个路人甲的发言对？我回顾了下，我是前期听罗胖子的，中期听路人甲的，后期决定中庸。都对，都不对。否则岂不是又陷入焦虑？来分析下，罗胖子要我们学习，学习是好事啊，我们就应该终身学习是吧，这是一个有经验的人对其他人的忠告；罗胖子也是个商人，无形之中给我们灌输的是“小笨蛋们，想变聪明嘛，用得到app才行啊！”，这与我们来说肯定觉得是不对的，但对于一个商人来说无可厚非；再看看路人甲，他说出来罗胖子作为商人的行为，很正确，问题在于如何去选择是他自己的事。</p><br><p>以上仅代表个人观点。“得到”现在还在我的手机里，我还在用，不同的是不再觉得看了“得到”就有文化（不被商家左右），就不傻了，而是把他当作一个渠道、一个娱乐方式，没有去刻意的使用，强迫自己今天必须要听多少。每个人情况都有所不同，你工作累了想放松你大可回来花半个小时听听舒缓的歌，强迫自己去接受知识带着负面情绪还怎么赚钱？还是要随心嘛。目前的时代确实是碎片化的，当“碎片化”被提及是，带来了电子书的回春，碎片化知识服务产业的兴起，电子书也不是单纯的看书了多了讲书，电台也开始有知识服务了，还有知乎一小时系列等等。有人说这个好，有人说那个好，不可能照单全收，否责又陷入焦虑了。知识是学不完的，不是说你没有使用某个app你就错过了一些知识，也不是你用了某个app就高人一等，每个人都有自己的选择，这类软件1-2个足以。最最主要的是你要选择你喜欢的软件，选择软件里提供的你感兴趣的内容，不要被别人左右。学你感兴趣的才是学习，你不知道想知道的才是知识。</p><br><p>我目前手机里有“微信读书”和“得到”，“微信读书”用的多，可以看到很多有趣的书，“得到”呢只偶尔无聊时使用它的“每天听本书”栏目，只是偶尔，有时间还是喜欢看而不是听。听的都是别人的见解，看的才能有自己的想法。</p>
 
 <h1 id="公司团建前后"><a href="#公司团建前后" class="headerlink" title="公司团建前后"></a>公司团建前后</h1><h2 id="团建前"><a href="#团建前" class="headerlink" title="团建前"></a>团建前</h2><p>时间：2017.12.16 星期六 方山汽摩基地 冷但有阳光</p><br><p>这是来公司的第一次集体出去活动，自然不能缺席，也十分期待周六的活动。这是个令人高兴的事，但是如果周六时间用来团建，那本周的工作则需要在周六之前完成。从周会上来看，本周的工作完成肯定不会需要太长的时间，然而我已经不会再那么天真了（/手动摊手），早早就有了心里准备，活来了，焦虑也来了。是无知的焦虑，我一直觉得既然工作了就不应该有什么不会的，不会就去学呗，别人会自己也能吧，这次的活能够去了解其他部门的东西，还是觉得很有趣，后来严重受挫。老板和同事都在指点帮助我理解，我还是出错还是在纠结，时间花掉却没能输出成果或者说没能输出满意的结果。连续加了四晚的班，我想还有一部分时间是在焦虑，来自自身的焦虑。想把这件事完成的焦虑，还有其他事的焦虑，自己是否能胜任这个工作的焦虑，后而自身不足的焦虑。也希望我能够像理解“得到”式焦虑那样消除这些焦虑。</p>
@@ -520,504 +153,93 @@
 
 
 
-        
-                <blockquote style="margin: 2em 0 0;padding: 0.5em 1em;border-left: 3px solid #F44336;background-color: #F5F5F5;list-style: none;">
-                    <p><strong>
-                         
-                            Licensed under <a target="_blank" href="//creativecommons.org/licenses/by-nc-sa/4.0/legalcode">CC BY-NC-SA 4.0</a>
-                        </strong>
-                        <br>
-                        <strong>本文链接：</strong><a href="http://JohnneyAnn.github.io/2017/12/17/后焦虑思考/">http://JohnneyAnn.github.io/2017/12/17/后焦虑思考/</a>
-                    </p>
-                </blockquote>
-        
-    
-
-    
-</div>
-
-
-                
-
-                <!-- Post Comments -->
-                
-                    
-    <div id="comment" style='padding:10px;' class="vcomment"></div>
-<script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
-<script src="//unpkg.com/valine/dist/Valine.min.js"></script>
-<script>
-    var GUEST_INFO = ['nick','mail','link'];
-    var guest_info = 'nick,mail,link'.split(',').filter(function(item){
-        return GUEST_INFO.indexOf(item) > -1
-    });
-    var notify = 'false' == true;
-    var verify = 'false' == true;
-    new Valine({
-        el: '.vcomment',
-        notify: notify,
-        verify: verify,
-        appId: "vRAyxzxr73dg5eErS2BinqU0-gzGzoHsz",
-        appKey: "GtyJrh1h66aRFHDhsKXGD5pT",
-        placeholder: "Please leave your opinions...",
-        pageSize:'10',
-        avatar:'wavatar',
-        lang:'zh-cn'
-    });
-</script>
-
-                
             </div>
+          
 
-            <!-- Post Prev & Next Nav -->
-            <nav class="material-nav mdl-color-text--grey-50 mdl-cell mdl-cell--12-col">
-    <!-- Prev Nav -->
     
-        <a href="/2017/12/23/MySQL存储过程/" id="post_nav-newer" class="prev-content">
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_back</i>
-            </button>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            新篇
-        </a>
-    
+      <footer class="post-footer">
+		
+		<div class="post-tags">
+		  
+			<a href="/tags/随笔/">随笔</a>
+		  
+			<a href="/tags/愚见/">愚见</a>
+		  
+		</div>
+		
 
-    <!-- Section Spacer -->
-    <div class="section-spacer"></div>
-
-    <!-- Next Nav -->
-    
-        <a href="/2017/12/01/机器学习实战（五）Logistic回归/" id="post_nav-older" class="next-content">
-            旧篇
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-            <button class="mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon mdl-color--white mdl-color-text--grey-900" role="presentation">
-                <i class="material-icons">arrow_forward</i>
-            </button>
-        </a>
-    
-</nav>
-
-        </div>
-    </div>
-
-
-
-                    
-                        <!-- Overlay For Active Sidebar -->
-<div class="sidebar-overlay"></div>
-
-<!-- Material sidebar -->
-<aside id="sidebar" class="sidebar sidebar-colored sidebar-fixed-left" role="navigation">
-    <div id="sidebar-main">
-        <!-- Sidebar Header -->
-        <div class="sidebar-header header-cover" style="background-image: url(/img/sidebar_header.png);">
-    <!-- Top bar -->
-    <div class="top-bar"></div>
-
-    <!-- Sidebar toggle button -->
-    <button type="button" class="sidebar-toggle mdl-button mdl-js-button mdl-js-ripple-effect mdl-button--icon" style="display: initial;" data-upgraded=",MaterialButton,MaterialRipple">
-        <i class="material-icons">clear_all</i>
-        <span class="mdl-button__ripple-container">
-            <span class="mdl-ripple">
-            </span>
-        </span>
-    </button>
-
-    <!-- Sidebar Avatar -->
-    <div class="sidebar-image">
-        <img src="/img/avatar.jpg" alt="安 阳's avatar">
-    </div>
-
-    <!-- Sidebar Email -->
-    <a data-toggle="dropdown" class="sidebar-brand" href="#settings-dropdown">
-        itsanyang@163.com
-        <b class="caret"></b>
-    </a>
-</div>
-
-
-        <!-- Sidebar Navigation  -->
-        <ul class="nav sidebar-nav">
-    <!-- User dropdown  -->
-    <li class="dropdown">
-        <ul id="settings-dropdown" class="dropdown-menu">
-            
-                <li>
-                    <a href="mailto:itsanyang@163.com" target="_blank" title="Email Me">
-                        
-                            <i class="material-icons sidebar-material-icons sidebar-indent-left1pc-element">email</i>
-                        
-                        Email Me
-                    </a>
-                </li>
-            
-        </ul>
-    </li>
-
-    <!-- Homepage -->
-    
-        <li id="sidebar-first-li">
-            <a href="/">
-                
-                    <i class="material-icons sidebar-material-icons">home</i>
-                
-                主页
-            </a>
-        </li>
         
-    
-
-    <!-- Archives  -->
-    
-        <li class="dropdown">
-            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
-                
-                    <i class="material-icons sidebar-material-icons">inbox</i>
-                
-                    归档
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-            <li>
-                <a class="sidebar_archives-link" href="/archives/2019/07/">七月 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/04/">四月 2019<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2019/03/">三月 2019<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/12/">十二月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/11/">十一月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/09/">九月 2018<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/08/">八月 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/07/">七月 2018<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/06/">六月 2018<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/04/">四月 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/03/">三月 2018<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/02/">二月 2018<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2018/01/">一月 2018<span class="sidebar_archives-count">4</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/12/">十二月 2017<span class="sidebar_archives-count">6</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/11/">十一月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/10/">十月 2017<span class="sidebar_archives-count">3</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/09/">九月 2017<span class="sidebar_archives-count">24</span></a></li><li><a class="sidebar_archives-link" href="/archives/2017/08/">八月 2017<span class="sidebar_archives-count">3</span></a>
-            </ul>
-        </li>
         
+  <nav class="post-nav">
     
+      <a class="prev" href="/2017/12/23/MySQL存储过程/">
+        <i class="iconfont icon-left"></i>
+        <span class="prev-text nav-default">MySQL存储过程</span>
+        <span class="prev-text nav-mobile">Prev</span>
+      </a>
+    
+    
+      <a class="next" href="/2017/12/01/机器学习实战（五）Logistic回归/">
+        <span class="next-text nav-default">机器学习实战（五）Logistic回归</span>
+        <span class="prev-text nav-mobile">Next</span>
+        <i class="iconfont icon-right"></i>
+      </a>
+    
+  </nav>
 
-    <!-- Categories  -->
-    
-        <li class="dropdown">
-            <a href="#" class="ripple-effect dropdown-toggle" data-toggle="dropdown">
-                
-                    <i class="material-icons sidebar-material-icons">chrome_reader_mode</i>
-                
-                分类
-                <b class="caret"></b>
-            </a>
-            <ul class="dropdown-menu">
-                <li>
-                <a class="sidebar_archives-link" href="/categories/书籍分享/">书籍分享<span class="sidebar_archives-count">17</span></a></li><li><a class="sidebar_archives-link" href="/categories/产品/">产品<span class="sidebar_archives-count">2</span></a></li><li><a class="sidebar_archives-link" href="/categories/工作/">工作<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/杂谈/">杂谈<span class="sidebar_archives-count">5</span></a></li><li><a class="sidebar_archives-link" href="/categories/生活/">生活<span class="sidebar_archives-count">27</span></a></li><li><a class="sidebar_archives-link" href="/categories/电脑问题/">电脑问题<span class="sidebar_archives-count">1</span></a></li><li><a class="sidebar_archives-link" href="/categories/编程/">编程<span class="sidebar_archives-count">20</span></a>
-            </ul>
-        </li>
         
-            <li class="divider"></li>
-        
+  <div class="comments" id="comments">
     
+  </div>
 
-    <!-- Pages  -->
+
+      </footer>
     
-        <li>
-            <a href="/tags" title="标签云">
-                
-                    <i class="material-icons sidebar-material-icons">cloud_circle</i>
-                
-                标签云
-            </a>
-        </li>
-        
-    
-        <li>
-            <a href="/about" title="关于我">
-                
-                    <i class="material-icons sidebar-material-icons">person</i>
-                
-                关于我
-            </a>
-        </li>
-        
-    
-        <li>
-            <a href="/links" title="友情链接">
-                
-                    <i class="material-icons sidebar-material-icons">person</i>
-                
-                友情链接
-            </a>
-        </li>
-        
-    
-
-    <!-- Article Number  -->
-    
-        <li>
-            <a href="/archives">
-                文章总数
-                <span class="sidebar-badge">73</span>
-            </a>
-        </li>
-        
-    
-</ul>
-
-
-        <!-- Sidebar Footer -->
-        <!--
-I'm glad you use this theme, the development is no so easy, I hope you can keep the copyright, I will thank you so much.
-If you still want to delete the copyrights, could you still retain the first one? Which namely "Theme Material"
-It will not impact the appearance and can give developers a lot of support :)
-
-很高兴您使用并喜欢该主题，开发不易 十分谢谢与希望您可以保留一下版权声明。
-如果您仍然想删除的话 能否只保留第一项呢？即 "Theme Material"
-它不会影响美观并可以给开发者很大的支持和动力。 :)
--->
-
-<!-- Sidebar Divider -->
-
-
-<!-- Theme Material -->
-
-
-<!-- Help & Support -->
-<!--
-
--->
-
-<!-- Feedback -->
-<!--
-
--->
-
-<!-- About Theme -->
-<!--
-
--->
+  </article>
 
     </div>
 
-    <!-- Sidebar Image -->
+      </div>
+
+      <footer id="colophon"><span class="copyright-year">
     
-
-</aside>
-
-                    
-
-                    
-                        <!-- Footer Top Button -->
-                        <div id="back-to-top" class="toTop-wrap">
-    <a href="#top" class="toTop">
-        <i class="material-icons footer_top-i">expand_less</i>
-    </a>
-</div>
-
-                    
-
-                    <!--Footer-->
-<footer class="mdl-mini-footer" id="bottom">
+        &copy;
     
-        <!-- Paradox Footer Left Section -->
-        <div class="mdl-mini-footer--left-section sns-list">
-    <!-- Twitter -->
+        2017 -
     
+    2019
+    <span class="footer-author">安 阳.</span>
+    <span class="power-by">
+        Powered by <a class="hexo-link" href="https://hexo.io/">Hexo</a> and <a class="theme-link" href="https://github.com/frostfan/hexo-theme-polarbear">Polar Bear</a>
+    </span>
+</span>
 
-    <!-- Facebook -->
-    
+      </footer>
 
-    <!-- Google + -->
-    
-
-    <!-- Weibo -->
-    
-        <a href="http://weibo.com/u/3554797744" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-weibo">
-                <span class="visuallyhidden">Weibo</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Instagram -->
-    
-
-    <!-- Tumblr -->
-    
-
-    <!-- Github -->
-    
-        <a href="https://github.com/JohnneyAnn" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-github">
-                <span class="visuallyhidden">Github</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- LinkedIn -->
-    
-        <a href="https://www.linkedin.com/in/%E9%98%B3-%E5%AE%89-84441b103/" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-linkedin">
-                <span class="visuallyhidden">LinkedIn</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Zhihu -->
-    
-        <a href="https://www.zhihu.com/people/an-an-an-an-an-an-70/activities" target="_blank">
-            <button class="mdl-mini-footer--social-btn social-btn footer-sns-zhihu">
-                <span class="visuallyhidden">Zhihu</span>
-            </button><!--
-     --></a>
-    
-
-    <!-- Bilibili -->
-    
-
-    <!-- Telegram -->
-    
-    
-    <!-- V2EX -->
-    
-</div>
-
-
-        <!--Copyright-->
-        <div id="copyright">
-            Copyright&nbsp;©&nbsp;2017&nbsp;-<script type="text/javascript">var fd = new Date();document.write("&nbsp;" + fd.getFullYear() + "&nbsp;");</script>安阳
-            
-        </div>
-
-        <!-- Paradox Footer Right Section -->
-
-        <!--
-        I am glad you use this theme, the development is no so easy, I hope you can keep the copyright.
-        It will not impact the appearance and can give developers a lot of support :)
-
-        很高兴您使用该主题，开发不易，希望您可以保留一下版权声明。
-        它不会影响美观并可以给开发者很大的支持。 :)
-        -->
-
-        <div class="mdl-mini-footer--right-section">
-            <div>
-                <div class="footer-develop-div">Powered by <a href="https://hexo.io" target="_blank" class="footer-develop-a">Hexo</a></div>
-                <div class="footer-develop-div">Theme - <a href="https://github.com/viosey/hexo-theme-material" target="_blank" class="footer-develop-a">Material</a></div>
-            </div>
-        </div>
-    
-</footer>
-
-
-                    <!-- Import JS File -->
-
-    <script>lsloader.load("lazyload_js","/js/lazyload.min.js?1BcfzuNXqV+ntF6gq+5X3Q==", true)</script>
-
-
-
-    <script>lsloader.load("js_js","/js/js.min.js?V/53wGualMuiPM3xoetD5Q==", true)</script>
-
-
-
-    <script>lsloader.load("np_js","/js/nprogress.js?pl3Qhb9lvqR1FlyLUna1Yw==", true)</script>
-
-
-<script type="text/ls-javascript" id="NProgress-script">
-    NProgress.configure({
-        showSpinner: true
-    });
-    NProgress.start();
-    $('#nprogress .bar').css({
-        'background': '#29d'
-    });
-    $('#nprogress .peg').css({
-        'box-shadow': '0 0 10px #29d, 0 0 15px #29d'
-    });
-    $('#nprogress .spinner-icon').css({
-        'border-top-color': '#29d',
-        'border-left-color': '#29d'
-    });
-    setTimeout(function() {
-        NProgress.done();
-        $('.fade').removeClass('out');
-    }, 800);
-</script>
-
-
-
-
-
-
-
-    <!-- Busuanzi -->
-    <script src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-
-
-
-   
-
-
-
-
-
-<!-- UC Browser Compatible -->
-<script>
-	var agent = navigator.userAgent.toLowerCase();
-	if(agent.indexOf('ucbrowser')>0) {
-		document.write('<link rel="stylesheet" href="/css/uc.css">');
-	   alert('由于 UC 浏览器使用极旧的内核，而本网站使用了一些新的特性。\n为了您能更好的浏览，推荐使用 Chrome 或 Firefox 浏览器。');
-	}
-</script>
-
-<!-- Import prettify js  -->
-
-
-    
-        <script>lsloader.load("hanabi","/js/hanabi-browser-bundle.js?Pki5+pzkluqu53g+ouMWpA==", true)</script>
+      <div class="back-to-top" id="back-to-top">
+        <i class="iconfont icon-up"></i>
+      </div>
+    </div>
     
 
 
-<!-- Window Load -->
-<!-- add class for prettify -->
-<script type="text/ls-javascript" id="window-load">
-    $(window).on('load', function() {
-        // Post_Toc parent position fixed
-        $('.post-toc-wrap').parent('.mdl-menu__container').css('position', 'fixed');
-    });
-
     
-    
-        
-        
-        HanabiBrowser.start('pre code',true);
-    
-</script>
-
-<!-- MathJax Load-->
-
-
-<!-- Bing Background -->
-
-
-<script type="text/ls-javascript" id="lazy-load">
-    // Offer LazyLoad
-    queue.offer(function(){
-        $('.lazy').lazyload({
-            effect : 'show'
-        });
-    });
-
-    // Start Queue
-    $(document).ready(function(){
-        setInterval(function(){
-            queue.execNext();
-        },200);
-    });
-</script>
-
-<!-- Custom Footer -->
+  
 
 
 
-<script>
-    (function(){
-        var scriptList = document.querySelectorAll('script[type="text/ls-javascript"]')
 
-        for (var i = 0; i < scriptList.length; ++i) {
-            var item = scriptList[i];
-            lsloader.runInlineScript(item.id,item.id);
-        }
-    })()
-console.log('\n %c © Material Theme | Version: 1.5.2 | https://github.com/viosey/hexo-theme-material %c \n', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-left-radius:5px;border-bottom-left-radius:5px;', 'color:#455a64;background:#e0e0e0;padding:5px 0;border-top-right-radius:5px;border-bottom-right-radius:5px;');
-</script>
 
-                </main>
-            </div>
-        </body>
-    
+  
+    <script type="text/javascript" src="/lib/jquery/jquery-3.1.1.min.js"></script>
+  
+
+  
+    <script type="text/javascript" src="/lib/fancybox/jquery.fancybox.pack.js"></script>
+  
+
+    <script type="text/javascript" src="/js/src/theme.js?v=1.1"></script>
+<script type="text/javascript" src="/js/src/bootstrap.js?v=1.1"></script>
+
+  </body>
 </html>
